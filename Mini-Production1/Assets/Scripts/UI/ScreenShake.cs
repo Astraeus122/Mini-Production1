@@ -19,16 +19,14 @@ public class ScreenShake : MonoBehaviour
 
     void Update()
     {
-        Vector3 binocularsOffset = cameraControl.GetBinocularsOffset();
-
         if (shakeTimeRemaining > 0)
         {
-            transform.localPosition = originalLocalPosition + binocularsOffset + Random.insideUnitSphere * shakeMagnitude;
+            transform.localPosition = originalLocalPosition + Random.insideUnitSphere * shakeMagnitude;
             shakeTimeRemaining -= Time.deltaTime;
         }
         else
         {
-            transform.localPosition = originalLocalPosition + binocularsOffset;
+            transform.localPosition = originalLocalPosition;
         }
     }
 
