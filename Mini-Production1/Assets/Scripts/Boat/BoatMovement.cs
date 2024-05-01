@@ -105,7 +105,7 @@ public class BoatMovement : MonoBehaviour
         TiltBoat();
     }
 
-    private void ToggleAnchor()
+    public void ToggleAnchor()
     {
         isAnchored = !isAnchored;
         if (isAnchored)
@@ -149,7 +149,7 @@ public class BoatMovement : MonoBehaviour
     }
 
 
-    private void RotateBoat(float input)
+    public void RotateBoat(float input)
     {
         // Base rotation amount calculated from input and rotation speed
         float rotationAmount = input * rotationSpeed * Time.deltaTime;
@@ -168,7 +168,7 @@ public class BoatMovement : MonoBehaviour
         currentRotationVelocity += rotationAmount;
     }
 
-    private void ApplyThrust(float input)
+    public void ApplyThrust(float input)
     {
         Vector3 thrust = transform.forward * input * speed * Time.deltaTime;
         currentVelocity += thrust;
