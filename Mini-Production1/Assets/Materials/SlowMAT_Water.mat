@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: FastMAT_Water
+  m_Name: SlowMAT_Water
   m_Shader: {fileID: -6465566751694194690, guid: cce9fbc6c8d958f448c0f393b481321a, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -51,19 +51,19 @@ Material:
     - _Dir_1: 5
     - _Dir_2: -2
     - _Displacement: 1.16
-    - _Normal_Strength: 15.37
+    - _Normal_Strength: 5
     - _QueueControl: 0
     - _QueueOffset: -5
     - _Smoothness: 0.5
     m_Colors:
     - _DIsplacement_Tiling: {r: 1, g: 1.9, b: 0, a: 0}
-    - _Deep: {r: 0.42052335, g: 0.6603774, b: 0.58519924, a: 1}
-    - _Direction_1: {r: 5, g: 0, b: 0, a: 0}
-    - _Direction_2: {r: 5, g: 0, b: 0, a: 0}
-    - _DisplacementSpeed: {r: 2, g: 0, b: 0, a: 0}
+    - _Deep: {r: 0.068841234, g: 0.8584906, b: 0.61172515, a: 1}
+    - _Direction_1: {r: 0.05, g: 0, b: 0, a: 0}
+    - _Direction_2: {r: 0.01, g: 0, b: 0, a: 0}
+    - _DisplacementSpeed: {r: 0.05, g: 0, b: 0, a: 0}
     - _Shallow: {r: 0.089711644, g: 0.26277068, b: 0.3018868, a: 1}
-    - _Tiling_1: {r: 5, g: 2.79, b: 0, a: 0}
-    - _Tiling_2: {r: 5, g: 5, b: 0, a: 0}
+    - _Tiling_1: {r: 7, g: 7, b: 0, a: 0}
+    - _Tiling_2: {r: 6, g: 12, b: 0, a: 0}
     - _dir1: {r: 1, g: 0, b: 0, a: 0}
     - _dir2: {r: 2, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
