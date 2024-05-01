@@ -6,9 +6,14 @@ using UnityEngine.UI;
 
 public class BoatMovement : MonoBehaviour
 {
-    public float speed = 6.0f;
+    public float speed = 3.5f;
+    public float rotationSpeed = 10.0f;
+    private Vector3 currentVelocity;
+    private bool isAnchored = false;
+    private float currentRotationVelocity;
     public float inertiaDuration = 2.0f; // Time in seconds to stop completely from max speed
-    public float tiltAngle = 10.0f; // Maximum tilt angle
+    public float tiltAngle = 8.0f; // Maximum tilt angle
+
     public float maxHitPoints = 5;
     public Leak[] leakSites;
     public float leakSusceptibility = 0.3f;
@@ -22,10 +27,7 @@ public class BoatMovement : MonoBehaviour
 
     public ScreenShake screenShake;
     private float currentHitPoints;
-    private float lateralMovement = 0f;
     private Quaternion originalRotation;
-
-    private Rigidbody rigidbody;
 
     public GameObject despawnVFX;
 
@@ -63,25 +65,29 @@ public class BoatMovement : MonoBehaviour
         screenShake = Camera.main.GetComponent<ScreenShake>();
         currentHitPoints = maxHitPoints;
         originalRotation = transform.rotation; // Save the original rotation
-
-        rigidbody = GetComponent<Rigidbody>();
     }
 
-    private void Update()
+    void Update()
     {
-        float input = 0;
+        Vector2 input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 
-        if (IsControlEnabled)
+        if (IsControlEnabled && !isAnchored)  // Check if the boat is not anchored
         {
-            input = Input.GetAxis("Horizontal"); // 'A' and 'D' keys are mapped to the "Horizontal" axis
-            lateralMovement += input * speed * Time.deltaTime;
-            lateralMovement = Mathf.Clamp(lateralMovement, -speed, speed);
+            if (input.x != 0)
+            {
+                RotateBoat(input.x);
+            }
+
+            if (input.y != 0)
+            {
+                ApplyThrust(input.y);
+            }
         }
 
-        ApplyInertia();
-        TiltBoat(input);
-
-        mountPoint.rotation = Quaternion.identity;
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            ToggleAnchor();
+        }
 
         if (isInDrainLiquid)
         {
@@ -89,54 +95,106 @@ public class BoatMovement : MonoBehaviour
         }
 
         ProcessLeaks();
-    }
 
-    void FixedUpdate()
-    {
+        ApplyInertia(input);
         MoveBoat();
+        TiltBoat();
     }
 
-    private void ApplyInertia()
+    private void ToggleAnchor()
     {
-        if (lateralMovement != 0)
+        isAnchored = !isAnchored;
+        if (isAnchored)
         {
-            // Reduce the lateralMovement over time to simulate inertia
-            float inertiaEffect = speed / inertiaDuration * Time.deltaTime;
-            lateralMovement = (Mathf.Abs(lateralMovement) - inertiaEffect) * Mathf.Sign(lateralMovement);
-            if (Mathf.Abs(lateralMovement) < inertiaEffect)
-            {
-                lateralMovement = 0;
-            }
+            StartCoroutine(AnchorEffect());
         }
         else
         {
-            // Gradually reset rotation to original
-            transform.rotation = Quaternion.Lerp(transform.rotation, originalRotation, Time.deltaTime * yawSpeed);
+            // Reset the boat's state when the anchor is lifted
+            currentVelocity = Vector3.zero;
+            currentRotationVelocity = 0;
         }
+    }
+    IEnumerator AnchorEffect()
+    {
+        float timeToStop = 5.0f; // Increase this duration to make the stop more gradual
+        float initialRotationEffect = 0.2f;
+        float timer = 0;
+
+        // Determine the initial direction based on the current rotational velocity
+        int rotationDirection = currentRotationVelocity >= 0 ? 1 : -1;
+
+        while (timer < timeToStop && isAnchored)  // Ensure this only runs if still anchored
+        {
+            timer += Time.deltaTime;
+            float progress = timer / timeToStop;
+
+            // Apply a smoother deceleration curve, such as using the square of progress
+            currentVelocity = Vector3.Lerp(currentVelocity, Vector3.zero, progress * progress);
+            // Apply the rotation effect based on the initial direction, decreasing it over time
+            currentRotationVelocity += rotationDirection * initialRotationEffect * (1 - Mathf.Sqrt(progress));
+
+            yield return null;
+        }
+
+        if (isAnchored)  // Finalize only if still anchored
+        {
+            currentVelocity = Vector3.zero;
+            currentRotationVelocity = Mathf.Lerp(currentRotationVelocity, 0, Time.deltaTime * 5.0f);
+        }
+    }
+
+
+    private void RotateBoat(float input)
+    {
+        // Base rotation amount calculated from input and rotation speed
+        float rotationAmount = input * rotationSpeed * Time.deltaTime;
+
+        // Adjust rotation amount by 0.02 in the direction of input
+        if (input > 0)
+        {  // Turning right
+            rotationAmount += 0.02f;
+        }
+        else if (input < 0)
+        {  // Turning left
+            rotationAmount -= 0.02f;
+        }
+
+        // Apply the calculated rotation velocity
+        currentRotationVelocity += rotationAmount;
+    }
+
+    private void ApplyThrust(float input)
+    {
+        Vector3 thrust = transform.forward * input * speed * Time.deltaTime;
+        currentVelocity += thrust;
+    }
+
+    private void ApplyInertia(Vector2 input)
+    {
+        if (input == Vector2.zero)
+        {
+            currentVelocity = Vector3.Lerp(currentVelocity, Vector3.zero, inertiaDuration * Time.deltaTime);
+        }
+        // Update the inertia effect on rotation to be dependent on the rotation speed
+        currentRotationVelocity = Mathf.Lerp(currentRotationVelocity, 0, inertiaDuration / rotationSpeed * Time.deltaTime);
     }
 
     private void MoveBoat()
     {
-        Vector3 position = rigidbody.position;
-        position.x += lateralMovement * Time.deltaTime;
-        position.x = Mathf.Clamp(position.x, minX, maxX); // Adjust based on your game's boundaries
-        rigidbody.MovePosition(position);
+        transform.position += currentVelocity * Time.deltaTime;
+        transform.Rotate(0, currentRotationVelocity * Time.deltaTime, 0);
     }
 
-    private void TiltBoat(float input)
+    private void TiltBoat()
     {
-        // Calculate the tilt based on input direction
-        float tilt = input * -tiltAngle;
-
-        // Calculate yaw based on input
-        float yaw = input * yawAmount;
-
-        // Combine the original rotation with tilt and yaw
-        Quaternion targetRotation = originalRotation * Quaternion.Euler(0, yaw, tilt);
-        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * yawSpeed);
+        // Adjust tilt based on rotation velocity for a dynamic visual effect
+        float tilt = -currentRotationVelocity * tiltAngle / rotationSpeed;
+        Quaternion targetRotation = Quaternion.Euler(0, transform.eulerAngles.y, tilt);
+        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
     }
 
-    public void TakeDamage(float damage, Vector3 impactPoint, float maxDistFromImpact = Mathf.Infinity,
+public void TakeDamage(float damage, Vector3 impactPoint, float maxDistFromImpact = Mathf.Infinity,
         float releakStrengthThreshold = 0.5f)
     {
         if (!TakeDamage(damage)) return;
