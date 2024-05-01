@@ -13,6 +13,7 @@ public class BoatMovement : MonoBehaviour
     private float currentRotationVelocity;
     public float inertiaDuration = 2.0f; // Time in seconds to stop completely from max speed
     public float tiltAngle = 8.0f; // Maximum tilt angle
+    public float speedMax = 15.0f; // Maximum speed of the boat
 
     public float maxHitPoints = 5;
     public Leak[] leakSites;
@@ -169,6 +170,11 @@ public class BoatMovement : MonoBehaviour
     {
         Vector3 thrust = transform.forward * input * speed * Time.deltaTime;
         currentVelocity += thrust;
+        // Ensure the current velocity does not exceed the maximum speed
+        if (currentVelocity.magnitude >= 15)
+        {
+            currentVelocity = currentVelocity.normalized * speedMax;  // Clamp the speed
+        }
     }
 
     private void ApplyInertia(Vector2 input)
