@@ -70,7 +70,6 @@ public class BoatMovement : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(currentVelocity);
         Vector2 input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 
         if (IsControlEnabled && !isAnchored)  // Check if the boat is not anchored
