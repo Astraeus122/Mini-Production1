@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using static UnityEngine.GraphicsBuffer;
 
 public class BoatMovement : MonoBehaviour
 {
@@ -29,6 +30,7 @@ public class BoatMovement : MonoBehaviour
     public ScreenShake screenShake;
     private float currentHitPoints;
     private Quaternion originalRotation;
+    public float fixedYPosition; 
 
     public GameObject despawnVFX;
 
@@ -66,6 +68,7 @@ public class BoatMovement : MonoBehaviour
         screenShake = Camera.main.GetComponent<ScreenShake>();
         currentHitPoints = maxHitPoints;
         originalRotation = transform.rotation; // Save the original rotation
+        fixedYPosition = transform.position.y; // Capture the initial Y position
     }
 
     void Update()
@@ -191,16 +194,20 @@ public class BoatMovement : MonoBehaviour
         transform.position += currentVelocity * Time.deltaTime;
         transform.Rotate(0, currentRotationVelocity * Time.deltaTime, 0);
     }
-
     private void TiltBoat()
     {
         // Adjust tilt based on rotation velocity for a dynamic visual effect
         float tilt = -currentRotationVelocity * tiltAngle / rotationSpeed;
         Quaternion targetRotation = Quaternion.Euler(0, transform.eulerAngles.y, tilt);
         transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+
+        // Reset the y position to the fixed value after tilting and moving
+        Vector3 currentPosition = transform.position;
+        currentPosition.y = fixedYPosition; // Keeps the y position locked
+        transform.position = currentPosition;
     }
 
-public void TakeDamage(float damage, Vector3 impactPoint, float maxDistFromImpact = Mathf.Infinity,
+    public void TakeDamage(float damage, Vector3 impactPoint, float maxDistFromImpact = Mathf.Infinity,
         float releakStrengthThreshold = 0.5f)
     {
         if (!TakeDamage(damage)) return;

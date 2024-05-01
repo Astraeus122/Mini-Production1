@@ -7,13 +7,12 @@ public class ScreenShake : MonoBehaviour
     public float shakeDuration = 0.5f;
     public float shakeMagnitude = 0.7f;
 
-    private CameraControl cameraControl;
     private Vector3 originalLocalPosition;
     private float shakeTimeRemaining;
+    private Vector3 lastShakeOffset = Vector3.zero;
 
     void Start()
     {
-        cameraControl = Camera.main.GetComponent<CameraControl>();
         originalLocalPosition = transform.localPosition;
     }
 
@@ -21,12 +20,15 @@ public class ScreenShake : MonoBehaviour
     {
         if (shakeTimeRemaining > 0)
         {
-            transform.localPosition = originalLocalPosition + Random.insideUnitSphere * shakeMagnitude;
+            Vector3 shakeOffset = Random.insideUnitSphere * shakeMagnitude;
+            transform.localPosition = transform.localPosition - lastShakeOffset + shakeOffset;
+            lastShakeOffset = shakeOffset;
             shakeTimeRemaining -= Time.deltaTime;
         }
         else
         {
-            transform.localPosition = originalLocalPosition;
+            transform.localPosition = transform.localPosition - lastShakeOffset;
+            lastShakeOffset = Vector3.zero;  // Reset shake offset after the shaking stops
         }
     }
 
