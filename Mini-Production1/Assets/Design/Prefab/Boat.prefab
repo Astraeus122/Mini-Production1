@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 4959092140955197788}
   - component: {fileID: 2272036539136199458}
   - component: {fileID: 6422597471755119524}
+  - component: {fileID: 7445220977883080694}
+  - component: {fileID: -4295740895799948048}
   m_Layer: 0
   m_Name: Boat
   m_TagString: Untagged
@@ -78,7 +80,6 @@ MonoBehaviour:
   speed: 5
   inertiaDuration: 2
   tiltAngle: 5
-  speedMax: 15
   maxHitPoints: 5
   leakSites:
   - {fileID: 6048565466993455196}
@@ -102,7 +103,6 @@ MonoBehaviour:
   mountPoint: {fileID: 7675256435150753238}
   HitAudioSource: {fileID: 6422597471755119524}
   screenShake: {fileID: 0}
-  fixedYPosition: 0
   despawnVFX: {fileID: 0}
   minX: -5.4
   maxX: 5.4
@@ -367,6 +367,32 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7445220977883080694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 41867275289408981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10faf53f060d5a040beba3f7e47f6ba5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entryRange: {fileID: -4295740895799948048}
+--- !u!65 &-4295740895799948048
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 41867275289408981}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 6, y: 1, z: 10}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &239094694111648199
 GameObject:
   m_ObjectHideFlags: 0

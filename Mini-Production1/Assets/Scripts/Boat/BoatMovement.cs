@@ -25,8 +25,6 @@ public class BoatMovement : MonoBehaviour
     private float lateralMovement = 0f;
     private Quaternion originalRotation;
 
-    private Rigidbody rigidbody;
-
     public GameObject despawnVFX;
 
     [SerializeField] [Tooltip("Clamp position of ship (min value)")] [Range(0, -6f)]
@@ -63,8 +61,6 @@ public class BoatMovement : MonoBehaviour
         screenShake = Camera.main.GetComponent<ScreenShake>();
         currentHitPoints = maxHitPoints;
         originalRotation = transform.rotation; // Save the original rotation
-
-        rigidbody = GetComponent<Rigidbody>();
     }
 
     private void Update()
@@ -117,10 +113,11 @@ public class BoatMovement : MonoBehaviour
 
     private void MoveBoat()
     {
-        Vector3 position = rigidbody.position;
+        Vector3 position = transform.position;
         position.x += lateralMovement * Time.deltaTime;
         position.x = Mathf.Clamp(position.x, minX, maxX); // Adjust based on your game's boundaries
-        rigidbody.MovePosition(position);
+
+        transform.position = position;
     }
 
     private void TiltBoat(float input)

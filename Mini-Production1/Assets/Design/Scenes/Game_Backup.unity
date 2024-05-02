@@ -1406,8 +1406,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41f3e4c12dbae9a4a9e3be72c9195f0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameCamera: {fileID: 1667749200}
-  forwardOffset: 40
 --- !u!114 &1667749204
 MonoBehaviour:
   m_ObjectHideFlags: 0
