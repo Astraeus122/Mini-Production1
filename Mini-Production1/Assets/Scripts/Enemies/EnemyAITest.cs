@@ -43,14 +43,14 @@ public class EnemyAITest : MonoBehaviour
             {
                 if (!anchorDropped)
                 {
-                    boatMovement.ToggleAnchor();
+                    //boatMovement.ToggleAnchor();
                     anchorDropped = true;
                 }
                 shootScript.Fire();
             }
             else if (anchorDropped)
             {
-                boatMovement.ToggleAnchor();
+                //boatMovement.ToggleAnchor();
                 anchorDropped = false;
             }
         }
@@ -58,7 +58,7 @@ public class EnemyAITest : MonoBehaviour
         {
             if (anchorDropped)
             {
-                boatMovement.ToggleAnchor();
+                //boatMovement.ToggleAnchor();
                 anchorDropped = false;
             }
             Patrol();
