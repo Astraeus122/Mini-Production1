@@ -22,26 +22,38 @@ public class Shoot : MonoBehaviour
     private float nextFireTime = 0.0f;
     private float angle = 45.0f;
 
-    public void Fire()
+    public bool Triggered { get; set; }
+
+    public void Update()
     {
-        // Check if the current time is greater than or equal to the next allowed fire time.
+        if (Triggered && Time.time >= nextFireTime)
+        {
+            FireTurret();
+        }
+    }
+
+    public void FireTurret()
+    {
+        nextFireTime = Time.time + 1.0f / fireRate; // Update nextFireTime to the current time, plus the inverse of fireRate, to allow the next fire.
+
+        GameObject bullet = Instantiate(projecile, launcher.position, launcher.rotation); // Creates an instance of a projectile.
+
+        bullet.GetComponent<Rigidbody>().AddForce(launcher.forward * force, ForceMode.Impulse); // Applies force to the projectile.
+
+        Destroy(bullet, 1.0f); // Self destroys after delay.
+    }
+    
+    public void FireCatapult()
+    {
         if (Time.time >= nextFireTime)
         {
             nextFireTime = Time.time + 1.0f / fireRate; // Update nextFireTime to the current time, plus the inverse of fireRate, to allow the next fire.
 
             GameObject bullet = Instantiate(projecile, launcher.position, launcher.rotation); // Creates an instance of a projectile.
 
-            if (!turretWeapon)
-            {
-                Vector3 direction = Quaternion.Euler(angle, 0, 0) * launcher.forward + launcher.up;
-                bullet.GetComponent<Rigidbody>().AddForce(direction * force, ForceMode.Impulse); // Applies force to the projectile.
-                Destroy(bullet, 3.0f);
-                return; // If not a turret, get fucked
-            }
-
-            bullet.GetComponent<Rigidbody>().AddForce(launcher.forward * force, ForceMode.Impulse); // Applies force to the projectile.
-
-            Destroy(bullet, 1.0f); // Self destroys after delay.
+            Vector3 direction = Quaternion.Euler(angle, 0, 0) * launcher.forward + launcher.up;
+            bullet.GetComponent<Rigidbody>().AddForce(direction * force, ForceMode.Impulse); // Applies force to the projectile.
+            Destroy(bullet, 3.0f);
         }
     }
 }
