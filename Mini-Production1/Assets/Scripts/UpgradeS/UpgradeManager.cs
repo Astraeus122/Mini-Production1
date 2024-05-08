@@ -4,32 +4,34 @@ using UnityEngine.UI;
 
 public class UpgradeManager : MonoBehaviour
 {
-    public List<UpgradeOption> allUpgrades;
-    public GameObject upgradeCardPrefab;
-    public Transform cardsParent;
+    public List<Upgrade> allUpgrades;
+    public List<Upgrade> currentOptions = new List<Upgrade>();
 
-    // Function to pick 3 random upgrades
-    public void DisplayRandomUpgrades()
+    public Sprite speedImage;
+    public Sprite healthSprite;
+
+    void Start()
     {
-        List<UpgradeOption> selectedUpgrades = new List<UpgradeOption>();
-
-        for (int i = 0; i < 3; i++)
-        {
-            int randIndex = Random.Range(0, allUpgrades.Count);
-            selectedUpgrades.Add(allUpgrades[randIndex]);
-        }
-
-        foreach (UpgradeOption upgrade in selectedUpgrades)
-        {
-            GameObject card = Instantiate(upgradeCardPrefab, cardsParent);
-            SetupCard(card, upgrade);
-        }
+        InitializeUpgrades();
     }
 
-    void SetupCard(GameObject card, UpgradeOption upgrade)
+    void InitializeUpgrades()
     {
-        card.GetComponentInChildren<Text>().text = upgrade.name;
-        card.GetComponentInChildren<Image>().sprite = upgrade.image;
-        card.GetComponentInChildren<UpgradeCard>().Setup(upgrade);
+        // Initialize your upgrades here
+        // Example:
+        allUpgrades.Add(new Upgrade("Speed Boost", "Increases player speed by 20%", speedImage));
+        allUpgrades.Add(new Upgrade("Health Increase", "Increases player health by 10 points", healthSprite));
+        // Add other upgrades similarly
+    }
+
+    public void GenerateUpgradeOptions()
+    {
+        currentOptions.Clear();
+        for (int i = 0; i < 3; i++) // Assuming you show 3 upgrades at a time
+        {
+            int index = Random.Range(0, allUpgrades.Count);
+            currentOptions.Add(allUpgrades[index]);
+            allUpgrades.RemoveAt(index); // Optional: Remove to avoid repeat in the same draw
+        }
     }
 }
