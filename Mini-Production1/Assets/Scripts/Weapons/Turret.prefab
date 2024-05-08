@@ -193,7 +193,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e151ec40104fe64992dbb0721662c8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cannonBall: {fileID: 9079870105783229211, guid: bf2ac93d2ee43e544b15a9c5cbbd2f47, type: 3}
-  barrel: {fileID: 6745110706767568282}
+  projecile: {fileID: 9079870105783229211, guid: bf2ac93d2ee43e544b15a9c5cbbd2f47, type: 3}
+  launcher: {fileID: 6745110706767568282}
   force: 30000
   fireRate: 10
