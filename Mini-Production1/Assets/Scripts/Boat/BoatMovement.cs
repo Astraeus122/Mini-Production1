@@ -61,6 +61,9 @@ public class BoatMovement : MonoBehaviour
     [SerializeField] private Transform boatWaterFill = null;
     [SerializeField] private Vector2 boatWaterMinMaxY = new Vector2(0, 1);
 
+    public Vector2 Movement { get { return movement; } }
+
+
     public void UpgradeMaxHealth(float additionalHealth)
     {
         maxHitPoints += additionalHealth;
