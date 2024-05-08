@@ -19,9 +19,8 @@ public class Shoot : MonoBehaviour
     [SerializeField]
     private float fireRate = 1.0f;
 
-    private float angle = 45.0f;
-
     private float nextFireTime = 0.0f;
+    private float angle = 45.0f;
 
     public void Fire()
     {
@@ -34,7 +33,7 @@ public class Shoot : MonoBehaviour
 
             if (!turretWeapon)
             {
-                Vector3 direction = Quaternion.Euler(0, 0, angle) * launcher.up;
+                Vector3 direction = Quaternion.Euler(angle, 0, 0) * launcher.forward + launcher.up;
                 bullet.GetComponent<Rigidbody>().AddForce(direction * force, ForceMode.Impulse); // Applies force to the projectile.
                 Destroy(bullet, 3.0f);
                 return; // If not a turret, get fucked
