@@ -53,7 +53,7 @@ public class Shoot : MonoBehaviour
 
             Vector3 direction = Quaternion.Euler(angle, 0, 0) * launcher.forward + launcher.up;
             bullet.GetComponent<Rigidbody>().AddForce(direction * force, ForceMode.Impulse); // Applies force to the projectile.
-            Destroy(bullet, 3.0f);
+            Destroy(bullet, 2.0f);
         }
     }
 }
