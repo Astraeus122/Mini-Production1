@@ -155,7 +155,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1745082466837946232}
         m_TargetAssemblyTypeName: Shoot, Assembly-CSharp
-        m_MethodName: Fire
+        m_MethodName: FireCatapult
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -196,5 +196,5 @@ MonoBehaviour:
   projecile: {fileID: 9079870105783229211, guid: bf2ac93d2ee43e544b15a9c5cbbd2f47, type: 3}
   launcher: {fileID: 1745082465205165139}
   turretWeapon: 0
-  force: 2000
+  force: 1250
   fireRate: 0.25

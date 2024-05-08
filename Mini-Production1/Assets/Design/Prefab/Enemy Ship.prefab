@@ -9766,6 +9766,8 @@ MonoBehaviour:
   bubbles: {fileID: 8886088615030578605}
   splashes: {fileID: 6749544675258325378}
   boat: {fileID: 242941300704943569}
+  wiggleRange: {x: -3, y: 3}
+  target: {fileID: 0}
 --- !u!1 &8769156610910271962
 GameObject:
   m_ObjectHideFlags: 0
