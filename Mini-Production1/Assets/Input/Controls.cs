@@ -189,6 +189,76 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Boat"",
+            ""id"": ""c3a9b21d-3b78-4336-b7d2-ab7e8d8956cd"",
+            ""actions"": [
+                {
+                    ""name"": ""Steering"",
+                    ""type"": ""Button"",
+                    ""id"": ""eb63cfca-1298-45ae-b7b4-acad41abe6ef"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Fire"",
+                    ""type"": ""Button"",
+                    ""id"": ""9e01518a-1269-469f-ae76-a77bfacd1bc3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""b6ad04ba-fe04-47af-ba2d-703828e0a50a"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Steering"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""f1cf3c0a-5310-4d1f-8e3f-87b86f1837eb"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Rat n' Keys"",
+                    ""action"": ""Steering"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""72290930-c82f-4ec6-8b0a-bb4c87278b69"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Rat n' Keys"",
+                    ""action"": ""Steering"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""21af4e60-cd15-4ef1-88bc-0d84c305f9c7"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Rat n' Keys"",
+                    ""action"": ""Fire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -215,6 +285,10 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         m_Character_Movement = m_Character.FindAction("Movement", throwIfNotFound: true);
         m_Character_Interact = m_Character.FindAction("Interact", throwIfNotFound: true);
         m_Character_Dismount = m_Character.FindAction("Dismount", throwIfNotFound: true);
+        // Boat
+        m_Boat = asset.FindActionMap("Boat", throwIfNotFound: true);
+        m_Boat_Steering = m_Boat.FindAction("Steering", throwIfNotFound: true);
+        m_Boat_Fire = m_Boat.FindAction("Fire", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -319,6 +393,47 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         }
     }
     public CharacterActions @Character => new CharacterActions(this);
+
+    // Boat
+    private readonly InputActionMap m_Boat;
+    private IBoatActions m_BoatActionsCallbackInterface;
+    private readonly InputAction m_Boat_Steering;
+    private readonly InputAction m_Boat_Fire;
+    public struct BoatActions
+    {
+        private @Controls m_Wrapper;
+        public BoatActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Steering => m_Wrapper.m_Boat_Steering;
+        public InputAction @Fire => m_Wrapper.m_Boat_Fire;
+        public InputActionMap Get() { return m_Wrapper.m_Boat; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(BoatActions set) { return set.Get(); }
+        public void SetCallbacks(IBoatActions instance)
+        {
+            if (m_Wrapper.m_BoatActionsCallbackInterface != null)
+            {
+                @Steering.started -= m_Wrapper.m_BoatActionsCallbackInterface.OnSteering;
+                @Steering.performed -= m_Wrapper.m_BoatActionsCallbackInterface.OnSteering;
+                @Steering.canceled -= m_Wrapper.m_BoatActionsCallbackInterface.OnSteering;
+                @Fire.started -= m_Wrapper.m_BoatActionsCallbackInterface.OnFire;
+                @Fire.performed -= m_Wrapper.m_BoatActionsCallbackInterface.OnFire;
+                @Fire.canceled -= m_Wrapper.m_BoatActionsCallbackInterface.OnFire;
+            }
+            m_Wrapper.m_BoatActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Steering.started += instance.OnSteering;
+                @Steering.performed += instance.OnSteering;
+                @Steering.canceled += instance.OnSteering;
+                @Fire.started += instance.OnFire;
+                @Fire.performed += instance.OnFire;
+                @Fire.canceled += instance.OnFire;
+            }
+        }
+    }
+    public BoatActions @Boat => new BoatActions(this);
     private int m_RatnKeysSchemeIndex = -1;
     public InputControlScheme RatnKeysScheme
     {
@@ -333,5 +448,10 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         void OnMovement(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnDismount(InputAction.CallbackContext context);
+    }
+    public interface IBoatActions
+    {
+        void OnSteering(InputAction.CallbackContext context);
+        void OnFire(InputAction.CallbackContext context);
     }
 }

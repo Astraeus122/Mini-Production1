@@ -32,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 41867275289408981}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.44315, y: 0.44315, z: 0.44315}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 309908509241389072}
@@ -102,9 +102,11 @@ MonoBehaviour:
   mountPoint: {fileID: 7675256435150753238}
   HitAudioSource: {fileID: 6422597471755119524}
   screenShake: {fileID: 0}
-  despawnVFX: {fileID: 0}
+  despawnVFX: {fileID: 954011737003777240, guid: b90b66d8c2692254792a98602e2fc2a0, type: 3}
   minX: -5.4
   maxX: 5.4
+  minZ: 0
+  maxZ: 0
   DangerTag: Obstacle
   CrateTag: Crate
   DrainTag: drain
@@ -151,6 +153,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: BoatMovement, Assembly-CSharp
         m_MethodName: set_IsControlEnabled
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: SewerSpawner, Assembly-CSharp
+        m_MethodName: OnDeath
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -390,8 +404,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 6, y: 1, z: 10}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 6, y: 7.952555, z: 10}
+  m_Center: {x: 0, y: 3.476277, z: 0}
 --- !u!1 &239094694111648199
 GameObject:
   m_ObjectHideFlags: 0
@@ -1554,6 +1568,7 @@ GameObject:
   - component: {fileID: 330110336997536566}
   - component: {fileID: 3540520523126862568}
   - component: {fileID: 4055364111983123632}
+  - component: {fileID: 8662210741148309957}
   m_Layer: 3
   m_Name: Steering Wheel
   m_TagString: Untagged
@@ -1667,6 +1682,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnDismounted:
     m_PersistentCalls:
       m_Calls:
@@ -1693,6 +1720,37 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 1
+        m_CallState: 2
+--- !u!114 &8662210741148309957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7299796917783411170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3953d8bcb669ac7408c4a3b1da1f961b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wheel: {fileID: 0}
+  wheelRotationLimit: 360
+  <SteerSpeed>k__BackingField: 2
+  <Recenter>k__BackingField: 0
+  onSteeringChanged:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 41867275289408979}
+        m_TargetAssemblyTypeName: BoatMovement, Assembly-CSharp
+        m_MethodName: set_SteeringInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &8524471128395814987
 GameObject:

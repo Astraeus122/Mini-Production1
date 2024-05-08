@@ -1,8 +1,8 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+
 
 public class BoatMovement : MonoBehaviour
 {
@@ -22,24 +22,40 @@ public class BoatMovement : MonoBehaviour
 
     public ScreenShake screenShake;
     private float currentHitPoints;
-    private float lateralMovement = 0f;
+    private Vector2 movement;
     private Quaternion originalRotation;
 
     public GameObject despawnVFX;
 
-    [SerializeField] [Tooltip("Clamp position of ship (min value)")] [Range(0, -6f)]
+    [SerializeField]
+    [Tooltip("Clamp position of ship (min value)")]
+    [Range(0, -6f)]
     private float minX;
 
-    [SerializeField] [Range(0, 6f)] [Tooltip("Clamp position of ship (max value)")]
+    [SerializeField]
+    [Range(0, 6f)]
+    [Tooltip("Clamp position of ship (max value)")]
     private float maxX;
 
-    public bool IsControlEnabled { get; set; } = false;
+    [SerializeField]
+    [Tooltip("Clamp position of ship (min value)")]
+    [Range(0, -10f)]
+    private float minZ;
+
+    [SerializeField]
+    [Tooltip("Clamp position of ship (min value)")]
+    [Range(0, 10f)]
+    private float maxZ;
 
     public string DangerTag = "";
     public string CrateTag = "";
     public string DrainTag = "";
 
     public UnityEvent OnBoatDied;
+
+    public float SteeringInput { get; set; }
+
+    public float ThrustInput { get; set; }
 
 
     [SerializeField] private Transform boatWaterFill = null;
@@ -65,17 +81,19 @@ public class BoatMovement : MonoBehaviour
 
     private void Update()
     {
-        float input = 0;
+        movement.x += SteeringInput * speed * Time.deltaTime;
+        movement.x = Mathf.Clamp(movement.x, -speed, speed);
 
-        if (IsControlEnabled)
-        {
-            input = Input.GetAxis("Horizontal"); // 'A' and 'D' keys are mapped to the "Horizontal" axis
-            lateralMovement += input * speed * Time.deltaTime;
-            lateralMovement = Mathf.Clamp(lateralMovement, -speed, speed);
-        }
+        movement.y += ThrustInput * speed * Time.deltaTime;
+        movement.y = Mathf.Clamp(movement.y, -speed, speed);
 
-        ApplyInertia();
-        TiltBoat(input);
+
+        float inertiaEffect = speed / inertiaDuration * Time.deltaTime;
+
+        movement.x = Mathf.Sign(movement.x) * Mathf.Max(Mathf.Abs(movement.x) - inertiaEffect, 0);
+        movement.y = Mathf.Sign(movement.y) * Mathf.Max(Mathf.Abs(movement.y) - inertiaEffect, 0);
+
+        TiltBoat(SteeringInput);
 
         mountPoint.rotation = Quaternion.identity;
 
@@ -94,28 +112,29 @@ public class BoatMovement : MonoBehaviour
 
     private void ApplyInertia()
     {
-        if (lateralMovement != 0)
+        if (movement.sqrMagnitude != 0)
         {
             // Reduce the lateralMovement over time to simulate inertia
-            float inertiaEffect = speed / inertiaDuration * Time.deltaTime;
-            lateralMovement = (Mathf.Abs(lateralMovement) - inertiaEffect) * Mathf.Sign(lateralMovement);
-            if (Mathf.Abs(lateralMovement) < inertiaEffect)
-            {
-                lateralMovement = 0;
-            }
+            float inertiaEffect = Time.deltaTime;
+
+            movement *= inertiaEffect;
         }
         else
         {
             // Gradually reset rotation to original
-            transform.rotation = Quaternion.Lerp(transform.rotation, originalRotation, Time.deltaTime * yawSpeed);
+            transform.rotation = Quaternion.Slerp(transform.rotation, originalRotation, Time.deltaTime * yawSpeed);
         }
     }
 
     private void MoveBoat()
     {
         Vector3 position = transform.position;
-        position.x += lateralMovement * Time.deltaTime;
+
+        position.x += movement.x * Time.deltaTime;
+        position.z += movement.y * Time.deltaTime;
+
         position.x = Mathf.Clamp(position.x, minX, maxX); // Adjust based on your game's boundaries
+        position.z = Mathf.Clamp(position.z, minZ, maxZ);
 
         transform.position = position;
     }
