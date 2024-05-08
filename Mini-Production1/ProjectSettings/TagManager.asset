@@ -8,6 +8,7 @@ TagManager:
   - Obstacle
   - UpgradeStation
   - drain
+  - SewerEnd
   layers:
   - Default
   - TransparentFX

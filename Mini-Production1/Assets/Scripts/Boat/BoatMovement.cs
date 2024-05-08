@@ -23,7 +23,7 @@ public class BoatMovement : MonoBehaviour
     public ScreenShake screenShake;
     private float currentHitPoints;
     private Vector2 movement;
-    private Quaternion originalRotation;
+    public Quaternion originalRotation;
 
     public GameObject despawnVFX;
 

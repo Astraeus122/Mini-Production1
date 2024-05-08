@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class SewerSpawner : MonoBehaviour
+public class SewerSpawnerTurn : MonoBehaviour
 {
     [SerializeField]
     private GameObject[] sewerPrefabs;
@@ -21,6 +21,9 @@ public class SewerSpawner : MonoBehaviour
 
     [SerializeField]
     Vector3 facing;
+    
+    private Vector3 sewerEndPoint = Vector3.zero;
+    private float rotationWalk = 0f;
 
     void Awake()
     {
@@ -34,6 +37,7 @@ public class SewerSpawner : MonoBehaviour
 
     private void SpawnSewer()
     {
+        /*
         // add increasing difficulty with weighted random later :)
         var sewer = Instantiate(sewerPrefabs[Random.Range(0, sewerPrefabs.Length)], transform);
         spawnedSewer.Add(sewer);
@@ -49,10 +53,54 @@ public class SewerSpawner : MonoBehaviour
             float lengthOfX = bounds.size.x;
             totalLength += lengthOfX;
         }
+        
+        water edge
+        tunnel gradient going up 
+        shadow missing 
+        reverse depth fade on water.
+        
+        */
+        var sewer = Instantiate(sewerPrefabs[Random.Range(0, sewerPrefabs.Length)], transform);
+        spawnedSewer.Add(sewer);
+        sewer.transform.position = sewerEndPoint;
+        
+        sewer.transform.localRotation = Quaternion.Euler(0,-90+rotationWalk,0f);
+        // record end point
+        var endpointComponent = sewer.GetComponentInChildren<SewerEnd>();
+
+        sewerEndPoint = endpointComponent.gameObject.transform.position;
+        rotationWalk += endpointComponent.turnAngle;
+        
+        Debug.Log(sewerEndPoint);
     }
 
     void Update()
     {
+        if (Input.GetKeyUp(KeyCode.L))
+        {
+            SpawnSewer();
+        }
+        
+        
+        var deltaPos = boatSpeed * Time.deltaTime;
+        totalLength -= deltaPos;
+
+        // move all the sewers
+        for (int i = spawnedSewer.Count - 1; i >= 0; i--)
+        {
+            var sewer = spawnedSewer[i];
+            sewer.transform.position = new Vector3(sewer.transform.position.x,
+                sewer.transform.position.y,
+                sewer.transform.position.z - deltaPos);
+            
+            // despawn sewer
+            if (sewer.transform.position.z < - maxSewerLength)
+            {
+                spawnedSewer.Remove(sewer);
+                Destroy(sewer.gameObject);
+            }
+        }
+        /*
         var deltaPos = boatSpeed * Time.deltaTime;
         totalLength -= deltaPos;
 
@@ -77,5 +125,6 @@ public class SewerSpawner : MonoBehaviour
         {
             SpawnSewer();
         }
+    */
     }
 }

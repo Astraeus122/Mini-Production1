@@ -5,6 +5,7 @@ using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
+    public Transform boat;
     public static GameManager Instance { get; private set; }
 
     public static string HighscorePrefKey = "PlayerHighscore";
