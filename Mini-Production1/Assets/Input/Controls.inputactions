@@ -167,6 +167,76 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Boat",
+            "id": "c3a9b21d-3b78-4336-b7d2-ab7e8d8956cd",
+            "actions": [
+                {
+                    "name": "Steering",
+                    "type": "Button",
+                    "id": "eb63cfca-1298-45ae-b7b4-acad41abe6ef",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Fire",
+                    "type": "Button",
+                    "id": "9e01518a-1269-469f-ae76-a77bfacd1bc3",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "1D Axis",
+                    "id": "b6ad04ba-fe04-47af-ba2d-703828e0a50a",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Steering",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "f1cf3c0a-5310-4d1f-8e3f-87b86f1837eb",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Rat n' Keys",
+                    "action": "Steering",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "72290930-c82f-4ec6-8b0a-bb4c87278b69",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Rat n' Keys",
+                    "action": "Steering",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "21af4e60-cd15-4ef1-88bc-0d84c305f9c7",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Rat n' Keys",
+                    "action": "Fire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [
