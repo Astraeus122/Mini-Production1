@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1745082465205165139}
   m_Layer: 3
-  m_Name: Barrel
+  m_Name: Launcher
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1745082465205165138}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.12, y: 0.789, z: -0.21}
+  m_LocalPosition: {x: -0.02, y: 0.575, z: -0.021}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -60,15 +60,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1745082466837946226}
-  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.44112873, y: 2.196, z: 25.786}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1745082465205165139}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1745082466837946237
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -195,5 +195,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projecile: {fileID: 9079870105783229211, guid: bf2ac93d2ee43e544b15a9c5cbbd2f47, type: 3}
   launcher: {fileID: 1745082465205165139}
-  force: 4000
-  fireRate: 1
+  turretWeapon: 0
+  force: 2000
+  fireRate: 0.25
