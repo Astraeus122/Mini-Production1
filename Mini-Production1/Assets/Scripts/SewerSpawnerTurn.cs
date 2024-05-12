@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -21,8 +22,8 @@ public class SewerSpawnerTurn : MonoBehaviour
 
     [SerializeField]
     Vector3 facing;
-    
-    private Vector3 sewerEndPoint = Vector3.zero;
+
+    GameObject sewerEndPointGO;
     private float rotationWalk = 0f;
 
     void Awake()
@@ -62,24 +63,27 @@ public class SewerSpawnerTurn : MonoBehaviour
         */
         var sewer = Instantiate(sewerPrefabs[Random.Range(0, sewerPrefabs.Length)], transform);
         spawnedSewer.Add(sewer);
-        sewer.transform.position = sewerEndPoint;
+        if (sewerEndPointGO)
+            sewer.transform.position = sewerEndPointGO.transform.position;
         
         sewer.transform.localRotation = Quaternion.Euler(0,-90+rotationWalk,0f);
+        //sewer.transform.DORotate(new Vector3(0f, -90f+rotationWalk, 0f), 1f, RotateMode.LocalAxisAdd);
+        
         // record end point
         var endpointComponent = sewer.GetComponentInChildren<SewerEnd>();
 
-        sewerEndPoint = endpointComponent.gameObject.transform.position;
+        sewerEndPointGO = endpointComponent.gameObject;
         rotationWalk += endpointComponent.turnAngle;
         
-        Debug.Log(sewerEndPoint);
+        Debug.Log(sewerEndPointGO);
     }
 
     void Update()
     {
-        if (Input.GetKeyUp(KeyCode.L))
+        /*if (Input.GetKeyUp(KeyCode.L))
         {
             SpawnSewer();
-        }
+        }*/
         
         
         var deltaPos = boatSpeed * Time.deltaTime;
@@ -99,6 +103,11 @@ public class SewerSpawnerTurn : MonoBehaviour
                 spawnedSewer.Remove(sewer);
                 Destroy(sewer.gameObject);
             }
+        }
+        
+        if (spawnedSewer.Count < maxNumberOfSewer)
+        {
+            SpawnSewer();
         }
         /*
         var deltaPos = boatSpeed * Time.deltaTime;
