@@ -407,7 +407,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06a3b6999b8a9a946845f63ee2796940, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 1418549254}
   shipThreshold: 100
   enemyShipPrefabs:
   - {fileID: 4337832363417643681, guid: 0f94f431bd8eb60468d6b1a847133842, type: 3}
