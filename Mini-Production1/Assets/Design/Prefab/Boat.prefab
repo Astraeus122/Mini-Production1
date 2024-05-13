@@ -104,6 +104,9 @@ MonoBehaviour:
   healthFillUI: {fileID: 0}
   mountPoint: {fileID: 7675256435150753238}
   HitAudioSource: {fileID: 6422597471755119524}
+  hasAdvancedNavigation: 0
+  miniMapCamera: {fileID: 0}
+  miniMapPanel: {fileID: 0}
   screenShake: {fileID: 0}
   despawnVFX: {fileID: 954011737003777240, guid: b90b66d8c2692254792a98602e2fc2a0, type: 3}
   minX: -5.4
@@ -178,7 +181,6 @@ MonoBehaviour:
         m_CallState: 2
   boatWaterFill: {fileID: 810999767295782490}
   boatWaterMinMaxY: {x: 0.4, y: 1.05}
-  hasAdvancedNavigation: 0
   scrapMagnetRadius: 0
   boatLight: {fileID: 0}
   shieldStrength: 0
@@ -1749,36 +1751,9 @@ MonoBehaviour:
   OnMounted:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 41867275289408979}
-        m_TargetAssemblyTypeName: BoatMovement, Assembly-CSharp
-        m_MethodName: set_IsControlEnabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnDismounted:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 41867275289408979}
-        m_TargetAssemblyTypeName: BoatMovement, Assembly-CSharp
-        m_MethodName: set_IsControlEnabled
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1800,6 +1775,45 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 8662210741148309957}
+        m_TargetAssemblyTypeName: SteeringWheel, Assembly-CSharp
+        m_MethodName: set_Controlable
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+  OnDismounted:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3540520523126862568}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 8662210741148309957}
+        m_TargetAssemblyTypeName: SteeringWheel, Assembly-CSharp
+        m_MethodName: set_Controlable
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &8662210741148309957
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1816,6 +1830,7 @@ MonoBehaviour:
   wheelRotationLimit: 360
   <SteerSpeed>k__BackingField: 2
   <Recenter>k__BackingField: 0
+  <Controlable>k__BackingField: 0
   onSteeringChanged:
     m_PersistentCalls:
       m_Calls:
