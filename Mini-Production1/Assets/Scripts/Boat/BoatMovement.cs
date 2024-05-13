@@ -14,7 +14,9 @@ public class BoatMovement : MonoBehaviour
     public float leakSusceptibility = 0.3f;
     public float yawAmount = 2.0f; // The maximum yaw angle
     public float yawSpeed = 2.0f; // How quickly the boat yaws
+
     private bool isInDrainLiquid = false;
+
     public float drainDamagePerSecond = 1f;
     [SerializeField]
     Image healthFillUI;
@@ -23,11 +25,15 @@ public class BoatMovement : MonoBehaviour
     [SerializeField]
     AudioSource HitAudioSource;
 
+    // Upgrade stats
     public bool hasAdvancedNavigation = false;
     [SerializeField]
-    public Camera miniMapCamera;  // Reference to the mini-map camera
+    Camera miniMapCamera;  // Reference to the mini-map camera
     [SerializeField]
-    public GameObject miniMapPanel;  // Reference to the mini-map UI Panel
+    GameObject miniMapPanel;  // Reference to the mini-map UI Panel
+
+    public float scrapMagnetRadius = 0f;  // Initial radius of the scrap magnet effect
+    public float scrapMagnetStrength = 0f;  // How strongly items are pulled towards the boat
 
     public ScreenShake screenShake;
     private float currentHitPoints;
@@ -270,6 +276,7 @@ public class BoatMovement : MonoBehaviour
 
         if (other.CompareTag(CrateTag))
         {
+            Debug.LogError("Resource collected");
             GameManager.Instance.RepairResources += (int)other.GetComponent<Obstacle_Scr>().Value;
             other.gameObject.GetComponent<Obstacle_Scr>().Die();
         }
@@ -301,8 +308,6 @@ public class BoatMovement : MonoBehaviour
         if (miniMapPanel != null)
             miniMapPanel.SetActive(true);  // Show the mini-map panel
     }
-
-    public float scrapMagnetRadius = 0f;
 
     public void IncreaseScrapMagnetRadius(float increment)
     {
