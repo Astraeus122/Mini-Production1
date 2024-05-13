@@ -35,7 +35,7 @@ public class Upgrade
 
     public void ApplyUpgrade()
     {
-        level++;  // Always increment level first
+        this.level++;  // Always increment level first
         levels[name] = level;  // Update static dictionary with new level
 
         switch (name)
