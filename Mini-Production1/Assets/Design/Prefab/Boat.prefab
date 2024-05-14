@@ -108,6 +108,7 @@ MonoBehaviour:
   miniMapCamera: {fileID: 0}
   miniMapPanel: {fileID: 0}
   screenShake: {fileID: 0}
+  originalRotation: {x: 0, y: 0, z: 0, w: 0}
   despawnVFX: {fileID: 954011737003777240, guid: b90b66d8c2692254792a98602e2fc2a0, type: 3}
   minX: -5.4
   maxX: 5.4
@@ -1829,7 +1830,7 @@ MonoBehaviour:
   wheel: {fileID: 0}
   wheelRotationLimit: 360
   <SteerSpeed>k__BackingField: 2
-  <Recenter>k__BackingField: 0
+  <Recenter>k__BackingField: 1
   <Controlable>k__BackingField: 0
   onSteeringChanged:
     m_PersistentCalls:
