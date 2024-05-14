@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class BoatMovement : MonoBehaviour
 {
-    public float speed = 6.0f;
+    public float Speed = 6.0f;
     public float inertiaDuration = 2.0f; // Time in seconds to stop completely from max speed
     public float tiltAngle = 10.0f; // Maximum tilt angle
     public float maxHitPoints = 5;
@@ -16,9 +16,18 @@ public class BoatMovement : MonoBehaviour
     public float yawSpeed = 2.0f; // How quickly the boat yaws
     private bool isInDrainLiquid = false;
     public float drainDamagePerSecond = 1f;
-    public Image healthFillUI;
-    public Transform mountPoint;
-    public AudioSource HitAudioSource;
+    [SerializeField]
+    Image healthFillUI;
+    [SerializeField]
+    Transform mountPoint;
+    [SerializeField]
+    AudioSource HitAudioSource;
+
+    public bool hasAdvancedNavigation = false;
+    [SerializeField]
+    public Camera miniMapCamera;  // Reference to the mini-map camera
+    [SerializeField]
+    public GameObject miniMapPanel;  // Reference to the mini-map UI Panel
 
     public ScreenShake screenShake;
     private float currentHitPoints;
@@ -63,7 +72,6 @@ public class BoatMovement : MonoBehaviour
 
     public Vector2 Movement { get { return movement; } }
 
-
     public void UpgradeMaxHealth(float additionalHealth)
     {
         maxHitPoints += additionalHealth;
@@ -72,7 +80,7 @@ public class BoatMovement : MonoBehaviour
 
     public void UpgradeSpeed(float additionalSpeed)
     {
-        speed += additionalSpeed;
+        Speed += additionalSpeed;
     }
 
     void Start()
@@ -84,14 +92,14 @@ public class BoatMovement : MonoBehaviour
 
     private void Update()
     {
-        movement.x += SteeringInput * speed * Time.deltaTime;
-        movement.x = Mathf.Clamp(movement.x, -speed, speed);
+        movement.x += SteeringInput * Speed * Time.deltaTime;
+        movement.x = Mathf.Clamp(movement.x, -Speed, Speed);
 
-        movement.y += ThrustInput * speed * Time.deltaTime;
-        movement.y = Mathf.Clamp(movement.y, -speed, speed);
+        movement.y += ThrustInput * Speed * Time.deltaTime;
+        movement.y = Mathf.Clamp(movement.y, -Speed, Speed);
 
 
-        float inertiaEffect = speed / inertiaDuration * Time.deltaTime;
+        float inertiaEffect = Speed / inertiaDuration * Time.deltaTime;
 
         movement.x = Mathf.Sign(movement.x) * Mathf.Max(Mathf.Abs(movement.x) - inertiaEffect, 0);
         movement.y = Mathf.Sign(movement.y) * Mathf.Max(Mathf.Abs(movement.y) - inertiaEffect, 0);
@@ -218,7 +226,7 @@ public class BoatMovement : MonoBehaviour
 
         if (currentHitPoints <= 0)
         {
-            speed = 0;
+            Speed = 0;
 
             // sink boat
             StartCoroutine(SinkBoatRoutine());
@@ -285,4 +293,58 @@ public class BoatMovement : MonoBehaviour
             isInDrainLiquid = false;
         }
     }
+    public void ActivateAdvancedNavigation()
+    {
+        hasAdvancedNavigation = true;
+        if (miniMapCamera != null)
+            miniMapCamera.enabled = true;  // Enable the mini-map camera
+        if (miniMapPanel != null)
+            miniMapPanel.SetActive(true);  // Show the mini-map panel
+    }
+
+    public float scrapMagnetRadius = 0f;
+
+    public void IncreaseScrapMagnetRadius(float increment)
+    {
+        scrapMagnetRadius += increment;
+        // Logic to pull in items within `scrapMagnetRadius`
+    }
+
+    public Light boatLight; // Attach a Light component in the Unity editor
+
+    public void EnhanceFloodlights(float additionalRange)
+    {
+        if (boatLight != null)
+        {
+            boatLight.range += additionalRange;
+        }
+    }
+
+    public float shieldStrength = 0;
+    public bool shieldActive = false;
+
+    public void ActivateShield(float strength)
+    {
+        shieldStrength = strength;
+        shieldActive = true;
+        // Visual or gameplay effects to indicate shield is active
+    }
+
+    public void HandleDamageWithShield(float damageAmount)
+    {
+        if (shieldActive && shieldStrength > 0)
+        {
+            shieldStrength -= damageAmount;
+            if (shieldStrength <= 0)
+            {
+                shieldActive = false;  // Deactivate shield if depleted
+                                       // Additional effects for shield deactivation
+            }
+        }
+        else
+        {
+            TakeDamage(damageAmount);  // Regular damage handling
+        }
+    }
+
 }
