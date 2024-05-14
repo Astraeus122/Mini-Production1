@@ -19,13 +19,16 @@ public class SteeringWheel : MonoBehaviour
     [SerializeField]
     private UnityEvent<float> onSteeringChanged;
 
+    [field: SerializeField]
+    public bool Controlable { get; set; }
+
 
     public float CurrentSteerAngle { get; private set; }
 
 
     private void LateUpdate()
     {
-        float input = InputInstance.Controls.Boat.Steering.ReadValue<float>() * Time.deltaTime;
+        float input = Controlable ? InputInstance.Controls.Boat.Steering.ReadValue<float>() * Time.deltaTime : 0f;
 
         if (Mathf.Abs(input) > 0.001f)
             CurrentSteerAngle += input * SteerSpeed;

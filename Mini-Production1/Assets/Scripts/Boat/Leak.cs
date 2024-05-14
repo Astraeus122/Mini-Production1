@@ -124,4 +124,20 @@ public class Leak : MonoBehaviour
 
         leakParticles.transform.localScale = Vector3.one * scaleByStrength.Evaluate(LeakStrength);
     }
+    public void ReactivateLeak(float strengthIncrease)
+    {
+        if (!enabled) // If the leak is disabled, we enable it
+        {
+            enabled = true;
+            OnEnable();  // Call OnEnable to reset the necessary components and visuals
+        }
+        LeakStrength += strengthIncrease;  // Increase leak strength
+        LeakStrength = Mathf.Min(LeakStrength, 1);  // Ensure it does not exceed 1
+    }
+
+    public void UpdateLeakRepairDuration()
+    {
+        float decreasePercentage = 0.1f;
+        leakRepairDuration *= (1 - decreasePercentage);
+    }
 }

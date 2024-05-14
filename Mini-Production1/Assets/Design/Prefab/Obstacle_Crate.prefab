@@ -59,6 +59,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -6.501
       objectReference: {fileID: 0}
+    - target: {fileID: 2536073516160274963, guid: 9c3d7039a2d60fe4aba97bf243617c2b, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 2536073516303619250, guid: 9c3d7039a2d60fe4aba97bf243617c2b, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -107,6 +111,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: VFXSparkleBottleCap
       objectReference: {fileID: 0}
+    - target: {fileID: 2536073516303619251, guid: 9c3d7039a2d60fe4aba97bf243617c2b, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 2536073516319256208, guid: 9c3d7039a2d60fe4aba97bf243617c2b, type: 3}
       propertyPath: m_PropertySheet.m_Vector4f.m_Array.Array.size
       value: 1
@@ -134,6 +142,10 @@ PrefabInstance:
     - target: {fileID: 2536073516319256208, guid: 9c3d7039a2d60fe4aba97bf243617c2b, type: 3}
       propertyPath: m_PropertySheet.m_Vector4f.m_Array.Array.data[0].m_Overridden
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2536073516319256210, guid: 9c3d7039a2d60fe4aba97bf243617c2b, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2536073516319256223, guid: 9c3d7039a2d60fe4aba97bf243617c2b, type: 3}
       propertyPath: m_LocalScale.x
@@ -222,6 +234,10 @@ PrefabInstance:
       value: Obstacle_Crate
       objectReference: {fileID: 0}
     - target: {fileID: 5414029004215200820, guid: d1985cfc87dec13418bb6bf8b14fad14, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5414029004215200820, guid: d1985cfc87dec13418bb6bf8b14fad14, type: 3}
       propertyPath: m_TagString
       value: Crate
       objectReference: {fileID: 0}
@@ -237,6 +253,22 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5414029004215200820, guid: d1985cfc87dec13418bb6bf8b14fad14, type: 3}
   m_PrefabInstance: {fileID: 6972893444287691228}
   m_PrefabAsset: {fileID: 0}
+--- !u!54 &-4165339059912411276
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3163443477585483240}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!135 &9119103625989350708
 SphereCollider:
   m_ObjectHideFlags: 0

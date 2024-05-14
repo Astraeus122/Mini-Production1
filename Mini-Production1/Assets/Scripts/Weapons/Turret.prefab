@@ -48,7 +48,7 @@ GameObject:
   - component: {fileID: -6953762919675047008}
   m_Layer: 3
   m_Name: Turret
-  m_TagString: Untagged
+  m_TagString: Turret
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -222,3 +222,7 @@ MonoBehaviour:
   turretWeapon: 1
   force: 30000
   fireRate: 10
+  cannonPowerLevel: 0
+  fireRateLevel: 0
+  powerIncrement: 10
+  rateIncrement: 0.2

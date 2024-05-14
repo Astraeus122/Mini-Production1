@@ -1,4 +1,6 @@
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -21,19 +23,55 @@ public class BoatMovement : MonoBehaviour
     [SerializeField]
     Image healthFillUI;
     [SerializeField]
-    Transform mountPoint;
+    private Transform mountPoint;
     [SerializeField]
-    AudioSource HitAudioSource;
+    private AudioSource HitAudioSource;
 
     // Upgrade stats
     public bool hasAdvancedNavigation = false;
     [SerializeField]
-    Camera miniMapCamera;  // Reference to the mini-map camera
+    private Camera miniMapCamera;  // Reference to the mini-map camera
     [SerializeField]
-    GameObject miniMapPanel;  // Reference to the mini-map UI Panel
+    private GameObject miniMapPanel;  // Reference to the mini-map UI Panel
 
     public float scrapMagnetRadius = 0f;  // Initial radius of the scrap magnet effect
     public float scrapMagnetStrength = 0f;  // How strongly items are pulled towards the boat
+    [SerializeField]
+    private Light boatLight;
+
+    public int maxShieldHits = 0;  // Maximum hits the shield can take
+    public int currentShieldHits = 0;  // Current hits before depletion
+    public float shieldRegenCooldown = 30f;  // Time in seconds to regenerate shield
+    public float shieldStrength = 0;
+    public bool shieldActive = false;
+
+    public float collisionDamageReduction = 0f;  // Percentage of damage reduction from collisions
+
+    public float baseTemporalShiftDuration = 3.0f;
+    private float temporalShiftIncrement = 0.5f; // Duration increase per upgrade
+    public int temporalShiftUpgradeLevel = 0; 
+    public float temporalShiftDuration => baseTemporalShiftDuration + temporalShiftUpgradeLevel * temporalShiftIncrement;
+
+    public float temporalShiftCooldown = 30.0f;
+    private float temporalShiftTimer = 0.0f; // Ensure it's initially 0 for availability
+    private bool isTemporalShiftActive = false;
+
+    public float healthRegenerationRate = 0;  // Health gained per second
+    private float healthRegenerationCooldown = 0.1f;  // Cooldown between regenerations
+    private float lastRegenerationTime;
+
+    [SerializeField] private GameObject jeremiahPrefab; // Assign this in the Unity Editor
+    [SerializeField] private Transform spawnPoint; // Assign or calculate a spawn point for Jeremiah
+    private int jeremiahCount = 0;
+
+    [SerializeField]
+    private GameObject shieldVisualEffect;
+    [SerializeField]
+    private AudioSource shieldAudioSource;
+    [SerializeField]
+    private AudioClip shieldImpactSound;
+    [SerializeField]
+    private AudioClip shieldCrackSound; 
 
     public ScreenShake screenShake;
     private float currentHitPoints;
@@ -89,6 +127,20 @@ public class BoatMovement : MonoBehaviour
         Speed += additionalSpeed;
     }
 
+    public void ReceiveDamage(float damage, Vector3 impactPoint)
+    {
+        if (shieldActive)
+        {
+            HandleDamageWithShield(damage);
+        }
+        else
+        {
+            // Apply collision damage reduction if shield is not active
+            float reducedDamage = damage * (1 - collisionDamageReduction);
+            TakeDamage(reducedDamage, impactPoint);
+        }
+    }
+
     void Start()
     {
         screenShake = Camera.main.GetComponent<ScreenShake>();
@@ -120,6 +172,51 @@ public class BoatMovement : MonoBehaviour
         }
 
         ProcessLeaks();
+
+        if (scrapMagnetRadius > 0)
+        {
+            Collider[] hits = Physics.OverlapSphere(transform.position, scrapMagnetRadius, LayerMask.GetMask("CrateLayer"));
+            foreach (var hit in hits)
+            {
+                float distance = Vector3.Distance(transform.position, hit.transform.position);
+                Vector3 pullDirection = (transform.position - hit.transform.position).normalized;
+                float pullStrength = Mathf.Lerp(scrapMagnetStrength, 0, distance / scrapMagnetRadius);
+
+                hit.GetComponent<Rigidbody>().AddForce(pullDirection * pullStrength * Time.deltaTime);
+            }
+        }
+
+        // Handle Temporal Shift Activation
+        if (Input.GetKeyDown(KeyCode.Q) && temporalShiftTimer <= 0)
+        {
+            ActivateTemporalShift();
+        }
+
+        // Manage active Temporal Shift
+        if (isTemporalShiftActive)
+        {
+            temporalShiftTimer -= Time.unscaledDeltaTime;
+            if (temporalShiftTimer <= 0)
+            {
+                DeactivateTemporalShift();
+            }
+        }
+        else if (temporalShiftTimer > 0)  // Cooldown management
+        {
+            temporalShiftTimer -= Time.deltaTime;
+            temporalShiftTimer = Mathf.Max(temporalShiftTimer, 0);
+        }
+
+        // Handle passive health regeneration
+        if (Time.time >= lastRegenerationTime + healthRegenerationCooldown && healthRegenerationRate > 0)
+        {
+            Heal(healthRegenerationRate * healthRegenerationCooldown);
+            lastRegenerationTime = Time.time;
+        }
+    }
+    public void Heal(float healthAmount)
+    {
+        TakeDamage(-healthAmount);  // Using negative damage to heal
     }
 
     void FixedUpdate()
@@ -253,6 +350,14 @@ public class BoatMovement : MonoBehaviour
         }
     }
 
+    public void AddLeak(Leak leak)
+    {
+        if (!leakSites.Contains(leak))
+        {
+            leak.UpdateLeakRepairDuration(); // Adjust the repair duration
+        }
+    }
+
     private void ProcessLeaks()
     {
         foreach (var leak in leakSites)
@@ -265,13 +370,9 @@ public class BoatMovement : MonoBehaviour
     {
         if (other.CompareTag(DangerTag))
         {
-            if (other.TryGetComponent(out Obstacle_Scr obstacle))
-            {
-                if (obstacle.Die())
-                    TakeDamage(other.GetComponent<Obstacle_Scr>().Value,
-                        other.transform
-                            .position); //TODO add damage field to the obstacle instance, different ones could do different dmg
-            }
+            float damage = other.GetComponent<Obstacle_Scr>()?.Value ?? 0;
+            ReceiveDamage(damage, other.transform.position);
+            other.GetComponent<Obstacle_Scr>()?.Die();
         }
 
         if (other.CompareTag(CrateTag))
@@ -309,47 +410,137 @@ public class BoatMovement : MonoBehaviour
             miniMapPanel.SetActive(true);  // Show the mini-map panel
     }
 
-    public void IncreaseScrapMagnetRadius(float increment)
+    public void IncreaseScrapMagnetRadius(float incrementRadius, float incrementStrength)
     {
-        scrapMagnetRadius += increment;
-        // Logic to pull in items within `scrapMagnetRadius`
+        scrapMagnetRadius += incrementRadius;
+        scrapMagnetStrength += incrementStrength;
     }
 
-    public Light boatLight; // Attach a Light component in the Unity editor
-
-    public void EnhanceFloodlights(float additionalRange)
+    public void EnhanceFloodlights(float additionalIntensity)
     {
         if (boatLight != null)
         {
-            boatLight.range += additionalRange;
+            boatLight.intensity += additionalIntensity; // Increases the light range
+        }
+        else
+        {
+            Debug.LogError("No light component found on the boat!");
         }
     }
 
-    public float shieldStrength = 0;
-    public bool shieldActive = false;
-
-    public void ActivateShield(float strength)
+    public void ActivateShield()
     {
-        shieldStrength = strength;
+        currentShieldHits = maxShieldHits;
         shieldActive = true;
-        // Visual or gameplay effects to indicate shield is active
+        if (shieldVisualEffect != null)
+            shieldVisualEffect.SetActive(true);
+        if (shieldAudioSource != null)
+        {
+            shieldAudioSource.Play();
+        }
+
+        StopCoroutine("RegenerateShield");
+        StartCoroutine("RegenerateShield");
+    }
+
+    IEnumerator RegenerateShield()
+    {
+        yield return new WaitForSeconds(shieldRegenCooldown);
+        if (currentShieldHits < maxShieldHits)
+        {
+            currentShieldHits++;
+            if (shieldAudioSource != null && currentShieldHits == maxShieldHits)
+            {
+                shieldAudioSource.Play();
+            }
+            StartCoroutine("RegenerateShield");
+        }
+        else
+        {
+            shieldActive = false;
+            if (shieldVisualEffect != null)
+                shieldVisualEffect.SetActive(false);
+        }
     }
 
     public void HandleDamageWithShield(float damageAmount)
     {
-        if (shieldActive && shieldStrength > 0)
+        if (shieldActive && currentShieldHits > 0)
         {
-            shieldStrength -= damageAmount;
-            if (shieldStrength <= 0)
+            currentShieldHits--;
+            if (shieldAudioSource != null && shieldImpactSound != null)
             {
-                shieldActive = false;  // Deactivate shield if depleted
-                                       // Additional effects for shield deactivation
+                shieldAudioSource.PlayOneShot(shieldImpactSound);  // Play impact sound
+            }
+            if (currentShieldHits <= 0)
+            {
+                shieldActive = false;
+                if (shieldVisualEffect != null)
+                    shieldVisualEffect.SetActive(false);
+                if (shieldAudioSource != null && shieldCrackSound != null)
+                {
+                    shieldAudioSource.PlayOneShot(shieldCrackSound);  // Play crack sound
+                }
             }
         }
         else
         {
-            TakeDamage(damageAmount);  // Regular damage handling
+            TakeDamage(damageAmount);
         }
     }
 
+    public void ActivateShieldVisualEffect(bool isActive)
+    {
+        if (shieldVisualEffect != null)
+        {
+            shieldVisualEffect.SetActive(isActive);
+        }
+    }
+    public void ActivateTemporalShift()
+    {
+        if (temporalShiftUpgradeLevel > 0 && temporalShiftTimer <= 0)
+        {
+            Time.timeScale = 0.5f;
+            Time.fixedDeltaTime = 0.02f * Time.timeScale;
+            isTemporalShiftActive = true;
+            temporalShiftTimer = temporalShiftDuration; // Start the duration timer
+        }
+        else
+        {
+            Debug.Log("Cannot activate Temporal Shift: Level=" + temporalShiftUpgradeLevel + ", Timer=" + temporalShiftTimer);
+        }
+    }
+
+    private void DeactivateTemporalShift()
+    {
+        Time.timeScale = 1.0f;
+        Time.fixedDeltaTime = 0.02f;
+        isTemporalShiftActive = false;
+        temporalShiftTimer = temporalShiftCooldown; // Reset cooldown
+    }
+    public void AddJeremiah()
+    {
+        if (jeremiahPrefab != null && spawnPoint != null && spawnPoint != null)
+        {
+            GameObject jeremiahInstance = Instantiate(jeremiahPrefab, spawnPoint.position, Quaternion.identity);
+            jeremiahCount++;
+
+            // Set the boat and standby location on the spawned Jeremiah
+            CrewmateDriver jeremiahDriver = jeremiahInstance.GetComponent<CrewmateDriver>();
+            if (jeremiahDriver != null)
+            {
+                jeremiahDriver.SetInitialSettings(this, spawnPoint);
+            }
+            else
+            {
+                Debug.LogError("CrewmateDriver component not found on the spawned Jeremiah prefab!");
+            }
+
+            Debug.Log("Jeremiah added, total: " + jeremiahCount);
+        }
+        else
+        {
+            Debug.LogError("Jeremiah prefab, spawn point, or standby location not set");
+        }
+    }
 }
