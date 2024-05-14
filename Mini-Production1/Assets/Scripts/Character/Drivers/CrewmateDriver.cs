@@ -177,4 +177,13 @@ public class CrewmateDriver : MonoBehaviour
         controller.MoveInput = Vector2.zero;
         return true;
     }
+
+    public void SetInitialSettings(BoatMovement aboardBoat, Transform standbyLoc)
+    {
+        boatAboard = aboardBoat;
+        standbyLocation = standbyLoc;
+
+        if (teleportToStandbyOnStart && standbyLocation != null)
+            transform.position = standbyLocation.position;
+    }
 }

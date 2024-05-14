@@ -10,7 +10,7 @@ public class UpgradeManager : MonoBehaviour
     public List<Upgrade> currentOptions = new List<Upgrade>();
 
     private BoatMovement boat; // BoatMovement reference
-
+   
     void Awake()
     {
         boat = FindObjectOfType<BoatMovement>(); // Find and assign BoatMovement
@@ -37,6 +37,8 @@ public class UpgradeManager : MonoBehaviour
         allUpgrades.Add(new Upgrade("Temporal Shift", "Activates a device that temporarily slows everything except the player, offering tactical maneuver advantages.", null, boat));
         allUpgrades.Add(new Upgrade("Hyper Drive", "Grants a temporary burst of invincible speed, allowing the boat to smash through obstacles and enemies unharmed.", null, boat));
         allUpgrades.Add(new Upgrade("Regeneration Module", "Installs a regeneration module that continuously restores boat health over time.", null, boat));
+        allUpgrades.Add(new Upgrade("Jeremiah", "Jeremiah will repair your boat, he is cool.", null, boat));
+        allUpgrades.Add(new Upgrade("Waterproof Seal", "Nothing some Flextape cant fix!", null, boat));
     }
 
     public void GenerateUpgradeOptions()

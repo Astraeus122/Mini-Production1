@@ -15,7 +15,6 @@ public class Upgrade
     public string description;
     public Sprite image;
     public int level = 0;
-    private int repairSpeedLevel = 0;
     public AudioSource buttonPressAudioSource;
 
     // Updated constructor to accept BoatMovement
@@ -36,49 +35,64 @@ public class Upgrade
     public void ApplyUpgrade()
     {
         this.level++;  // Always increment level first
-        levels[name] = level;  // Update static dictionary with new level
 
         switch (name)
         {
             case "Speed Boost":
-                boat.Speed += 5;  // Example: Increase speed by 5 units
+                boat.Speed += 5;  
                 break;
             case "Maneuverability Enhancements":
                 boat.yawAmount += 0.2f;  // Increase the yaw amount to improve maneuverability
                 boat.yawSpeed += 0.1f;  // Optionally, increase yaw speed
                 break;
             case "Hull Strength":
-                boat.UpgradeMaxHealth(20);  // Use existing method to upgrade max health
+                boat.UpgradeMaxHealth(2);  // Use existing method to upgrade max health
                 break;
             case "Efficient Repairs":
-                boat.leakSusceptibility -= 0.05f;  // Decrease susceptibility to leaks
+                foreach (var leak in boat.leakSites)
+                {
+                    leak.UpdateLeakRepairDuration(); // Assuming you add a method to update the duration
+                }
+                break;
+            case "Waterproof Seal":
+                boat.leakSusceptibility -= 0.03f; // Decrease susceptibility to leaks
+                boat.leakSusceptibility = Mathf.Max(0, boat.leakSusceptibility); // Ensure it doesn't go negative
                 break;
             case "Advanced Navigation Tools":
-                boat.ActivateAdvancedNavigation();
+                boat.ActivateAdvancedNavigation();  
                 break;
             case "Scrap Magnet":
-                boat.IncreaseScrapMagnetRadius(5);  // Example radius increment
+                boat.IncreaseScrapMagnetRadius(10.0f, 5.1f);
                 break;
             case "Floodlights":
-                boat.EnhanceFloodlights(10);  // Example range increment
+                boat.EnhanceFloodlights(2.5f);
                 break;
             case "Shield Generator":
-                boat.ActivateShield(100);  // Example shield strength
+                boat.maxShieldHits++;  // Increase the maximum hits the shield can take
+                boat.ActivateShield();  // Reactivate or refresh the shield
                 break;
             case "Impact Bumpers":
-                //boat.CollisionResistance += 0.1f;  // Reduce collision damage
+                boat.collisionDamageReduction += 0.1f;  // Increment damage reduction by 10%
                 break;
             case "Cannon Upgrades":
-                // This could affect properties related to offensive capabilities, such as weapon power or firing rate
+                GameObject cannonObject = GameObject.FindWithTag("Turret"); // Ensure your cannon GameObject has this tag
+                Shoot shootScript = cannonObject?.GetComponent<Shoot>();
+                if (shootScript != null)
+                {
+                    shootScript.UpgradeCannon();
+                }
                 break;
             case "Temporal Shift":
-                // Add functionality in BoatMovement to slow down time or similar effects
+                boat.temporalShiftUpgradeLevel++;  // Increment the upgrade level
                 break;
             case "Hyper Drive":
                 // Implement a boost in speed that ignores collisions temporarily
                 break;
             case "Regeneration Module":
-                // Implement a passive health regeneration mechanism in BoatMovement
+                boat.healthRegenerationRate += 0.03f;  // Increase regeneration rate by 0.05 per second per level
+                break;
+            case "Jeremiah":
+                boat.AddJeremiah();  // Spawn another Jeremiah instance
                 break;
             default:
                 Debug.LogWarning($"Unknown upgrade name: {name}");

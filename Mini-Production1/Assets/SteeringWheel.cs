@@ -16,11 +16,11 @@ public class SteeringWheel : MonoBehaviour
     [field: SerializeField]
     public bool Recenter { get; set; } = false;
 
-    [field: SerializeField]
-    public bool Controlable { get; set; }
-
     [SerializeField]
     private UnityEvent<float> onSteeringChanged;
+
+    [field: SerializeField]
+    public bool Controlable { get; set; }
 
 
     public float CurrentSteerAngle { get; private set; }

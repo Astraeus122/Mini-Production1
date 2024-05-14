@@ -12,9 +12,7 @@ public class PlayerLevelManager : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(currentXP);
-
-        AddXP(Time.deltaTime * 50); // Adding XP based on time, modify the multiplier as needed
+        AddXP(Time.deltaTime * 5); // Adding XP based on time, modify the multiplier as needed
     }
 
     public void AddXP(float xp)
