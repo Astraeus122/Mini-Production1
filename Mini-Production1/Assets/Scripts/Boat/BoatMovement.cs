@@ -423,6 +423,7 @@ public class BoatMovement : MonoBehaviour
         if (boatLight != null)
         {
             boatLight.intensity += additionalIntensity; // Increases the light range
+            boatLight.range += additionalIntensity / 2;
         }
         else
         {

@@ -2090,7 +2090,7 @@ MonoBehaviour:
   wheel: {fileID: 0}
   wheelRotationLimit: 360
   <SteerSpeed>k__BackingField: 2
-  <Recenter>k__BackingField: 0
+  <Recenter>k__BackingField: 1
   onSteeringChanged:
     m_PersistentCalls:
       m_Calls:
