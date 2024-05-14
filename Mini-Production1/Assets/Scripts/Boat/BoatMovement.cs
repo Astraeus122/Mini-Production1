@@ -63,6 +63,8 @@ public class BoatMovement : MonoBehaviour
     [SerializeField] private GameObject jeremiahPrefab; // Assign this in the Unity Editor
     [SerializeField] private Transform spawnPoint; // Assign or calculate a spawn point for Jeremiah
     private int jeremiahCount = 0;
+    [SerializeField]
+    private PlayerLevelManager playerLevelManager;
 
     [SerializeField]
     private GameObject shieldVisualEffect;
@@ -378,7 +380,7 @@ public class BoatMovement : MonoBehaviour
         if (other.CompareTag(CrateTag))
         {
             Debug.LogError("Resource collected");
-            GameManager.Instance.RepairResources += (int)other.GetComponent<Obstacle_Scr>().Value;
+            playerLevelManager.AddXP(25);
             other.gameObject.GetComponent<Obstacle_Scr>().Die();
         }
 

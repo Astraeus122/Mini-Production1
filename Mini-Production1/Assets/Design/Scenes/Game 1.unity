@@ -857,6 +857,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8f79d1eeb234b94596749ac8e470ea9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1434342653 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1533557389130122970, guid: 3f0a96c40c8e65049a13d7606ace43f1, type: 3}
+  m_PrefabInstance: {fileID: 1545753363}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f392f6c76d751aa4e9cd9dbee1d6c454, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!20 &1461204564 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 3972360958983654375, guid: f14163ab994fd5e4096f15e590958f96, type: 3}
@@ -962,6 +973,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1461204564}
     - target: {fileID: 41867275289408979, guid: 75ac378782d622c4ea74324512dd281b, type: 3}
+      propertyPath: playerLevelManager
+      value: 
+      objectReference: {fileID: 1434342653}
+    - target: {fileID: 41867275289408979, guid: 75ac378782d622c4ea74324512dd281b, type: 3}
       propertyPath: shieldVisualEffect
       value: 
       objectReference: {fileID: 513254326}
@@ -1039,17 +1054,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 75ac378782d622c4ea74324512dd281b, type: 3}
---- !u!114 &1492929143 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4489766075251460238, guid: fdd31716a3feaa641ad1e51c650a2fae, type: 3}
-  m_PrefabInstance: {fileID: 2675704449508172002}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1545753363
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1088,7 +1092,7 @@ PrefabInstance:
     - target: {fileID: -5441887349518841969, guid: 3f0a96c40c8e65049a13d7606ace43f1, type: 3}
       propertyPath: OnResourceChange.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1492929143}
+      objectReference: {fileID: 0}
     - target: {fileID: -5441887349518841969, guid: 3f0a96c40c8e65049a13d7606ace43f1, type: 3}
       propertyPath: OnScoreChange.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
