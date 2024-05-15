@@ -158,7 +158,6 @@ public class BoatMovement : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.B)) AddJeremiah();
         movement.x += SteeringInput * Speed * Time.deltaTime;
         movement.x = Mathf.Clamp(movement.x, -Speed, Speed);
 
