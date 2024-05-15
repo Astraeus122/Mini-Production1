@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5228127636351200770}
   - component: {fileID: -6068315870374472285}
+  - component: {fileID: 789935465166711488}
   m_Layer: 6
   m_Name: Obstacle
   m_TagString: Obstacle
@@ -44,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c35ebaf5df95d434eb0226f8011752f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <TeamId>k__BackingField: 0
   Movement_Dir: {x: 0, y: 0, z: 0}
   Movement_Speed: 1
   LifeTime: 1
@@ -53,6 +55,19 @@ MonoBehaviour:
   SpawnPos: {x: 0, y: 0, z: 0}
   SpawnRot: {x: 0, y: 0, z: 0}
   Spawner: {fileID: 0}
-  TerminationPoint: {x: 0, y: 0, z: 0}
+  TerminationPoint: {x: -30, y: 0, z: 0}
   IsDead: 0
-  Value: 1
+  Damage: 1
+--- !u!114 &789935465166711488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5414029004215200820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d891109226c84b42a37fe2c74085f75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  teamId: 0

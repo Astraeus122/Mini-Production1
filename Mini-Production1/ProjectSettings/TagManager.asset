@@ -9,6 +9,7 @@ TagManager:
   - UpgradeStation
   - drain
   - Turret
+  - SewerEnd
   layers:
   - Default
   - TransparentFX
@@ -19,7 +20,7 @@ TagManager:
   - Obstacle
   - Minimap
   - CrateLayer
-  - 
+  - Character
   - 
   - 
   - 

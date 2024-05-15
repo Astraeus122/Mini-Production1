@@ -20,23 +20,38 @@ public class EnemyBoat : MonoBehaviour
 
     private float xTarget;
 
+    bool fireCommandStatus = false;
 
     private void Update()
     {
-        float x = target.transform.position.x - transform.position.x;
+        float deltaX = target.transform.position.x - transform.position.x;
 
         if (Mathf.Abs(target.Movement.x) > 1f)
         {
             if (target.Movement.x < 0) xTarget = wiggleRange.y;
             else xTarget = wiggleRange.x;
         }
-        else if (Mathf.Abs(x) < 4)
+        else if (Mathf.Abs(deltaX) < 4)
         {
             if (target.transform.position.x < 0) xTarget = wiggleRange.y;
             else xTarget = wiggleRange.x;
         }
 
         SteerToTarget();
+
+        if (Mathf.Abs(deltaX) < 3)
+        {
+            if (!fireCommandStatus)
+            {
+                boat.IssueCrewCommand("Fire");
+                fireCommandStatus = true;
+            }
+        }
+        else if (fireCommandStatus)
+        {
+            boat.IssueCrewCommand("Cease Fire");
+            fireCommandStatus = false;
+        }
     }
 
     public void SetTarget(BoatMovement target)

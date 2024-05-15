@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,14 @@ public class BoatMovement : MonoBehaviour
     public float inertiaDuration = 2.0f; // Time in seconds to stop completely from max speed
     public float tiltAngle = 10.0f; // Maximum tilt angle
     public float maxHitPoints = 5;
-    public Leak[] leakSites;
+    [field: SerializeField]
+    public Leak[] LeakSites { get; private set; }
+    [field: SerializeField]
+    public Shoot[] Guns { get; private set; }
+
+    [field: SerializeField]
+    public List<CrewmateDriver> AiRoster { get; private set; } = new List<CrewmateDriver>();
+
     public float leakSusceptibility = 0.3f;
     public float yawAmount = 2.0f; // The maximum yaw angle
     public float yawSpeed = 2.0f; // How quickly the boat yaws
@@ -56,7 +64,7 @@ public class BoatMovement : MonoBehaviour
     private float lastRegenerationTime;
 
     [SerializeField] private GameObject jeremiahPrefab; // Assign this in the Unity Editor
-    [SerializeField] private Transform spawnPoint; // Assign or calculate a spawn point for Jeremiah
+    [SerializeField] private Transform jeremiahStandby; // Assign or calculate a spawn point for Jeremiah
     private int jeremiahCount = 0;
 
     [SerializeField]
@@ -74,6 +82,8 @@ public class BoatMovement : MonoBehaviour
     public Quaternion originalRotation;
 
     public GameObject despawnVFX;
+    public bool destroyAfterSinking = false;
+    public float destroyBelowSinkingY = -3;
 
     [SerializeField]
     [Tooltip("Clamp position of ship (min value)")]
@@ -107,6 +117,12 @@ public class BoatMovement : MonoBehaviour
 
     public Vector2 Movement { get { return movement; } }
 
+    public event Action<string> OnCrewCommand;
+
+    public void IssueCrewCommand(string cmd)
+    {
+        OnCrewCommand?.Invoke(cmd);
+    }
     public void UpgradeMaxHealth(float additionalHealth)
     {
         maxHitPoints += additionalHealth;
@@ -254,7 +270,7 @@ public class BoatMovement : MonoBehaviour
         float sqrDistClosest = Mathf.Infinity;
         Leak closest = null;
 
-        foreach (var leakSite in leakSites)
+        foreach (var leakSite in LeakSites)
         {
             if (leakSite.enabled && leakSite.LeakStrength > releakStrengthThreshold) continue;
 
@@ -275,7 +291,7 @@ public class BoatMovement : MonoBehaviour
 
     public bool TakeDamage(float damage)
     {
-        //print(name +"Took damage");
+        print(name +"Took damage");
         if (damage == 0) return false;
         if (damage > 0 && currentHitPoints <= 0) return false;
         if (damage < 0 && currentHitPoints >= maxHitPoints) return false;
@@ -304,7 +320,6 @@ public class BoatMovement : MonoBehaviour
             // sink boat
             StartCoroutine(SinkBoatRoutine());
 
-            GameManager.Instance.StopGame();
             OnBoatDied?.Invoke();
         }
 
@@ -317,12 +332,17 @@ public class BoatMovement : MonoBehaviour
         {
             transform.position = new Vector3(transform.position.x, transform.position.y - 0.003f, transform.position.z);
             yield return new WaitForEndOfFrame();
+
+            if (destroyAfterSinking && transform.position.y < destroyBelowSinkingY)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 
     public void AddLeak(Leak leak)
     {
-        if (!leakSites.Contains(leak))
+        if (!LeakSites.Contains(leak))
         {
             leak.UpdateLeakRepairDuration(); // Adjust the repair duration
         }
@@ -330,7 +350,7 @@ public class BoatMovement : MonoBehaviour
 
     private void ProcessLeaks()
     {
-        foreach (var leak in leakSites)
+        foreach (var leak in LeakSites)
         {
             TakeDamage(leak.LeakStrength * leakSusceptibility * Time.deltaTime);
         }
@@ -356,6 +376,7 @@ public class BoatMovement : MonoBehaviour
         if (boatLight != null)
         {
             boatLight.intensity += additionalIntensity; // Increases the light range
+            boatLight.range += additionalIntensity / 2;
         }
         else
         {
@@ -455,16 +476,17 @@ public class BoatMovement : MonoBehaviour
     }
     public void AddJeremiah()
     {
-        if (jeremiahPrefab != null && spawnPoint != null && spawnPoint != null)
+        if (jeremiahPrefab != null && jeremiahStandby != null)
         {
-            GameObject jeremiahInstance = Instantiate(jeremiahPrefab, spawnPoint.position, Quaternion.identity);
+            GameObject jeremiahInstance = Instantiate(jeremiahPrefab, jeremiahStandby.position, Quaternion.identity);
+
             jeremiahCount++;
 
             // Set the boat and standby location on the spawned Jeremiah
             CrewmateDriver jeremiahDriver = jeremiahInstance.GetComponent<CrewmateDriver>();
             if (jeremiahDriver != null)
             {
-                jeremiahDriver.SetInitialSettings(this, spawnPoint);
+                jeremiahDriver.Initialize(this, jeremiahStandby);
             }
             else
             {

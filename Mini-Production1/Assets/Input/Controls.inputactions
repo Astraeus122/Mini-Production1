@@ -31,6 +31,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "CmdFire",
+                    "type": "Button",
+                    "id": "a651e19b-4c89-4862-8bd0-8d322ab66e20",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -163,6 +172,17 @@
                     "processors": "",
                     "groups": "Rat n' Keys",
                     "action": "Dismount",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b4671ff3-69ad-47e3-87ab-eb53e4e5b931",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Rat n' Keys",
+                    "action": "CmdFire",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

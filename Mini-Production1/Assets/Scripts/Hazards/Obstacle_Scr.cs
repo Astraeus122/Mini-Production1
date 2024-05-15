@@ -10,7 +10,7 @@ public class Obstacle_Scr : Hazard
     public Vector3 Movement_Dir;
     public float Movement_Speed = 1.0f;
     public float LifeTime = 300.0f;      // in seconds
-    public float LifeDuration = 0.0f;
+    public float LifeDuration = 30.0f;
 
 
     //Initial spawn var
@@ -37,7 +37,7 @@ public class Obstacle_Scr : Hazard
         // Needs movement - not sure if manager or self should move it
         transform.position += (Movement_Dir * Movement_Speed) * Time.deltaTime;
         LifeDuration += Time.deltaTime;
-        if(TerminationPoint.z - transform.position.z > 0)
+        if(TerminationPoint.z - transform.position.z > 30)
         {
             Die();
         }
