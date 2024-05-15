@@ -177,11 +177,33 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""506236eb-529f-4a4c-a515-5dff6f84d617"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""GamePad"",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""a9fb1224-7e90-4b9b-8f2c-d3cd5ec627cc"",
                     ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Rat n' Keys"",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""44763699-c89e-48cf-bc51-c3654aeb0a83"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""GamePad"",
                     ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -199,11 +221,33 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""c30b8443-3771-4c5b-a9c8-83911b184241"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Rat n' Keys"",
+                    ""action"": ""Dismount"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""b4671ff3-69ad-47e3-87ab-eb53e4e5b931"",
                     ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Rat n' Keys"",
+                    ""action"": ""CmdFire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c967903b-ab92-43ee-af35-6de7c5d6d464"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""GamePad"",
                     ""action"": ""CmdFire"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -216,18 +260,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
             ""actions"": [
                 {
                     ""name"": ""Steering"",
-                    ""type"": ""Button"",
+                    ""type"": ""Value"",
                     ""id"": ""eb63cfca-1298-45ae-b7b4-acad41abe6ef"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""Fire"",
-                    ""type"": ""Button"",
-                    ""id"": ""9e01518a-1269-469f-ae76-a77bfacd1bc3"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
@@ -269,12 +304,12 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""21af4e60-cd15-4ef1-88bc-0d84c305f9c7"",
-                    ""path"": ""<Keyboard>/space"",
+                    ""id"": ""99ba70d1-13da-40ba-8b92-895a9dd72cd1"",
+                    ""path"": ""<Gamepad>/leftStick/x"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Rat n' Keys"",
-                    ""action"": ""Fire"",
+                    ""groups"": ""GamePad"",
+                    ""action"": ""Steering"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -297,6 +332,17 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""isOR"": false
                 }
             ]
+        },
+        {
+            ""name"": ""GamePad"",
+            ""bindingGroup"": ""GamePad"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Gamepad>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
         }
     ]
 }");
@@ -309,7 +355,6 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         // Boat
         m_Boat = asset.FindActionMap("Boat", throwIfNotFound: true);
         m_Boat_Steering = m_Boat.FindAction("Steering", throwIfNotFound: true);
-        m_Boat_Fire = m_Boat.FindAction("Fire", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -427,13 +472,11 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Boat;
     private IBoatActions m_BoatActionsCallbackInterface;
     private readonly InputAction m_Boat_Steering;
-    private readonly InputAction m_Boat_Fire;
     public struct BoatActions
     {
         private @Controls m_Wrapper;
         public BoatActions(@Controls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Steering => m_Wrapper.m_Boat_Steering;
-        public InputAction @Fire => m_Wrapper.m_Boat_Fire;
         public InputActionMap Get() { return m_Wrapper.m_Boat; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -446,9 +489,6 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Steering.started -= m_Wrapper.m_BoatActionsCallbackInterface.OnSteering;
                 @Steering.performed -= m_Wrapper.m_BoatActionsCallbackInterface.OnSteering;
                 @Steering.canceled -= m_Wrapper.m_BoatActionsCallbackInterface.OnSteering;
-                @Fire.started -= m_Wrapper.m_BoatActionsCallbackInterface.OnFire;
-                @Fire.performed -= m_Wrapper.m_BoatActionsCallbackInterface.OnFire;
-                @Fire.canceled -= m_Wrapper.m_BoatActionsCallbackInterface.OnFire;
             }
             m_Wrapper.m_BoatActionsCallbackInterface = instance;
             if (instance != null)
@@ -456,9 +496,6 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Steering.started += instance.OnSteering;
                 @Steering.performed += instance.OnSteering;
                 @Steering.canceled += instance.OnSteering;
-                @Fire.started += instance.OnFire;
-                @Fire.performed += instance.OnFire;
-                @Fire.canceled += instance.OnFire;
             }
         }
     }
@@ -472,6 +509,15 @@ public partial class @Controls : IInputActionCollection2, IDisposable
             return asset.controlSchemes[m_RatnKeysSchemeIndex];
         }
     }
+    private int m_GamePadSchemeIndex = -1;
+    public InputControlScheme GamePadScheme
+    {
+        get
+        {
+            if (m_GamePadSchemeIndex == -1) m_GamePadSchemeIndex = asset.FindControlSchemeIndex("GamePad");
+            return asset.controlSchemes[m_GamePadSchemeIndex];
+        }
+    }
     public interface ICharacterActions
     {
         void OnMovement(InputAction.CallbackContext context);
@@ -482,6 +528,5 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     public interface IBoatActions
     {
         void OnSteering(InputAction.CallbackContext context);
-        void OnFire(InputAction.CallbackContext context);
     }
 }

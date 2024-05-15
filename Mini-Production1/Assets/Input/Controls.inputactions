@@ -155,11 +155,33 @@
                 },
                 {
                     "name": "",
+                    "id": "506236eb-529f-4a4c-a515-5dff6f84d617",
+                    "path": "<Gamepad>/leftStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "GamePad",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "a9fb1224-7e90-4b9b-8f2c-d3cd5ec627cc",
                     "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
                     "groups": "Rat n' Keys",
+                    "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "44763699-c89e-48cf-bc51-c3654aeb0a83",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "GamePad",
                     "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -177,11 +199,33 @@
                 },
                 {
                     "name": "",
+                    "id": "c30b8443-3771-4c5b-a9c8-83911b184241",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Rat n' Keys",
+                    "action": "Dismount",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "b4671ff3-69ad-47e3-87ab-eb53e4e5b931",
                     "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
                     "groups": "Rat n' Keys",
+                    "action": "CmdFire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c967903b-ab92-43ee-af35-6de7c5d6d464",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "GamePad",
                     "action": "CmdFire",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -194,18 +238,9 @@
             "actions": [
                 {
                     "name": "Steering",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "eb63cfca-1298-45ae-b7b4-acad41abe6ef",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
-                    "name": "Fire",
-                    "type": "Button",
-                    "id": "9e01518a-1269-469f-ae76-a77bfacd1bc3",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -247,12 +282,12 @@
                 },
                 {
                     "name": "",
-                    "id": "21af4e60-cd15-4ef1-88bc-0d84c305f9c7",
-                    "path": "<Keyboard>/space",
+                    "id": "99ba70d1-13da-40ba-8b92-895a9dd72cd1",
+                    "path": "<Gamepad>/leftStick/x",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Rat n' Keys",
-                    "action": "Fire",
+                    "groups": "GamePad",
+                    "action": "Steering",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -271,6 +306,17 @@
                 },
                 {
                     "devicePath": "<Mouse>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        },
+        {
+            "name": "GamePad",
+            "bindingGroup": "GamePad",
+            "devices": [
+                {
+                    "devicePath": "<Gamepad>",
                     "isOptional": false,
                     "isOR": false
                 }

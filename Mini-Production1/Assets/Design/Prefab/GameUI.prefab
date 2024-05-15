@@ -1696,6 +1696,7 @@ GameObject:
   - component: {fileID: 6141354373772563927}
   - component: {fileID: 4499407182908936560}
   - component: {fileID: 8310916981795820198}
+  - component: {fileID: 6123647984210088248}
   m_Layer: 5
   m_Name: Upgrade1 Button
   m_TagString: Untagged
@@ -1817,6 +1818,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &6123647984210088248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5347155607968272443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 291069be5c02a2a42a2218f562471193, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5547881218208903351
 GameObject:
   m_ObjectHideFlags: 0
@@ -2890,6 +2903,7 @@ GameObject:
   - component: {fileID: 7606111804465737729}
   - component: {fileID: 7606111804465737728}
   - component: {fileID: 7606111804465737735}
+  - component: {fileID: 5703012905078736329}
   m_Layer: 5
   m_Name: 'RetryButton '
   m_TagString: Untagged
@@ -3012,6 +3026,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 1
+--- !u!114 &5703012905078736329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7606111804465737733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 291069be5c02a2a42a2218f562471193, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7606111804675523455
 GameObject:
   m_ObjectHideFlags: 0
