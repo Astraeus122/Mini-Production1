@@ -68,6 +68,7 @@ public class CrewmateDriver : MonoBehaviour
 
     private void OnDisable()
     {
+        controller.MoveInput = new Vector2(0, 0);
         interactor.enabled = false;
     }
 

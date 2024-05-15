@@ -82,6 +82,8 @@ public class BoatMovement : MonoBehaviour
     public Quaternion originalRotation;
 
     public GameObject despawnVFX;
+    public bool destroyAfterSinking = false;
+    public float destroyBelowSinkingY = -3;
 
     [SerializeField]
     [Tooltip("Clamp position of ship (min value)")]
@@ -330,6 +332,11 @@ public class BoatMovement : MonoBehaviour
         {
             transform.position = new Vector3(transform.position.x, transform.position.y - 0.003f, transform.position.z);
             yield return new WaitForEndOfFrame();
+
+            if (destroyAfterSinking && transform.position.y < destroyBelowSinkingY)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 
