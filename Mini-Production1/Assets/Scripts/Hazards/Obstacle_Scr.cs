@@ -5,7 +5,7 @@ using UnityEngine;
 
 
 
-public class Obstacle_Scr : MonoBehaviour
+public class Obstacle_Scr : Hazard
 {
     public Vector3 Movement_Dir;
     public float Movement_Speed = 1.0f;
@@ -25,7 +25,11 @@ public class Obstacle_Scr : MonoBehaviour
     public bool IsDead = false;
 
     [SerializeField]
-    public float Value = 1;
+    public float Damage = 1;
+
+
+    private bool isDead = false;
+
 
     // Update is called once per frame
     void Update()
@@ -53,16 +57,27 @@ public class Obstacle_Scr : MonoBehaviour
     {
         LifeTime = _lft;
     }
-    
-    public bool Die()
+
+    public void Die()
     {
-        if (IsDead) return false;
-        //play death anim
+
         if (Spawner != null)
         {
             Spawner.GetComponent<Obst_Spawner_Scr>().ObjectDeath(gameObject);
         }
+        isDead = true;
         Destroy(gameObject);
-        return IsDead = true;
+    }
+
+    public override void OnImpacting(HazardImpactor hazardImpactor)
+    {
+        if (isDead) return;
+
+        if (gameObject.CompareTag("Crate"))
+            GameManager.Instance.AddXP(25);
+        else if (hazardImpactor.TryGetComponent(out BoatMovement boat))
+            boat.TakeDamage(Damage, transform.position);
+
+        Die();
     }
 }

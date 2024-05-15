@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 7445220977883080694}
   - component: {fileID: -4295740895799948048}
   - component: {fileID: 4117184558127618775}
+  - component: {fileID: -7453634309459528492}
   m_Layer: 0
   m_Name: Boat
   m_TagString: Untagged
@@ -124,7 +125,6 @@ MonoBehaviour:
   healthRegenerationRate: 0
   jeremiahPrefab: {fileID: 6916629348939648720, guid: 789c0540860dd4b4c97576877c7f33f2, type: 3}
   spawnPoint: {fileID: 3789443597750480588}
-  playerLevelManager: {fileID: 0}
   shieldVisualEffect: {fileID: 0}
   shieldAudioSource: {fileID: 4117184558127618775}
   shieldImpactSound: {fileID: 8300000, guid: d714ef20ae9a0bb469e40aa2c6a0af2d, type: 3}
@@ -312,6 +312,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90b1d4fb7b9dfbc48b820efba61cc20e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <TeamId>k__BackingField: 0
   healthDrainRate: 0.01
 --- !u!82 &6422597471755119524
 AudioSource:
@@ -531,6 +532,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &-7453634309459528492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 41867275289408981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d891109226c84b42a37fe2c74085f75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  teamId: 1
 --- !u!1 &190020022898726915
 GameObject:
   m_ObjectHideFlags: 0
@@ -2090,7 +2104,7 @@ MonoBehaviour:
   wheel: {fileID: 0}
   wheelRotationLimit: 360
   <SteerSpeed>k__BackingField: 2
-  <Recenter>k__BackingField: 0
+  <Recenter>k__BackingField: 1
   onSteeringChanged:
     m_PersistentCalls:
       m_Calls:
