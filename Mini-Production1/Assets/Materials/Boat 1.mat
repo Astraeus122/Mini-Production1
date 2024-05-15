@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Boat
+  m_Name: Boat 1
   m_Shader: {fileID: -6465566751694194690, guid: 21aef805bfe753841a44c47f0a313988, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords:

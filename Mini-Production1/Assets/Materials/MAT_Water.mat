@@ -28,6 +28,10 @@ Material:
         m_Texture: {fileID: 2800000, guid: bf4dca8d4a82a9a49a85c28b46e32a26, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SampleCubemap_3706a945f9ae4de0bdfa98a12b56239d_Cube_1:
+        m_Texture: {fileID: 8900000, guid: b3b4bd2281f1436409bce22106fff7db, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _Secondary_Normal:
         m_Texture: {fileID: 2800000, guid: f87134f421af47f4e9313223af038293, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -46,24 +50,24 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Alpha: 1.8
+    - _Alpha: 0.14
     - _Depth: 1
     - _Dir_1: 5
     - _Dir_2: -2
     - _Displacement: 1.16
-    - _IntersectionDepth: -3.01
-    - _Normal_Strength: 15.37
+    - _IntersectionDepth: 0.5
+    - _Normal_Strength: 3.39
     - _QueueControl: 0
     - _QueueOffset: -5
-    - _Smoothness: 0.5
+    - _Smoothness: 0.65
     m_Colors:
     - _DIsplacement_Tiling: {r: 1, g: 1.9, b: 0, a: 0}
-    - _Deep: {r: 0.068841234, g: 0.8584906, b: 0.61172515, a: 1}
+    - _Deep: {r: 0.4784314, g: 0.30980393, b: 0.14117648, a: 1}
     - _Direction_1: {r: 0.1, g: 0, b: 0, a: 0}
-    - _Direction_2: {r: 0.1, g: 0, b: 0, a: 0}
+    - _Direction_2: {r: 0.2, g: 0, b: 0, a: 0}
     - _DisplacementSpeed: {r: 0.15, g: 0, b: 0, a: 0}
-    - _IntersectionColor: {r: 0, g: 0, b: 0, a: 0}
-    - _Shallow: {r: 0.089711644, g: 0.26277068, b: 0.3018868, a: 1}
+    - _IntersectionColor: {r: 1, g: 0.9198113, b: 0.9198113, a: 0}
+    - _Shallow: {r: 0.16078432, g: 0.10980393, b: 0.07058824, a: 1}
     - _Tiling_1: {r: 5, g: 2.79, b: 0, a: 0}
     - _Tiling_2: {r: 5, g: 5, b: 0, a: 0}
     - _dir1: {r: 1, g: 0, b: 0, a: 0}

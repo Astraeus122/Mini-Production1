@@ -7,7 +7,6 @@ public class GameManager : MonoBehaviour
 {
     public Transform boat;
     public static GameManager Instance { get; private set; }
-    [SerializeField] private UpgradeUI upgradeUI;
 
     public static string HighscorePrefKey = "PlayerHighscore";
 
@@ -17,6 +16,9 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     private int startingRepairResources = 0;
+
+    [SerializeField]
+    private UpgradeUI upgradeUI;
 
     public int currentLevel = 1;
     public float currentXP = 0;
@@ -98,13 +100,13 @@ public class GameManager : MonoBehaviour
     void LevelUp()
     {
         currentLevel++;
-        currentXP -= xpToNextLevel;
-        xpToNextLevel *= xpIncreaseFactor;
+        currentXP -= xpToNextLevel; // Remove the XP needed for the previous level
+        xpToNextLevel *= xpIncreaseFactor; // Increase the requirement for the next level
 
-        // Check and trigger the upgrade UI directly from the referenced field
         if (upgradeUI != null)
         {
             upgradeUI.ActivateUpgradeMenu();
         }
+
     }
 }

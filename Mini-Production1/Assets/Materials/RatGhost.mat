@@ -20,25 +20,29 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Boat
-  m_Shader: {fileID: -6465566751694194690, guid: 21aef805bfe753841a44c47f0a313988, type: 3}
-  m_ValidKeywords: []
-  m_InvalidKeywords:
-  - _METALLICSPECGLOSSMAP
+  m_Name: RatGhost
+  m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
+  m_ValidKeywords:
+  - _EMISSION
   - _OCCLUSIONMAP
   - _PARALLAXMAP
+  - _SPECULAR_SETUP
   - _SURFACE_TYPE_TRANSPARENT
-  m_LightmapFlags: 4
+  m_InvalidKeywords: []
+  m_LightmapFlags: 1
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2450
-  stringTagMap: {}
-  disabledShaderPasses: []
+  m_CustomRenderQueue: 3000
+  stringTagMap:
+    RenderType: Transparent
+  disabledShaderPasses:
+  - DepthOnly
+  - SHADOWCASTER
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: cef45fce66fa84744896c0c7011d25c5, type: 3}
+        m_Texture: {fileID: 2800000, guid: 5a7f2ebb6c5eb304bbdbfbd4e320133f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BoatBaseColour:
@@ -78,35 +82,31 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
-        m_Texture: {fileID: 2800000, guid: e3a6917973c08a24198bc336124a2313, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: cef45fce66fa84744896c0c7011d25c5, type: 3}
+        m_Texture: {fileID: 2800000, guid: 5a7f2ebb6c5eb304bbdbfbd4e320133f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
-        m_Texture: {fileID: 2800000, guid: 7a52d771fcf21a84ba327c1603bb4736, type: 3}
+        m_Texture: {fileID: 2800000, guid: 80f3535a8eaff644c91fb76d8c2ec280, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
-        m_Texture: {fileID: 2800000, guid: e3a6917973c08a24198bc336124a2313, type: 3}
+        m_Texture: {fileID: 2800000, guid: be86be109bf345f47805ecec6ce3abc4, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ParallaxMap:
-        m_Texture: {fileID: 2800000, guid: 7a52d771fcf21a84ba327c1603bb4736, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SampleCubemap_bfc1e32e97294077adc17c0bf0d67a07_Cube_1:
-        m_Texture: {fileID: 8900000, guid: b3b4bd2281f1436409bce22106fff7db, type: 3}
+        m_Texture: {fileID: 2800000, guid: 2365e0048ac924a42be4b4f0ce0f5129, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SampleTexture2D_07ea9884f6eb4358a1b50d498deda4e8_Texture_1:
-        m_Texture: {fileID: 2800000, guid: 164df923d19a2a5409ce33afe458b8c0, type: 3}
+        m_Texture: {fileID: 2800000, guid: 2365e0048ac924a42be4b4f0ce0f5129, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SampleTexture2D_07f4dfee7b0f4aa8ab7e72fd023d1c1a_Texture_1:
-        m_Texture: {fileID: 2800000, guid: cef45fce66fa84744896c0c7011d25c5, type: 3}
+        m_Texture: {fileID: 2800000, guid: 5a7f2ebb6c5eb304bbdbfbd4e320133f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SampleTexture2D_2254f10cce444ec18767f76e78fb6273_Texture_1:
@@ -118,7 +118,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SampleTexture2D_4eaa5550fa5e4c80b247dc91694083af_Texture_1:
-        m_Texture: {fileID: 2800000, guid: 235baa39bf4b7434db64bbe59620099c, type: 3}
+        m_Texture: {fileID: 2800000, guid: be86be109bf345f47805ecec6ce3abc4, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SampleTexture2D_95209f95c29c4a75ba1d337065f56127_Texture_1:
@@ -169,11 +169,11 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 5
     - _Surface: 1
-    - _WorkflowMode: 1
+    - _WorkflowMode: 0
     - _ZWrite: 0
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _EmissionColor: {r: 0.21698111, g: 0.21698111, b: 0.21698111, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
