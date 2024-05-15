@@ -2,14 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Projectile : MonoBehaviour
-{ 
-    private void OnTriggerEnter(Collider other)
+public class Projectile : Hazard
+{
+    [SerializeField]
+    private float damage = 10;
+
+    private bool isDead = false;
+
+    public override void OnImpacting(HazardImpactor hazardImpactor)
     {
-        if (other.gameObject.CompareTag("Obstacle"))
+        if (isDead) return;
+
+        if (hazardImpactor.TryGetComponent(out BoatMovement boat))
         {
-            Destroy(other.gameObject);
-            Destroy(gameObject);
+            boat.TakeDamage(damage, transform.position);
         }
+        else if (hazardImpactor.TryGetComponent(out Obstacle_Scr obstacle))
+        {
+            obstacle.Die();
+        }
+
+        isDead = true;
+        Destroy(gameObject);
     }
 }
