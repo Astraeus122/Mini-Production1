@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 {
     public Transform boat;
     public static GameManager Instance { get; private set; }
+    [SerializeField] private UpgradeUI upgradeUI;
 
     public static string HighscorePrefKey = "PlayerHighscore";
 
@@ -97,16 +98,13 @@ public class GameManager : MonoBehaviour
     void LevelUp()
     {
         currentLevel++;
-        currentXP -= xpToNextLevel; // Remove the XP needed for the previous level
-        xpToNextLevel *= xpIncreaseFactor; // Increase the requirement for the next level
+        currentXP -= xpToNextLevel;
+        xpToNextLevel *= xpIncreaseFactor;
 
-        // Trigger the upgrade UI
-        // dirty but quick, in fuiture make upgrades ui have singleton
-        UpgradeUI upgradeUI = FindObjectOfType<UpgradeUI>();
+        // Check and trigger the upgrade UI directly from the referenced field
         if (upgradeUI != null)
         {
             upgradeUI.ActivateUpgradeMenu();
         }
-
     }
 }

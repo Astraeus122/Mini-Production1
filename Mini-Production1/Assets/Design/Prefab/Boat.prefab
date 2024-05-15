@@ -676,7 +676,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41f3e4c12dbae9a4a9e3be72c9195f0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boatTransform: {fileID: 0}
+  boatTransform: {fileID: 41867275289408978}
 --- !u!114 &7696661496168180790
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3090,7 +3090,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1445135727771878989, guid: eb8d5ec9835a53742905ebb88e5f211f, type: 3}
       propertyPath: m_RootOrder
-      value: 15
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 1445135727771878989, guid: eb8d5ec9835a53742905ebb88e5f211f, type: 3}
       propertyPath: m_LocalScale.x
