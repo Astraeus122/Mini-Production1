@@ -11,12 +11,11 @@ GameObject:
   - component: {fileID: 777154891755277364}
   - component: {fileID: 5009287568975640104}
   - component: {fileID: 3173765263987959144}
-  - component: {fileID: 6456035923992820890}
   - component: {fileID: 4173424761790541683}
   - component: {fileID: -7611656165752088726}
   - component: {fileID: 4793132356249369372}
   m_Layer: 0
-  m_Name: Projectile
+  m_Name: Player Projectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -87,19 +86,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &6456035923992820890
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9079870105783229211}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &4173424761790541683
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -124,7 +110,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9079870105783229211}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 1
@@ -141,3 +127,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a7e7e0236797864499783499bb1dd08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <TeamId>k__BackingField: 1
+  damage: 1
