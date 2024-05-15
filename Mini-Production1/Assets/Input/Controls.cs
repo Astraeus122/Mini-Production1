@@ -53,6 +53,15 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CmdFire"",
+                    ""type"": ""Button"",
+                    ""id"": ""a651e19b-4c89-4862-8bd0-8d322ab66e20"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -187,6 +196,17 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""action"": ""Dismount"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b4671ff3-69ad-47e3-87ab-eb53e4e5b931"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Rat n' Keys"",
+                    ""action"": ""CmdFire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -285,6 +305,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         m_Character_Movement = m_Character.FindAction("Movement", throwIfNotFound: true);
         m_Character_Interact = m_Character.FindAction("Interact", throwIfNotFound: true);
         m_Character_Dismount = m_Character.FindAction("Dismount", throwIfNotFound: true);
+        m_Character_CmdFire = m_Character.FindAction("CmdFire", throwIfNotFound: true);
         // Boat
         m_Boat = asset.FindActionMap("Boat", throwIfNotFound: true);
         m_Boat_Steering = m_Boat.FindAction("Steering", throwIfNotFound: true);
@@ -351,6 +372,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Character_Movement;
     private readonly InputAction m_Character_Interact;
     private readonly InputAction m_Character_Dismount;
+    private readonly InputAction m_Character_CmdFire;
     public struct CharacterActions
     {
         private @Controls m_Wrapper;
@@ -358,6 +380,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         public InputAction @Movement => m_Wrapper.m_Character_Movement;
         public InputAction @Interact => m_Wrapper.m_Character_Interact;
         public InputAction @Dismount => m_Wrapper.m_Character_Dismount;
+        public InputAction @CmdFire => m_Wrapper.m_Character_CmdFire;
         public InputActionMap Get() { return m_Wrapper.m_Character; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -376,6 +399,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Dismount.started -= m_Wrapper.m_CharacterActionsCallbackInterface.OnDismount;
                 @Dismount.performed -= m_Wrapper.m_CharacterActionsCallbackInterface.OnDismount;
                 @Dismount.canceled -= m_Wrapper.m_CharacterActionsCallbackInterface.OnDismount;
+                @CmdFire.started -= m_Wrapper.m_CharacterActionsCallbackInterface.OnCmdFire;
+                @CmdFire.performed -= m_Wrapper.m_CharacterActionsCallbackInterface.OnCmdFire;
+                @CmdFire.canceled -= m_Wrapper.m_CharacterActionsCallbackInterface.OnCmdFire;
             }
             m_Wrapper.m_CharacterActionsCallbackInterface = instance;
             if (instance != null)
@@ -389,6 +415,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Dismount.started += instance.OnDismount;
                 @Dismount.performed += instance.OnDismount;
                 @Dismount.canceled += instance.OnDismount;
+                @CmdFire.started += instance.OnCmdFire;
+                @CmdFire.performed += instance.OnCmdFire;
+                @CmdFire.canceled += instance.OnCmdFire;
             }
         }
     }
@@ -448,6 +477,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         void OnMovement(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnDismount(InputAction.CallbackContext context);
+        void OnCmdFire(InputAction.CallbackContext context);
     }
     public interface IBoatActions
     {

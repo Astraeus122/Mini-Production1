@@ -49,7 +49,7 @@ public class Upgrade
                 boat.UpgradeMaxHealth(2);  // Use existing method to upgrade max health
                 break;
             case "Efficient Repairs":
-                foreach (var leak in boat.leakSites)
+                foreach (var leak in boat.LeakSites)
                 {
                     leak.UpdateLeakRepairDuration(); // Assuming you add a method to update the duration
                 }

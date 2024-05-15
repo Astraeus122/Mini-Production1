@@ -9,6 +9,8 @@ public class CharacterDriver : MonoBehaviour
     CharacterController character;
     Interactor interactor;
 
+    [SerializeField]
+    BoatMovement boatAboard = null;
 
     private void Awake()
     {
@@ -26,6 +28,10 @@ public class CharacterDriver : MonoBehaviour
         InputInstance.Controls.Character.Interact.canceled += StopInteract;
 
         InputInstance.Controls.Character.Dismount.performed += Dismount;
+
+
+        InputInstance.Controls.Character.CmdFire.performed += CmdFire;
+        InputInstance.Controls.Character.CmdFire.canceled += CmdFire;
     }
 
     private void OnDisable()
@@ -39,6 +45,10 @@ public class CharacterDriver : MonoBehaviour
         InputInstance.Controls.Character.Interact.canceled -= StopInteract;
 
         InputInstance.Controls.Character.Dismount.performed -= Dismount;
+
+
+        InputInstance.Controls.Character.CmdFire.performed -= CmdFire;
+        InputInstance.Controls.Character.CmdFire.canceled -= CmdFire;
     }
 
     private void Dismount(InputAction.CallbackContext ctx)
@@ -59,5 +69,10 @@ public class CharacterDriver : MonoBehaviour
     private void StopInteract(InputAction.CallbackContext ctx)
     {
         interactor.StopInteract();
+    }
+
+    private void CmdFire(InputAction.CallbackContext ctx)
+    {
+        boatAboard?.IssueCrewCommand(ctx.ReadValueAsButton() ? "Fire" : "Cease Fire");
     }
 }

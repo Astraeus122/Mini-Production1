@@ -6,14 +6,20 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterController), typeof(Interactor))]
 public class CrewmateDriver : MonoBehaviour
 {
+    private enum CrewmateOccupation
+    {
+        Repairer,
+        Gunner
+    }
+
     private enum CrewmateState
     {
         Standby,
         Tracking,
+        Reset,
         Repairing,
-        Reset
+        Gunning
     }
-
 
     [SerializeField]
     private float trackingTimeout = 5f;
@@ -27,8 +33,12 @@ public class CrewmateDriver : MonoBehaviour
     [SerializeField]
     private bool teleportToStandbyOnStart = true;
 
+    [SerializeField]
+    private CrewmateOccupation occupation = CrewmateOccupation.Repairer;
+
     private CrewmateState state;
     private Leak targettedLeak;
+    private Shoot targettedGun;
     private float resetTimer;
 
     private CharacterController controller;
@@ -45,8 +55,10 @@ public class CrewmateDriver : MonoBehaviour
 
     private void Start()
     {
-        if (teleportToStandbyOnStart)
+        if (teleportToStandbyOnStart && standbyLocation)
             transform.position = standbyLocation.position;
+
+        if (boatAboard) boatAboard.OnCrewCommand += HandleCommand;
     }
 
     private void OnEnable()
@@ -59,7 +71,43 @@ public class CrewmateDriver : MonoBehaviour
         interactor.enabled = false;
     }
 
+    private void OnDestroy()
+    {
+        if (boatAboard)
+            boatAboard.OnCrewCommand -= HandleCommand;
+    }
     private void FixedUpdate()
+    {
+        switch (occupation)
+        {
+            case CrewmateOccupation.Repairer:
+                ProcessRepairerState();
+                break;
+            case CrewmateOccupation.Gunner:
+                ProcessGunnerState();
+                break;
+            default:
+                break;
+        }
+    }
+
+
+    public void Initialize(BoatMovement aboardBoat, Transform standbyLoc)
+    {
+        if (!boatAboard)
+        {
+            boatAboard = aboardBoat;
+            aboardBoat.OnCrewCommand += HandleCommand;
+        }
+
+        if (!standbyLocation)
+            standbyLocation = standbyLoc;
+
+        if (teleportToStandbyOnStart && !standbyLocation)
+            transform.position = standbyLocation.position;
+    }
+
+    private void ProcessRepairerState()
     {
         switch (state)
         {
@@ -139,11 +187,94 @@ public class CrewmateDriver : MonoBehaviour
         }
     }
 
+    private void ProcessGunnerState()
+    {
+        switch (state)
+        {
+            case CrewmateState.Standby:
+                {
+                    MoveTowards(standbyLocation.position, 0.2f);
+
+                    SearchForFreeGun();
+                }
+                break;
+            case CrewmateState.Tracking:
+                {
+                    resetTimer += Time.fixedDeltaTime;
+
+                    if (resetTimer >= trackingTimeout)
+                    {
+                        // time to walk to gun has run out, go back home and try again
+                        targettedGun = null;
+                        state = CrewmateState.Reset;
+                        break;
+                    }
+
+                    if (!targettedGun)
+                    {
+                        // gun has since been repaired or removed
+                        targettedGun = null;
+                        state = CrewmateState.Standby;
+                        break;
+                    }
+
+                    if (targettedGun && interactor.Focus && targettedGun.gameObject == interactor.Focus.gameObject)
+                    {
+                        // have arrived at leak site
+                        controller.MoveInput = Vector3.zero;
+                        state = CrewmateState.Gunning;
+                        break;
+                    }
+                    // on way to leak site still with no issues
+                    MoveTowards(targettedGun.transform.position, 0f);
+                }
+                break;
+            case CrewmateState.Gunning:
+                {
+                    // lost gun, run back to it
+                    if (!interactor.Focus || interactor.Focus.gameObject != targettedGun.gameObject)
+                    {
+                        resetTimer = 0;
+                        state = CrewmateState.Tracking;
+                        break;
+                    }
+                }
+                break;
+            case CrewmateState.Reset:
+                {
+                    // this state is a safeguard for straight-line pathfinding. if he is stuck tracking for x
+                    // seconds he resets back to standby which hopefully has a straight path to most of the leaks
+
+                    if (MoveTowards(standbyLocation.position, 0.2f))
+                    {
+                        state = CrewmateState.Standby;
+                    }
+                }
+                break;
+        }
+    }
+
+    private void HandleCommand(string command)
+    {
+        if (occupation == CrewmateOccupation.Gunner && state == CrewmateState.Gunning)
+        {
+            if (command == "Fire")
+            {
+                interactor.TryStartInteract();
+            }
+            if (command == "Cease Fire")
+            {
+                interactor.StopInteract();
+            }
+
+        }
+    }
+
     private void SearchForLeak()
     {
         (Leak obj, float sqrDist) closest = (null, Mathf.Infinity);
 
-        foreach (var leak in boatAboard.leakSites)
+        foreach (var leak in boatAboard.LeakSites)
         {
             if (!leak.enabled) continue;
 
@@ -164,6 +295,40 @@ public class CrewmateDriver : MonoBehaviour
         }
     }
 
+    private void SearchForFreeGun()
+    {
+        (Shoot obj, float sqrDist) closest = (null, Mathf.Infinity);
+
+        foreach (var gun in boatAboard.Guns)
+        {
+            if (GunOccupied(gun)) continue;
+
+            float sqrDist = (interactor.Origin.position - gun.transform.position).sqrMagnitude;
+
+            if (sqrDist > closest.sqrDist) continue;
+
+            closest.sqrDist = sqrDist;
+            closest.obj = gun;
+
+        }
+
+        if (closest.obj)
+        {
+            targettedGun = closest.obj;
+            resetTimer = 0;
+            state = CrewmateState.Tracking;
+        }
+    }
+
+    private bool GunOccupied(Shoot gun)
+    {
+        foreach (var ai in boatAboard.AiRoster)
+        {
+            if (ai.targettedGun == gun) return true;
+        }
+        return false;
+    }
+
     private bool MoveTowards(Vector3 point, float stoppingRange)
     {
         Vector3 delta = point - transform.position;
@@ -176,14 +341,5 @@ public class CrewmateDriver : MonoBehaviour
 
         controller.MoveInput = Vector2.zero;
         return true;
-    }
-
-    public void SetInitialSettings(BoatMovement aboardBoat, Transform standbyLoc)
-    {
-        boatAboard = aboardBoat;
-        standbyLocation = standbyLoc;
-
-        if (teleportToStandbyOnStart && standbyLocation != null)
-            transform.position = standbyLocation.position;
     }
 }
