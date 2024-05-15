@@ -126,7 +126,7 @@ MonoBehaviour:
   temporalShiftCooldown: 30
   healthRegenerationRate: 0
   jeremiahPrefab: {fileID: 6916629348939648720, guid: 789c0540860dd4b4c97576877c7f33f2, type: 3}
-  spawnPoint: {fileID: 3789443597750480588}
+  jeremiahStandby: {fileID: 3789443597750480588}
   shieldVisualEffect: {fileID: 0}
   shieldAudioSource: {fileID: 4117184558127618775}
   shieldImpactSound: {fileID: 8300000, guid: d714ef20ae9a0bb469e40aa2c6a0af2d, type: 3}
@@ -134,6 +134,8 @@ MonoBehaviour:
   screenShake: {fileID: 0}
   originalRotation: {x: 0, y: 0, z: 0, w: 0}
   despawnVFX: {fileID: 954011737003777240, guid: b90b66d8c2692254792a98602e2fc2a0, type: 3}
+  destroyAfterSinking: 0
+  destroyBelowSinkingY: -3
   minX: -5.4
   maxX: 5.4
   minZ: 0
@@ -433,8 +435,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 6, y: 7.952555, z: 10}
-  m_Center: {x: 0, y: 3.476277, z: 0}
+  m_Size: {x: 6, y: 1.1819267, z: 8.834622}
+  m_Center: {x: 0, y: 0.78721374, z: 0.2616366}
 --- !u!82 &4117184558127618775
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3090,7 +3092,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1445135727771878989, guid: eb8d5ec9835a53742905ebb88e5f211f, type: 3}
       propertyPath: m_RootOrder
-      value: 15
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 1445135727771878989, guid: eb8d5ec9835a53742905ebb88e5f211f, type: 3}
       propertyPath: m_LocalScale.x

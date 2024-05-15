@@ -17,6 +17,9 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private int startingRepairResources = 0;
 
+    [SerializeField]
+    private UpgradeUI upgradeUI;
+
     public int currentLevel = 1;
     public float currentXP = 0;
     public float xpToNextLevel = 100;  // Initial XP required to reach the next level
@@ -100,9 +103,6 @@ public class GameManager : MonoBehaviour
         currentXP -= xpToNextLevel; // Remove the XP needed for the previous level
         xpToNextLevel *= xpIncreaseFactor; // Increase the requirement for the next level
 
-        // Trigger the upgrade UI
-        // dirty but quick, in fuiture make upgrades ui have singleton
-        UpgradeUI upgradeUI = FindObjectOfType<UpgradeUI>();
         if (upgradeUI != null)
         {
             upgradeUI.ActivateUpgradeMenu();

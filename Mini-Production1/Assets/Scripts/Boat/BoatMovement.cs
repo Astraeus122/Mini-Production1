@@ -64,7 +64,7 @@ public class BoatMovement : MonoBehaviour
     private float lastRegenerationTime;
 
     [SerializeField] private GameObject jeremiahPrefab; // Assign this in the Unity Editor
-    [SerializeField] private Transform spawnPoint; // Assign or calculate a spawn point for Jeremiah
+    [SerializeField] private Transform jeremiahStandby; // Assign or calculate a spawn point for Jeremiah
     private int jeremiahCount = 0;
 
     [SerializeField]
@@ -158,6 +158,7 @@ public class BoatMovement : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.B)) AddJeremiah();
         movement.x += SteeringInput * Speed * Time.deltaTime;
         movement.x = Mathf.Clamp(movement.x, -Speed, Speed);
 
@@ -476,16 +477,17 @@ public class BoatMovement : MonoBehaviour
     }
     public void AddJeremiah()
     {
-        if (jeremiahPrefab != null && spawnPoint != null && spawnPoint != null)
+        if (jeremiahPrefab != null && jeremiahStandby != null)
         {
-            GameObject jeremiahInstance = Instantiate(jeremiahPrefab, spawnPoint.position, Quaternion.identity);
+            GameObject jeremiahInstance = Instantiate(jeremiahPrefab, jeremiahStandby.position, Quaternion.identity);
+
             jeremiahCount++;
 
             // Set the boat and standby location on the spawned Jeremiah
             CrewmateDriver jeremiahDriver = jeremiahInstance.GetComponent<CrewmateDriver>();
             if (jeremiahDriver != null)
             {
-                jeremiahDriver.Initialize(this, spawnPoint);
+                jeremiahDriver.Initialize(this, jeremiahStandby);
             }
             else
             {

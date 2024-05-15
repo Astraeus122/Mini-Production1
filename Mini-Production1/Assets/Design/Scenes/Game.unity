@@ -969,6 +969,18 @@ PrefabInstance:
       propertyPath: OnStartInteract.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3789443597750480588, guid: 75ac378782d622c4ea74324512dd281b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.56
+      objectReference: {fileID: 0}
+    - target: {fileID: 3789443597750480588, guid: 75ac378782d622c4ea74324512dd281b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3789443597750480588, guid: 75ac378782d622c4ea74324512dd281b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2.85
+      objectReference: {fileID: 0}
     - target: {fileID: 4055364111983123632, guid: 75ac378782d622c4ea74324512dd281b, type: 3}
       propertyPath: OnMounted.m_PersistentCalls.m_Calls.Array.size
       value: 3
@@ -1073,6 +1085,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.x
       value: 6.422
       objectReference: {fileID: 0}
+    - target: {fileID: 6083300639852444189, guid: 75ac378782d622c4ea74324512dd281b, type: 3}
+      propertyPath: boatTransform
+      value: 
+      objectReference: {fileID: 1418549260}
     - target: {fileID: 6938990044104976519, guid: 75ac378782d622c4ea74324512dd281b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.58
@@ -1134,6 +1150,10 @@ PrefabInstance:
       propertyPath: boat
       value: 
       objectReference: {fileID: 1418549260}
+    - target: {fileID: -5441887349518841969, guid: 3f0a96c40c8e65049a13d7606ace43f1, type: 3}
+      propertyPath: upgradeUI
+      value: 
+      objectReference: {fileID: 2675704449508172003}
     - target: {fileID: -5441887349518841969, guid: 3f0a96c40c8e65049a13d7606ace43f1, type: 3}
       propertyPath: OnScoreChange.m_PersistentCalls.m_Calls.Array.size
       value: 1

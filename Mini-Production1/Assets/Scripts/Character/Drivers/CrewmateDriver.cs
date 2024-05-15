@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 
 [RequireComponent(typeof(CharacterController), typeof(Interactor))]
 public class CrewmateDriver : MonoBehaviour
 {
-    private enum CrewmateOccupation
+    public enum CrewmateOccupation
     {
         Repairer,
         Gunner
@@ -35,6 +36,9 @@ public class CrewmateDriver : MonoBehaviour
 
     [SerializeField]
     private CrewmateOccupation occupation = CrewmateOccupation.Repairer;
+
+    [SerializeField]
+    private TMP_Text occText = null;
 
     private CrewmateState state;
     private Leak targettedLeak;
@@ -111,6 +115,26 @@ public class CrewmateDriver : MonoBehaviour
 
         if (teleportToStandbyOnStart && !standbyLocation)
             transform.position = standbyLocation.position;
+
+        SetOccupation(occupation);
+    }
+
+    public void SetOccupation(CrewmateOccupation occ)
+    {
+        occupation = occ;
+
+        occText.text = '<' + occ.ToString() + '>';
+
+        targettedGun = null;
+        targettedLeak = null;
+
+        state = CrewmateState.Standby;
+    }
+
+    public void SwitchOccupation()
+    {
+        if (occupation == CrewmateOccupation.Gunner) SetOccupation(CrewmateOccupation.Repairer);
+        else if (occupation == CrewmateOccupation.Repairer) SetOccupation(CrewmateOccupation.Gunner);
     }
 
     private void ProcessRepairerState()
