@@ -5,6 +5,7 @@ using UnityEngine;
 public class SewerTurn : MonoBehaviour
 {
     private bool triggered = false;
+    public float turnAngle;
     private void OnTriggerEnter(Collider other)
     {
         if (!triggered)
@@ -18,7 +19,8 @@ public class SewerTurn : MonoBehaviour
             //boat.GetComponent<BoatMovement>().originalRotation = Quaternion.Euler(boat.localRotation.x, boat.localRotation.y+45f, boat.localRotation.z);
             
             //transform.parent.RotateAround(transform.position, new Vector3(0,1,0), -45);
-            StartCoroutine(RotateAroundTarget(-45, 2f));
+            //-45
+            StartCoroutine(RotateAroundTarget(turnAngle, 2f));
         }
     }
 
