@@ -535,7 +535,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 1, b: 1, a: 0.24705882}
+      maxColor: {r: 0.49056602, g: 0.4258712, b: 0.3952296, a: 0.24705882}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -5649,7 +5649,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 1, b: 1, a: 0.24705882}
+      maxColor: {r: 0.49056602, g: 0.39327744, b: 0.3767177, a: 0.24705882}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -10433,7 +10433,7 @@ MonoBehaviour:
   temporalShiftCooldown: 30
   healthRegenerationRate: 0
   jeremiahPrefab: {fileID: 0}
-  spawnPoint: {fileID: 0}
+  jeremiahStandby: {fileID: 0}
   shieldVisualEffect: {fileID: 0}
   shieldAudioSource: {fileID: 0}
   shieldImpactSound: {fileID: 0}
@@ -11375,6 +11375,10 @@ PrefabInstance:
       propertyPath: standbyLocation
       value: 
       objectReference: {fileID: 6309757849231625822}
+    - target: {fileID: 2657704400232944690, guid: 789c0540860dd4b4c97576877c7f33f2, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0f7638d096995594f911b6f611a1cdf4, type: 2}
     - target: {fileID: 3395500582256860568, guid: 789c0540860dd4b4c97576877c7f33f2, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -11419,6 +11423,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6336041917312805054, guid: 789c0540860dd4b4c97576877c7f33f2, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8eb1021090c47d64daa868d1e5aeee9c, type: 2}
     - target: {fileID: 6916629348939648720, guid: 789c0540860dd4b4c97576877c7f33f2, type: 3}
       propertyPath: m_Name
       value: Jeremiah (1)
@@ -11603,6 +11611,10 @@ PrefabInstance:
       propertyPath: standbyLocation
       value: 
       objectReference: {fileID: 8826111217109938538}
+    - target: {fileID: 2657704400232944690, guid: 789c0540860dd4b4c97576877c7f33f2, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0f7638d096995594f911b6f611a1cdf4, type: 2}
     - target: {fileID: 3395500582256860568, guid: 789c0540860dd4b4c97576877c7f33f2, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -11647,6 +11659,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6336041917312805054, guid: 789c0540860dd4b4c97576877c7f33f2, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8eb1021090c47d64daa868d1e5aeee9c, type: 2}
     - target: {fileID: 6916629348939648720, guid: 789c0540860dd4b4c97576877c7f33f2, type: 3}
       propertyPath: m_Name
       value: Jeremiah
@@ -11808,7 +11824,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 28e50602b19fee14ea458912c80bae22, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 8a7c729e9b46c1d42aeb07cc5704405f, type: 2}
+      objectReference: {fileID: 2100000, guid: 0f7638d096995594f911b6f611a1cdf4, type: 2}
     - target: {fileID: 919132149155446097, guid: 28e50602b19fee14ea458912c80bae22, type: 3}
       propertyPath: m_Name
       value: Rat_Player
@@ -12192,6 +12208,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5291161498351400377}
     m_Modifications:
+    - target: {fileID: 3865180666429121418, guid: 42270ff4bf286bf4083de49d93d79ae3, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0f7638d096995594f911b6f611a1cdf4, type: 2}
     - target: {fileID: 3865180666429121419, guid: 42270ff4bf286bf4083de49d93d79ae3, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
