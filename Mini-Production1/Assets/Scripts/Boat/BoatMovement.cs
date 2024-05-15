@@ -17,13 +17,8 @@ public class BoatMovement : MonoBehaviour
     public float yawAmount = 2.0f; // The maximum yaw angle
     public float yawSpeed = 2.0f; // How quickly the boat yaws
 
-    private bool isInDrainLiquid = false;
-
-    public float drainDamagePerSecond = 1f;
     [SerializeField]
     Image healthFillUI;
-    [SerializeField]
-    private Transform mountPoint;
     [SerializeField]
     private AudioSource HitAudioSource;
 
@@ -63,8 +58,6 @@ public class BoatMovement : MonoBehaviour
     [SerializeField] private GameObject jeremiahPrefab; // Assign this in the Unity Editor
     [SerializeField] private Transform spawnPoint; // Assign or calculate a spawn point for Jeremiah
     private int jeremiahCount = 0;
-    [SerializeField]
-    private PlayerLevelManager playerLevelManager;
 
     [SerializeField]
     private GameObject shieldVisualEffect;
@@ -101,10 +94,6 @@ public class BoatMovement : MonoBehaviour
     [Tooltip("Clamp position of ship (min value)")]
     [Range(0, 10f)]
     private float maxZ;
-
-    public string DangerTag = "";
-    public string CrateTag = "";
-    public string DrainTag = "";
 
     public UnityEvent OnBoatDied;
 
@@ -148,6 +137,7 @@ public class BoatMovement : MonoBehaviour
         screenShake = Camera.main.GetComponent<ScreenShake>();
         currentHitPoints = maxHitPoints;
         originalRotation = transform.rotation; // Save the original rotation
+        print(name + " started with " + currentHitPoints + " " +  maxHitPoints);
     }
 
     private void Update()
@@ -165,13 +155,6 @@ public class BoatMovement : MonoBehaviour
         movement.y = Mathf.Sign(movement.y) * Mathf.Max(Mathf.Abs(movement.y) - inertiaEffect, 0);
 
         TiltBoat(SteeringInput);
-
-        mountPoint.rotation = Quaternion.identity;
-
-        if (isInDrainLiquid)
-        {
-            TakeDamage(drainDamagePerSecond * Time.deltaTime);
-        }
 
         ProcessLeaks();
 
@@ -226,22 +209,6 @@ public class BoatMovement : MonoBehaviour
         MoveBoat();
     }
 
-    private void ApplyInertia()
-    {
-        if (movement.sqrMagnitude != 0)
-        {
-            // Reduce the lateralMovement over time to simulate inertia
-            float inertiaEffect = Time.deltaTime;
-
-            movement *= inertiaEffect;
-        }
-        else
-        {
-            // Gradually reset rotation to original
-            transform.rotation = Quaternion.Slerp(transform.rotation, originalRotation, Time.deltaTime * yawSpeed);
-        }
-    }
-
     private void MoveBoat()
     {
         Vector3 position = transform.position;
@@ -272,7 +239,6 @@ public class BoatMovement : MonoBehaviour
         float releakStrengthThreshold = 0.5f)
     {
         if (!TakeDamage(damage)) return;
-
         // Trigger screen shake
         if (screenShake != null)
         {
@@ -309,10 +275,12 @@ public class BoatMovement : MonoBehaviour
 
     public bool TakeDamage(float damage)
     {
+        print(name +"Took damage");
         if (damage == 0) return false;
         if (damage > 0 && currentHitPoints <= 0) return false;
         if (damage < 0 && currentHitPoints >= maxHitPoints) return false;
 
+        
         // it is take damage, but supports both direcitons / can be used to heal
         currentHitPoints = Mathf.Clamp(currentHitPoints - damage, 0, maxHitPoints);
 
@@ -368,41 +336,6 @@ public class BoatMovement : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag(DangerTag))
-        {
-            float damage = other.GetComponent<Obstacle_Scr>()?.Value ?? 0;
-            ReceiveDamage(damage, other.transform.position);
-            other.GetComponent<Obstacle_Scr>()?.Die();
-        }
-
-        if (other.CompareTag(CrateTag))
-        {
-            Debug.LogError("Resource collected");
-            playerLevelManager.AddXP(25);
-            other.gameObject.GetComponent<Obstacle_Scr>().Die();
-        }
-
-        if (other.CompareTag(DrainTag))
-        {
-            // Trigger screen shake
-            if (screenShake != null)
-            {
-                screenShake.TriggerShake();
-            }
-
-            isInDrainLiquid = true;
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag(DrainTag))
-        {
-            isInDrainLiquid = false;
-        }
-    }
     public void ActivateAdvancedNavigation()
     {
         hasAdvancedNavigation = true;
