@@ -407,6 +407,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CrateSpawner
       objectReference: {fileID: 0}
+    - target: {fileID: 1404030887028407974, guid: 3ad45cbabeabc6d4e98059a9a292bac3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5632165713882318282, guid: 3ad45cbabeabc6d4e98059a9a292bac3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 9.98
@@ -622,7 +626,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7901897898330469844, guid: 9d5fad2b63a956242af2578057257410, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -8.962
+      value: 4.284136
       objectReference: {fileID: 0}
     - target: {fileID: 7901897898330469844, guid: 9d5fad2b63a956242af2578057257410, type: 3}
       propertyPath: m_LocalRotation.w
@@ -775,6 +779,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemySpawner
       objectReference: {fileID: 0}
+    - target: {fileID: 1404030887028407974, guid: 3ad45cbabeabc6d4e98059a9a292bac3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5632165713882318282, guid: 3ad45cbabeabc6d4e98059a9a292bac3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 8.06
@@ -899,7 +907,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 41867275289408978, guid: 75ac378782d622c4ea74324512dd281b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -8.256136
+      value: 4.99
       objectReference: {fileID: 0}
     - target: {fileID: 41867275289408978, guid: 75ac378782d622c4ea74324512dd281b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1008,6 +1016,10 @@ PrefabInstance:
     - target: {fileID: 3154606238060037432, guid: 75ac378782d622c4ea74324512dd281b, type: 3}
       propertyPath: m_Mesh
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3540520523126862568, guid: 75ac378782d622c4ea74324512dd281b, type: 3}
+      propertyPath: OnStartInteract.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4055364111983123632, guid: 75ac378782d622c4ea74324512dd281b, type: 3}
       propertyPath: OnMounted.m_PersistentCalls.m_Calls.Array.size
@@ -1594,6 +1606,10 @@ PrefabInstance:
     - target: {fileID: 1404030887028407974, guid: 3ad45cbabeabc6d4e98059a9a292bac3, type: 3}
       propertyPath: m_Name
       value: DangerSpawner
+      objectReference: {fileID: 0}
+    - target: {fileID: 1404030887028407974, guid: 3ad45cbabeabc6d4e98059a9a292bac3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5632165713882318282, guid: 3ad45cbabeabc6d4e98059a9a292bac3, type: 3}
       propertyPath: m_LocalPosition.x

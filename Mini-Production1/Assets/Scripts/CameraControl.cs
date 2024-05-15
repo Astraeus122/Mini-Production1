@@ -3,20 +3,30 @@ using System.Collections;
 
 public class CameraControl : MonoBehaviour
 {
-    private Vector3 initialPosition = new Vector3(0, 40, 0);
-    private Vector3 targetPosition = new Vector3(0, 20, -9);
-    private Quaternion initialRotation = Quaternion.Euler(80, 0, 0);
-    private Quaternion targetRotation = Quaternion.Euler(40, 0, 0);
+    public Transform boatTransform; // Reference to the boat's transform
+    private Vector3 offsetPosition = new Vector3(0, 20, -9); // Offset position relative to the boat
+    private Quaternion fixedRotation = Quaternion.Euler(40, 0, 0); // Fixed rotation for the camera
     private float transitionTime = 2.0f;
     private bool isAtTargetPosition = false;
 
+    void Start()
+    {
+        // Set the initial position and rotation
+        transform.position = boatTransform.position + offsetPosition;
+        transform.rotation = fixedRotation;
+    }
+
     void Update()
     {
+        // Update the camera position to follow the boat with offset
+        transform.position = boatTransform.position + offsetPosition;
+
+        // Check for transition trigger
         if (Input.GetKeyDown(KeyCode.T))
         {
             StartCoroutine(TransitionCamera(
-                isAtTargetPosition ? initialPosition : targetPosition,
-                isAtTargetPosition ? initialRotation : targetRotation));
+                isAtTargetPosition ? boatTransform.position + offsetPosition * 2 : boatTransform.position + offsetPosition,
+                isAtTargetPosition ? fixedRotation * Quaternion.Euler(40, 0, 0) : fixedRotation));
 
             isAtTargetPosition = !isAtTargetPosition;
         }
@@ -25,21 +35,20 @@ public class CameraControl : MonoBehaviour
     IEnumerator TransitionCamera(Vector3 newPosition, Quaternion newRotation)
     {
         float elapsedTime = 0;
-        Vector3 startingPosition = transform.localPosition;
-        Quaternion startingRotation = transform.localRotation;
+        Vector3 startingPosition = transform.position;
 
         while (elapsedTime < transitionTime)
         {
             float fraction = elapsedTime / transitionTime;
-            transform.localPosition = Vector3.Lerp(startingPosition, newPosition, fraction);
-            transform.localRotation = Quaternion.Lerp(startingRotation, newRotation, fraction);
+            transform.position = Vector3.Lerp(startingPosition, newPosition, fraction);
+            transform.rotation = Quaternion.Lerp(transform.rotation, newRotation, fraction);
 
             elapsedTime += Time.deltaTime;
             yield return null;
         }
 
         // Explicitly set the final position and rotation
-        transform.localPosition = newPosition;
-        transform.localRotation = newRotation;
+        transform.position = newPosition;
+        transform.rotation = newRotation;
     }
 }
