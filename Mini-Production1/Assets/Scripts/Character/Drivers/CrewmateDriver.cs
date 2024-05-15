@@ -74,7 +74,11 @@ public class CrewmateDriver : MonoBehaviour
     private void OnDestroy()
     {
         if (boatAboard)
+        {
+            boatAboard.AiRoster.Remove(this);
             boatAboard.OnCrewCommand -= HandleCommand;
+        }
+
     }
     private void FixedUpdate()
     {
@@ -99,6 +103,7 @@ public class CrewmateDriver : MonoBehaviour
             boatAboard = aboardBoat;
             aboardBoat.OnCrewCommand += HandleCommand;
         }
+        boatAboard.AiRoster.Add(this);
 
         if (!standbyLocation)
             standbyLocation = standbyLoc;

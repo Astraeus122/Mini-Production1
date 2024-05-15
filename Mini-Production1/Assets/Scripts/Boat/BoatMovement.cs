@@ -318,7 +318,6 @@ public class BoatMovement : MonoBehaviour
             // sink boat
             StartCoroutine(SinkBoatRoutine());
 
-            GameManager.Instance.StopGame();
             OnBoatDied?.Invoke();
         }
 

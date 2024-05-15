@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 9080595880352179883}
   - component: {fileID: 6961880756238445753}
   - component: {fileID: 7088597232551834612}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Character
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -140,7 +140,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  ground: {fileID: 0}
+  platform: {fileID: 0}
 --- !u!114 &6961880756238445753
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,6 +153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 683d2642538fdb343ac7aa9de8f4ade9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  boatAboard: {fileID: 0}
 --- !u!114 &7088597232551834612
 MonoBehaviour:
   m_ObjectHideFlags: 0
