@@ -9,6 +9,8 @@ public class SewerTurn : MonoBehaviour
     {
         if (!triggered)
         {
+            if (other.gameObject.name != "Boat")
+                return;
             Debug.Log("SewerTurn Triggered:");
             triggered = true;
             //sewer.transform.localRotation = Quaternion.Euler(0,-90+rotationWalk,0f);

@@ -275,7 +275,7 @@ public class BoatMovement : MonoBehaviour
 
     public bool TakeDamage(float damage)
     {
-        print(name +"Took damage");
+        //print(name +"Took damage");
         if (damage == 0) return false;
         if (damage > 0 && currentHitPoints <= 0) return false;
         if (damage < 0 && currentHitPoints >= maxHitPoints) return false;
