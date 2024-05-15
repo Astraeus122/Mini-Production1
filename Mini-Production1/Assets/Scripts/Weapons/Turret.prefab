@@ -221,8 +221,9 @@ MonoBehaviour:
   launcher: {fileID: 6745110706767568282}
   turretWeapon: 1
   force: 30000
-  fireRate: 10
+  fireRate: 2
   cannonPowerLevel: 0
   fireRateLevel: 0
   powerIncrement: 10
   rateIncrement: 0.2
+  animator: {fileID: 0}
