@@ -974,89 +974,6 @@ CapsuleCollider:
   m_Height: 6.07468
   m_Direction: 2
   m_Center: {x: 3.473764, y: 0.1435535, z: -0.39376143}
---- !u!1 &3276312168870458846
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2590147120479498601}
-  - component: {fileID: 3147683362182233913}
-  - component: {fileID: 1147933025787501228}
-  m_Layer: 3
-  m_Name: Bucket Mesh
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2590147120479498601
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3276312168870458846}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 8361578854969068126}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &3147683362182233913
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3276312168870458846}
-  m_Mesh: {fileID: -944563635335726766, guid: 0c4b6a0c10158a746a83747dbd4bffd9, type: 3}
---- !u!23 &1147933025787501228
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3276312168870458846}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 6ee13dfeeaa19634cae3e64d7e6bac84, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &4270289691800866781
 GameObject:
   m_ObjectHideFlags: 0
@@ -2168,116 +2085,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 5.48, y: 1, z: 0.4}
   m_Center: {x: -0.1, y: 1, z: 4.25}
---- !u!1 &8608299388099135611
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8361578854969068126}
-  - component: {fileID: 7802332042985590482}
-  - component: {fileID: 6175605992567520175}
-  - component: {fileID: 7032187095846339798}
-  m_Layer: 3
-  m_Name: Bucket Station
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8361578854969068126
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8608299388099135611}
-  m_LocalRotation: {x: 0.030413017, y: 0.7157311, z: -0.031229706, w: 0.69701415}
-  m_LocalPosition: {x: 1.612, y: 0.37, z: 0.13}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 2590147120479498601}
-  m_Father: {fileID: 41867275289408978}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 4.997, y: 91.518, z: 0}
---- !u!114 &7802332042985590482
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8608299388099135611}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97c8a1e5aeee54b47baeebf4b78ed421, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  boat: {fileID: 41867275289408979}
-  bailRate: 0.2
---- !u!135 &6175605992567520175
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8608299388099135611}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 1.28
-  m_Center: {x: 0, y: 0.7, z: 0}
---- !u!114 &7032187095846339798
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8608299388099135611}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffdd071d491a57a4992d66df7ffdcef0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnFocus:
-    m_PersistentCalls:
-      m_Calls: []
-  OnLooseFocus:
-    m_PersistentCalls:
-      m_Calls: []
-  OnStartInteract:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 7802332042985590482}
-        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-  OnStopInteract:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 7802332042985590482}
-        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &8654531068709066715
 GameObject:
   m_ObjectHideFlags: 0
@@ -3156,6 +2963,72 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 1445135727771878989, guid: eb8d5ec9835a53742905ebb88e5f211f, type: 3}
   m_PrefabInstance: {fileID: 5407483789240179536}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &5576250062846478840
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 41867275289408978}
+    m_Modifications:
+    - target: {fileID: 2388493594080773930, guid: 6b7668649bc21b844808efae38514d46, type: 3}
+      propertyPath: boat
+      value: 
+      objectReference: {fileID: 41867275289408979}
+    - target: {fileID: 4136725898435986342, guid: 6b7668649bc21b844808efae38514d46, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4136725898435986342, guid: 6b7668649bc21b844808efae38514d46, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.612
+      objectReference: {fileID: 0}
+    - target: {fileID: 4136725898435986342, guid: 6b7668649bc21b844808efae38514d46, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.37
+      objectReference: {fileID: 0}
+    - target: {fileID: 4136725898435986342, guid: 6b7668649bc21b844808efae38514d46, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.13
+      objectReference: {fileID: 0}
+    - target: {fileID: 4136725898435986342, guid: 6b7668649bc21b844808efae38514d46, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.69701415
+      objectReference: {fileID: 0}
+    - target: {fileID: 4136725898435986342, guid: 6b7668649bc21b844808efae38514d46, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.030413017
+      objectReference: {fileID: 0}
+    - target: {fileID: 4136725898435986342, guid: 6b7668649bc21b844808efae38514d46, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7157311
+      objectReference: {fileID: 0}
+    - target: {fileID: 4136725898435986342, guid: 6b7668649bc21b844808efae38514d46, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.031229706
+      objectReference: {fileID: 0}
+    - target: {fileID: 4136725898435986342, guid: 6b7668649bc21b844808efae38514d46, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 4.997
+      objectReference: {fileID: 0}
+    - target: {fileID: 4136725898435986342, guid: 6b7668649bc21b844808efae38514d46, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 91.518
+      objectReference: {fileID: 0}
+    - target: {fileID: 4136725898435986342, guid: 6b7668649bc21b844808efae38514d46, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4184973578777280899, guid: 6b7668649bc21b844808efae38514d46, type: 3}
+      propertyPath: m_Name
+      value: Bucket Station
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6b7668649bc21b844808efae38514d46, type: 3}
+--- !u!4 &8361578854969068126 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4136725898435986342, guid: 6b7668649bc21b844808efae38514d46, type: 3}
+  m_PrefabInstance: {fileID: 5576250062846478840}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6105817196028435127
 PrefabInstance:
