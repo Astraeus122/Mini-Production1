@@ -25,7 +25,6 @@ public class GameManager : MonoBehaviour
     public float xpToNextLevel = 100;  // Initial XP required to reach the next level
     public float xpIncreaseFactor = 1.5f; // Factor by which the XP requirement increases each level
 
-
     private int backingRepairResources;
     public int RepairResources
     {
@@ -44,6 +43,7 @@ public class GameManager : MonoBehaviour
     public UnityEvent<string> OnScoreChange;
     public UnityEvent<string> OnResourceChange;
 
+    private BoatMovement boatMovement; // Reference to the BoatMovement
 
     private void Awake()
     {
@@ -55,11 +55,16 @@ public class GameManager : MonoBehaviour
             return;
         }
 
+        boatMovement = boat.GetComponent<BoatMovement>();
+        if (boatMovement == null)
+        {
+            Debug.LogError("Failed to find BoatMovement component on the boat.");
+        }
+
         RepairResources = startingRepairResources;
 
         // score is set to 0 from 0 so doesnt invoke the event initially, we manually do it here
         OnScoreChange?.Invoke(Score.ToString());
-
     }
 
     private void OnDestroy()
@@ -78,7 +83,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (!IsGameActive) return;
+        if (!IsGameActive || !IsPlayerAlive()) return;
 
         int oldScore = Score;
         Score = Mathf.FloorToInt(Time.timeSinceLevelLoad);
@@ -90,6 +95,8 @@ public class GameManager : MonoBehaviour
 
     public void AddXP(float xp)
     {
+        if (!IsPlayerAlive()) return;
+
         currentXP += xp;
         if (currentXP >= xpToNextLevel)
         {
@@ -99,6 +106,8 @@ public class GameManager : MonoBehaviour
 
     void LevelUp()
     {
+        if (!IsPlayerAlive()) return;
+
         currentLevel++;
         currentXP -= xpToNextLevel; // Remove the XP needed for the previous level
         xpToNextLevel *= xpIncreaseFactor; // Increase the requirement for the next level
@@ -107,6 +116,11 @@ public class GameManager : MonoBehaviour
         {
             upgradeUI.ActivateUpgradeMenu();
         }
+    }
 
+    private bool IsPlayerAlive()
+    {
+        return boatMovement != null && boatMovement.IsAlive;
     }
 }
+

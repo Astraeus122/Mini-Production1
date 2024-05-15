@@ -1,13 +1,9 @@
-using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 [System.Serializable]
 public class Upgrade
 {
-    // Static dictionary to keep levels persistent
     private static Dictionary<string, int> levels = new Dictionary<string, int>();
 
     private BoatMovement boat;
@@ -15,17 +11,17 @@ public class Upgrade
     public string description;
     public Sprite image;
     public int level = 0;
+    public int maxLevel;
     public AudioSource buttonPressAudioSource;
 
-    // Updated constructor to accept BoatMovement
-    public Upgrade(string name, string description, Sprite image, BoatMovement boat)
+    public Upgrade(string name, string description, Sprite image, BoatMovement boat, int maxLevel)
     {
         this.name = name;
         this.description = description;
         this.image = image;
         this.boat = boat;
+        this.maxLevel = maxLevel;
 
-        // Initialize level from static dictionary
         if (levels.ContainsKey(name))
             level = levels[name];
         else
@@ -34,32 +30,39 @@ public class Upgrade
 
     public void ApplyUpgrade()
     {
-        this.level++;  // Always increment level first
+        if (level >= maxLevel)
+        {
+            Debug.LogWarning($"{name} has reached its maximum level.");
+            return;
+        }
+
+        level++;
+        levels[name] = level;  // Ensure the level is saved in the static dictionary
 
         switch (name)
         {
             case "Speed Boost":
-                boat.Speed += 5;  
+                boat.Speed += 5;
                 break;
             case "Maneuverability Enhancements":
-                boat.yawAmount += 0.2f;  // Increase the yaw amount to improve maneuverability
-                boat.yawSpeed += 0.1f;  // Optionally, increase yaw speed
+                boat.yawAmount += 0.2f;
+                boat.yawSpeed += 0.1f;
                 break;
             case "Hull Strength":
-                boat.UpgradeMaxHealth(2);  // Use existing method to upgrade max health
+                boat.UpgradeMaxHealth(2);
                 break;
             case "Efficient Repairs":
                 foreach (var leak in boat.LeakSites)
                 {
-                    leak.UpdateLeakRepairDuration(); // Assuming you add a method to update the duration
+                    leak.UpdateLeakRepairDuration();
                 }
                 break;
             case "Waterproof Seal":
-                boat.leakSusceptibility -= 0.03f; // Decrease susceptibility to leaks
-                boat.leakSusceptibility = Mathf.Max(0, boat.leakSusceptibility); // Ensure it doesn't go negative
+                boat.leakSusceptibility -= 0.03f;
+                boat.leakSusceptibility = Mathf.Max(0, boat.leakSusceptibility);
                 break;
             case "Advanced Navigation Tools":
-                boat.ActivateAdvancedNavigation();  
+                boat.ActivateAdvancedNavigation();
                 break;
             case "Scrap Magnet":
                 boat.IncreaseScrapMagnetRadius(10.0f, 5.1f);
@@ -68,14 +71,14 @@ public class Upgrade
                 boat.EnhanceFloodlights(2.5f);
                 break;
             case "Shield Generator":
-                boat.maxShieldHits++;  // Increase the maximum hits the shield can take
-                boat.ActivateShield();  // Reactivate or refresh the shield
+                boat.maxShieldHits++;
+                boat.ActivateShield();
                 break;
             case "Impact Bumpers":
-                boat.collisionDamageReduction += 0.1f;  // Increment damage reduction by 10%
+                boat.collisionDamageReduction += 0.1f;
                 break;
             case "Cannon Upgrades":
-                GameObject cannonObject = GameObject.FindWithTag("Turret"); // Ensure your cannon GameObject has this tag
+                GameObject cannonObject = GameObject.FindWithTag("Turret");
                 Shoot shootScript = cannonObject?.GetComponent<Shoot>();
                 if (shootScript != null)
                 {
@@ -83,16 +86,13 @@ public class Upgrade
                 }
                 break;
             case "Temporal Shift":
-                boat.temporalShiftUpgradeLevel++;  // Increment the upgrade level
-                break;
-            case "Hyper Drive":
-                // Implement a boost in speed that ignores collisions temporarily
+                boat.temporalShiftUpgradeLevel++;
                 break;
             case "Regeneration Module":
-                boat.healthRegenerationRate += 0.03f;  // Increase regeneration rate by 0.05 per second per level
+                boat.healthRegenerationRate += 0.03f;
                 break;
             case "Jeremiah":
-                boat.AddJeremiah();  // Spawn another Jeremiah instance
+                boat.AddJeremiah();
                 break;
             default:
                 Debug.LogWarning($"Unknown upgrade name: {name}");

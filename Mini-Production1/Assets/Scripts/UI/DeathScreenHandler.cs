@@ -6,8 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class DeathScreenHandler : MonoBehaviour
 {
-
-    public GameObject audioObject; 
+    public GameObject audioObject;
     public GameObject deathScreenCanvas;
     public TMP_Text deathMessageText;
     public AudioSource buttonPressAudioSource;
@@ -26,32 +25,43 @@ public class DeathScreenHandler : MonoBehaviour
         "Overwhelmed by the tides. The quest for mastery continues."
     };
 
+    private bool isDeathScreenActive = false;
+
     public void ShowDeathScreen()
     {
-        // Access the AudioSource component
-        AudioSource audioSource = audioObject.GetComponent<AudioSource>();
-        audioSource.Stop();
+        if (!isDeathScreenActive)
+        {
+            Time.timeScale = 0.0f;
+            // Access the AudioSource component
+            AudioSource audioSource = audioObject.GetComponent<AudioSource>();
+            audioSource.Stop();
 
-        // Select a random message
-        string randomMessage = deathMessages[Random.Range(0, deathMessages.Length)];
-        deathMessageText.text = randomMessage;
+            // Select a random message
+            string randomMessage = deathMessages[Random.Range(0, deathMessages.Length)];
+            deathMessageText.text = randomMessage;
 
-        // Activate the death screen
-        deathScreenCanvas.SetActive(true);
-
+            // Activate the death screen
+            deathScreenCanvas.SetActive(true);
+            isDeathScreenActive = true;
+        }
     }
+
     public void RetryGame()
     {
+        Time.timeScale = 1.0f;
         buttonPressAudioSource.Play();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         deathScreenCanvas.SetActive(false);
+        isDeathScreenActive = false;
     }
 
     public void ExitToMenu()
     {
+        Time.timeScale = 1.0f;
         buttonPressAudioSource.Play();
         SceneManager.LoadScene("StartMenu");
         deathScreenCanvas.SetActive(false);
+        isDeathScreenActive = false;
     }
 
     public void ExitGame()

@@ -76,7 +76,7 @@ public class Obstacle_Scr : Hazard
         if (gameObject.CompareTag("Crate"))
             GameManager.Instance.AddXP(25);
         else if (hazardImpactor.TryGetComponent(out BoatMovement boat))
-            boat.TakeDamage(Damage, transform.position);
+            boat.ReceiveDamage(Damage, transform.position);
 
         Die();
     }

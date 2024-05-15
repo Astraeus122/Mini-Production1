@@ -6,7 +6,6 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-
 public class BoatMovement : MonoBehaviour
 {
     public float Speed = 6.0f;
@@ -52,7 +51,7 @@ public class BoatMovement : MonoBehaviour
 
     public float baseTemporalShiftDuration = 3.0f;
     private float temporalShiftIncrement = 0.5f; // Duration increase per upgrade
-    public int temporalShiftUpgradeLevel = 0; 
+    public int temporalShiftUpgradeLevel = 0;
     public float temporalShiftDuration => baseTemporalShiftDuration + temporalShiftUpgradeLevel * temporalShiftIncrement;
 
     public float temporalShiftCooldown = 30.0f;
@@ -74,7 +73,7 @@ public class BoatMovement : MonoBehaviour
     [SerializeField]
     private AudioClip shieldImpactSound;
     [SerializeField]
-    private AudioClip shieldCrackSound; 
+    private AudioClip shieldCrackSound;
 
     public ScreenShake screenShake;
     private float currentHitPoints;
@@ -111,7 +110,6 @@ public class BoatMovement : MonoBehaviour
 
     public float ThrustInput { get; set; }
 
-
     [SerializeField] private Transform boatWaterFill = null;
     [SerializeField] private Vector2 boatWaterMinMaxY = new Vector2(0, 1);
 
@@ -123,6 +121,7 @@ public class BoatMovement : MonoBehaviour
     {
         OnCrewCommand?.Invoke(cmd);
     }
+
     public void UpgradeMaxHealth(float additionalHealth)
     {
         maxHitPoints += additionalHealth;
@@ -148,12 +147,17 @@ public class BoatMovement : MonoBehaviour
         }
     }
 
+    public bool IsAlive
+    {
+        get { return currentHitPoints > 0; }
+    }
+
     void Start()
     {
         screenShake = Camera.main.GetComponent<ScreenShake>();
         currentHitPoints = maxHitPoints;
         originalRotation = transform.rotation; // Save the original rotation
-        print(name + " started with " + currentHitPoints + " " +  maxHitPoints);
+        print(name + " started with " + currentHitPoints + " " + maxHitPoints);
     }
 
     private void Update()
@@ -163,7 +167,6 @@ public class BoatMovement : MonoBehaviour
 
         movement.y += ThrustInput * Speed * Time.deltaTime;
         movement.y = Mathf.Clamp(movement.y, -Speed, Speed);
-
 
         float inertiaEffect = Speed / inertiaDuration * Time.deltaTime;
 
@@ -190,7 +193,8 @@ public class BoatMovement : MonoBehaviour
         // Handle Temporal Shift Activation
         if (Input.GetKeyDown(KeyCode.Q) && temporalShiftTimer <= 0)
         {
-            ActivateTemporalShift();
+            if (currentHitPoints > 0)
+                ActivateTemporalShift();
         }
 
         // Manage active Temporal Shift

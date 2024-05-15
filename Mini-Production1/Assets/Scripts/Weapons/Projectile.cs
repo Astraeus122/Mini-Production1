@@ -15,7 +15,7 @@ public class Projectile : Hazard
 
         if (hazardImpactor.TryGetComponent(out BoatMovement boat))
         {
-            boat.TakeDamage(damage, transform.position);
+            boat.ReceiveDamage(damage, transform.position);
         }
         else if (hazardImpactor.TryGetComponent(out Obstacle_Scr obstacle))
         {

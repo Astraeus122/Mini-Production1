@@ -564,6 +564,11 @@ PrefabInstance:
       objectReference: {fileID: 1418549252}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d5fad2b63a956242af2578057257410, type: 3}
+--- !u!1 &1123710834 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1249037133417633057, guid: fdd31716a3feaa641ad1e51c650a2fae, type: 3}
+  m_PrefabInstance: {fileID: 2675704449508172002}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1124671261 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6961880756238445753, guid: 9d5fad2b63a956242af2578057257410, type: 3}
@@ -893,7 +898,7 @@ PrefabInstance:
     - target: {fileID: 41867275289408979, guid: 75ac378782d622c4ea74324512dd281b, type: 3}
       propertyPath: miniMapPanel
       value: 
-      objectReference: {fileID: 2675704449508172006}
+      objectReference: {fileID: 1123710834}
     - target: {fileID: 41867275289408979, guid: 75ac378782d622c4ea74324512dd281b, type: 3}
       propertyPath: miniMapCamera
       value: 
@@ -1095,7 +1100,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1533557389130122970, guid: 3f0a96c40c8e65049a13d7606ace43f1, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 3f0a96c40c8e65049a13d7606ace43f1, type: 3}
 --- !u!114 &1545753365 stripped
 MonoBehaviour:
@@ -1636,6 +1642,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -196
       objectReference: {fileID: 0}
+    - target: {fileID: 6771539116564360757, guid: fdd31716a3feaa641ad1e51c650a2fae, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -65
+      objectReference: {fileID: 0}
     - target: {fileID: 7606111804913917641, guid: fdd31716a3feaa641ad1e51c650a2fae, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
@@ -1780,11 +1790,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &2675704449508172006 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6241270222928594577, guid: fdd31716a3feaa641ad1e51c650a2fae, type: 3}
-  m_PrefabInstance: {fileID: 2675704449508172002}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &2675704449508172007 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2612488125200877902, guid: fdd31716a3feaa641ad1e51c650a2fae, type: 3}
