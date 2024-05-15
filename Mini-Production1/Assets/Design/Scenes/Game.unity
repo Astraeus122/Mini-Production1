@@ -1085,6 +1085,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.x
       value: 6.422
       objectReference: {fileID: 0}
+    - target: {fileID: 6070297194465526532, guid: 75ac378782d622c4ea74324512dd281b, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6083300639852444189, guid: 75ac378782d622c4ea74324512dd281b, type: 3}
       propertyPath: boatTransform
       value: 
