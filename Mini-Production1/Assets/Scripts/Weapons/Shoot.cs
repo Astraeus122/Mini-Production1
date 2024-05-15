@@ -29,6 +29,8 @@ public class Shoot : MonoBehaviour
 
     public bool Triggered { get; set; }
 
+    public Animator animator;
+
     public void UpgradeCannon()
     {
         cannonPowerLevel++;
@@ -57,15 +59,23 @@ public class Shoot : MonoBehaviour
         }
     }
 
-    public void FireCatapult()
+    public void Cata()
     {
         if (Time.time >= nextFireTime)
         {
-            nextFireTime = Time.time + 1.0f / fireRate;
-            GameObject bullet = Instantiate(projecile, launcher.position, launcher.rotation);
-            Vector3 direction = Quaternion.Euler(angle, 0, 0) * launcher.forward + launcher.up;
-            bullet.GetComponent<Rigidbody>().AddForce(direction * force, ForceMode.Impulse);
-            Destroy(bullet, 2.0f + 0.5f * cannonPowerLevel); // Longer lifetime for higher power levels
+            animator.Play("CatapaultAttack");
+
+            Invoke("FireCatapult", 0.5f);
         }
+    }
+
+    public void FireCatapult()
+    {
+        nextFireTime = Time.time + 1.0f / fireRate;
+        GameObject bullet = Instantiate(projecile, launcher.position, launcher.rotation);
+        Vector3 direction = Quaternion.Euler(angle, 0, 0) * launcher.forward + launcher.up;
+        bullet.GetComponent<Rigidbody>().AddForce(direction * force, ForceMode.Impulse);
+        Destroy(bullet, 2.0f + 0.5f * cannonPowerLevel); // Longer lifetime for higher power levels
+
     }
 }
