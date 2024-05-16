@@ -42,40 +42,45 @@ public class Shoot : MonoBehaviour
 
     public void Update()
     {
-        if (Triggered && Time.time >= nextFireTime)
+        if (Triggered)
         {
             FireTurret();
         }
+    }
+
+    private void Turret()
+    {
+        animator.Play("ShooterAttack");
+        nextFireTime = Time.time + 1.0f / fireRate;
+        GameObject bullet = Instantiate(projecile, launcher.position, launcher.rotation);
+        bullet.GetComponent<Rigidbody>().AddForce(launcher.forward * force, ForceMode.Impulse);
+        Destroy(bullet, 1.0f + 0.5f * cannonPowerLevel); // Longer lifetime for higher power levels
     }
 
     public void FireTurret()
     {
         if (Time.time >= nextFireTime)
         {
-            nextFireTime = Time.time + 1.0f / fireRate;
-            GameObject bullet = Instantiate(projecile, launcher.position, launcher.rotation);
-            bullet.GetComponent<Rigidbody>().AddForce(launcher.forward * force, ForceMode.Impulse);
-            Destroy(bullet, 1.0f + 0.5f * cannonPowerLevel); // Longer lifetime for higher power levels
+            Invoke("Turret", 0.0f);
         }
     }
 
-    public void Cata()
-    {
-        if (Time.time >= nextFireTime)
-        {
-            animator.Play("CatapaultAttack");
-
-            Invoke("FireCatapult", 0.5f);
-        }
-    }
-
-    public void FireCatapult()
+    private void Catapult()
     {
         nextFireTime = Time.time + 1.0f / fireRate;
         GameObject bullet = Instantiate(projecile, launcher.position, launcher.rotation);
         Vector3 direction = Quaternion.Euler(angle, 0, 0) * launcher.forward + launcher.up;
         bullet.GetComponent<Rigidbody>().AddForce(direction * force, ForceMode.Impulse);
         Destroy(bullet, 2.0f + 0.5f * cannonPowerLevel); // Longer lifetime for higher power levels
+    }
+    
+    public void FireCatapult()
+    {
+        if (Time.time >= nextFireTime)
+        {
+            animator.Play("CatapaultAttack");
 
+            Invoke("Catapult", 0.5f);
+        }
     }
 }

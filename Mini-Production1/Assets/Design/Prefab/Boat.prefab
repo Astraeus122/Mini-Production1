@@ -2555,7 +2555,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2479516591572133885, guid: efddfd95914d64f4bac80414197e9b7c, type: 3}
       propertyPath: force
-      value: 3250
+      value: 2200
       objectReference: {fileID: 0}
     - target: {fileID: 2479516591572133886, guid: efddfd95914d64f4bac80414197e9b7c, type: 3}
       propertyPath: m_Radius
@@ -2575,7 +2575,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2479516591572133887, guid: efddfd95914d64f4bac80414197e9b7c, type: 3}
       propertyPath: OnStartInteract.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Cata
+      value: FireCatapult
       objectReference: {fileID: 0}
     - target: {fileID: 2730230645675093225, guid: efddfd95914d64f4bac80414197e9b7c, type: 3}
       propertyPath: m_RootOrder
