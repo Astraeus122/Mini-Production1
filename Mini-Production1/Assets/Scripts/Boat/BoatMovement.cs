@@ -405,21 +405,25 @@ public class BoatMovement : MonoBehaviour
 
     IEnumerator RegenerateShield()
     {
-        yield return new WaitForSeconds(shieldRegenCooldown);
-        if (currentShieldHits < maxShieldHits)
+        while (true)
         {
-            currentShieldHits++;
-            if (shieldAudioSource != null && currentShieldHits == maxShieldHits)
+            yield return new WaitForSeconds(shieldRegenCooldown);
+            if (currentShieldHits < maxShieldHits)
             {
-                shieldAudioSource.Play();
+                currentShieldHits++;
+                if (shieldAudioSource != null && currentShieldHits == 1)
+                {
+                    shieldAudioSource.Play();  
+                }
             }
-            StartCoroutine("RegenerateShield");
-        }
-        else
-        {
-            shieldActive = false;
-            if (shieldVisualEffect != null)
-                shieldVisualEffect.SetActive(false);
+
+            if (currentShieldHits == maxShieldHits)
+            {
+                if (shieldVisualEffect != null)
+                    shieldVisualEffect.SetActive(true);
+                shieldActive = true;
+                break;  // Exit the loop if the shield is fully regenerated
+            }
         }
     }
 
@@ -441,6 +445,7 @@ public class BoatMovement : MonoBehaviour
                 {
                     shieldAudioSource.PlayOneShot(shieldCrackSound);  // Play crack sound
                 }
+                StartCoroutine("RegenerateShield");  // Start regenerating even if it was deactivated
             }
         }
         else

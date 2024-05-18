@@ -6,55 +6,31 @@ public class ObstacleActivator : MonoBehaviour
     public GameObject[] enemies;
     public GameObject[] resources;
 
-    // Difficulty thresholds based on score
-    public int mediumDifficultyScore = 1000;
-    public int hardDifficultyScore = 3000;
+    [Header("Base Activation Chances")]
+    public float baseObstacleChance = 0.4f;
+    public float baseEnemyChance = 0.25f;
+    public float baseResourceChance = 0.35f;
 
-    // Activation chances for each difficulty level
-    [Header("Easy Difficulty Chances")]
-    public float easyObstacleChance = 0.3f;
-    public float easyEnemyChance = 0.2f;
-    public float easyResourceChance = 0.5f;
-
-    [Header("Medium Difficulty Chances")]
-    public float mediumObstacleChance = 0.5f;
-    public float mediumEnemyChance = 0.4f;
-    public float mediumResourceChance = 0.5f;
-
-    [Header("Hard Difficulty Chances")]
-    public float hardObstacleChance = 0.7f;
-    public float hardEnemyChance = 0.6f;
-    public float hardResourceChance = 0.4f;
+    [Header("Increase Rates Per Point Score")]
+    public float obstacleIncreasePerPoint = 0.0005f;
+    public float enemyIncreasePerPoint = 0.0005f;
+    public float resourceIncreasePerPoint = 0.0005f; 
 
     private void Start()
     {
-        int score = GetCurrentPlayerScore();
-        ActivateObjects(score);
+        if (GameManager.Instance != null && GameManager.Instance.IsGameActive)
+        {
+            int score = GameManager.Instance.Score;
+            ActivateObjects(score);
+        }
     }
 
     private void ActivateObjects(int score)
     {
-        float obstacleChance, enemyChance, resourceChance;
-
-        // Determine difficulty based on score
-        if (score >= hardDifficultyScore)
-        {
-            obstacleChance = hardObstacleChance;
-            enemyChance = hardEnemyChance;
-            resourceChance = hardResourceChance;
-        }
-        else if (score >= mediumDifficultyScore)
-        {
-            obstacleChance = mediumObstacleChance;
-            enemyChance = mediumEnemyChance;
-            resourceChance = mediumResourceChance;
-        }
-        else
-        {
-            obstacleChance = easyObstacleChance;
-            enemyChance = easyEnemyChance;
-            resourceChance = easyResourceChance;
-        }
+        // Calculate current chances based on score
+        float obstacleChance = Mathf.Clamp(baseObstacleChance + obstacleIncreasePerPoint * score, 0, 1);
+        float enemyChance = Mathf.Clamp(baseEnemyChance + enemyIncreasePerPoint * score, 0, 1);
+        float resourceChance = Mathf.Clamp(baseResourceChance + resourceIncreasePerPoint * score, 0, 1);
 
         // Activate or deactivate each type of object based on their chances
         SetActiveRandomly(obstacles, obstacleChance);
@@ -68,11 +44,5 @@ public class ObstacleActivator : MonoBehaviour
         {
             obj.SetActive(Random.value < activationChance);
         }
-    }
-
-    private int GetCurrentPlayerScore()
-    {
-        // Placeholder for actual score retrieval logic
-        return PlayerPrefs.GetInt("PlayerScore", 0);
     }
 }
