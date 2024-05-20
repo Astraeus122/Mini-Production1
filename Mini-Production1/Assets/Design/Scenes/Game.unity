@@ -1829,6 +1829,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Water_Grid
       objectReference: {fileID: 0}
+    - target: {fileID: 8489321081323879949, guid: 5115169048195bf4faab4c5ff7e46967, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 126
+      objectReference: {fileID: 0}
     - target: {fileID: 9123149520836437175, guid: 5115169048195bf4faab4c5ff7e46967, type: 3}
       propertyPath: m_RootOrder
       value: 1
