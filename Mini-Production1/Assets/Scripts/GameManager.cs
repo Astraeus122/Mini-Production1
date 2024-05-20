@@ -5,6 +5,9 @@ using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField]
+    private XPBarManager xpBarManager; // Reference to the XPBarController
+
     public Transform boat;
     public static GameManager Instance { get; private set; }
 
@@ -65,6 +68,12 @@ public class GameManager : MonoBehaviour
 
         // score is set to 0 from 0 so doesnt invoke the event initially, we manually do it here
         OnScoreChange?.Invoke(Score.ToString());
+
+        // Check for XPBarController reference
+        if (xpBarManager == null)
+        {
+            Debug.LogError("XPBarController reference is missing in GameManager.");
+        }
     }
 
     private void OnDestroy()
@@ -98,6 +107,8 @@ public class GameManager : MonoBehaviour
         if (!IsPlayerAlive()) return;
 
         currentXP += xp;
+        xpBarManager.UpdateXPBar(currentXP, xpToNextLevel); // Update the XP bar
+
         if (currentXP >= xpToNextLevel)
         {
             LevelUp();
@@ -109,8 +120,13 @@ public class GameManager : MonoBehaviour
         if (!IsPlayerAlive()) return;
 
         currentLevel++;
-        currentXP -= xpToNextLevel; // Remove the XP needed for the previous level
-        xpToNextLevel *= xpIncreaseFactor; // Increase the requirement for the next level
+        currentXP -= xpToNextLevel;
+        xpToNextLevel *= xpIncreaseFactor;
+
+        if (xpBarManager != null)
+        {
+            xpBarManager.UpdateXPBar(currentXP, xpToNextLevel); // Update the XP bar for the new level
+        }
 
         if (upgradeUI != null)
         {
@@ -123,4 +139,3 @@ public class GameManager : MonoBehaviour
         return boatMovement != null && boatMovement.IsAlive;
     }
 }
-

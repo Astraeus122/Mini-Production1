@@ -14,7 +14,7 @@ public class ObstacleActivator : MonoBehaviour
     [Header("Increase Rates Per Point Score")]
     public float obstacleIncreasePerPoint = 0.0005f;
     public float enemyIncreasePerPoint = 0.0005f;
-    public float resourceIncreasePerPoint = 0.0005f; 
+    public float resourceIncreasePerPoint = 0.0005f;
 
     private void Start()
     {
@@ -32,8 +32,11 @@ public class ObstacleActivator : MonoBehaviour
         float enemyChance = Mathf.Clamp(baseEnemyChance + enemyIncreasePerPoint * score, 0, 1);
         float resourceChance = Mathf.Clamp(baseResourceChance + resourceIncreasePerPoint * score, 0, 1);
 
-        // Activate or deactivate each type of object based on their chances
-        SetActiveRandomly(obstacles, obstacleChance);
+        // Calculate maximum allowed obstacles
+        int maxObstacles = Mathf.CeilToInt(obstacles.Length * Mathf.Clamp(obstacleChance + 0.2f, 0, 1));
+
+        // Activate or deactivate each type of object based on their chances and limits
+        SetActiveRandomlyWithLimit(obstacles, obstacleChance, maxObstacles);
         SetActiveRandomly(enemies, enemyChance);
         SetActiveRandomly(resources, resourceChance);
     }
@@ -43,6 +46,27 @@ public class ObstacleActivator : MonoBehaviour
         foreach (var obj in objects)
         {
             obj.SetActive(Random.value < activationChance);
+        }
+    }
+
+    private void SetActiveRandomlyWithLimit(GameObject[] objects, float activationChance, int maxCount)
+    {
+        int activatedCount = 0;
+        foreach (var obj in objects)
+        {
+            if (activatedCount >= maxCount)
+            {
+                obj.SetActive(false);
+            }
+            else
+            {
+                bool shouldBeActive = Random.value < activationChance;
+                obj.SetActive(shouldBeActive);
+                if (shouldBeActive)
+                {
+                    activatedCount++;
+                }
+            }
         }
     }
 }
