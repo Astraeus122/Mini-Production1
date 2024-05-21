@@ -2,27 +2,28 @@ using UnityEngine;
 
 public class CameraControl : MonoBehaviour
 {
+    [SerializeField]
+    private Transform translationTarget;
+
+    [SerializeField]
+    private Transform rotationTarget;
+
+    [SerializeField]
+    private float followSpeed = 12f;
+
     private Vector3 offset;
-    private Quaternion fixedRotation = Quaternion.Euler(22, 0, 0);
 
-    public Transform boatTransform;
 
-    void Start()
+    void Awake()
     {
         // Calculate the initial offset from the boat to the camera
-        offset = transform.position - boatTransform.position;
-
-        // Set the fixed rotation
-        transform.rotation = fixedRotation;
+        offset = transform.position - translationTarget.position;
     }
 
     void LateUpdate()
     {
-        // Follow the boat's position without inheriting its rotation
-        Vector3 targetPosition = boatTransform.position + offset;
-        transform.position = new Vector3(targetPosition.x, targetPosition.y, targetPosition.z);
+        transform.position = Vector3.Lerp(transform.position, translationTarget.position + offset, Time.deltaTime * followSpeed);
 
-        // Maintain the desired rotation
-        transform.rotation = fixedRotation;
+        transform.LookAt(rotationTarget ? rotationTarget : translationTarget);
     }
 }

@@ -174,8 +174,10 @@ public class BoatMovement : MonoBehaviour
         movement.y = Mathf.Sign(movement.y) * Mathf.Max(Mathf.Abs(movement.y) - inertiaEffect, 0);
 
         TiltBoat(SteeringInput);
+        MoveBoat();
 
         ProcessLeaks();
+
 
         if (scrapMagnetRadius > 0)
         {
@@ -224,10 +226,6 @@ public class BoatMovement : MonoBehaviour
         TakeDamage(-healthAmount);  // Using negative damage to heal
     }
 
-    void FixedUpdate()
-    {
-        MoveBoat();
-    }
 
     private void MoveBoat()
     {
