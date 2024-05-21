@@ -122,7 +122,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4847638218516069350}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 34.62, y: 0, z: 0}
+  m_LocalPosition: {x: 35, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -140,8 +140,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2, y: 20, z: 20}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 7.255005, y: 20, z: 20}
+  m_Center: {x: -2.6275024, y: 0, z: 0}
 --- !u!114 &346347166255471215
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -277,17 +277,12 @@ MonoBehaviour:
   - {fileID: 7833864938474242852}
   - {fileID: 4848118566169735482}
   - {fileID: 5204603051696073998}
-  mediumDifficultyScore: 1000
-  hardDifficultyScore: 3000
-  easyObstacleChance: 0.3
-  easyEnemyChance: 0.2
-  easyResourceChance: 0.5
-  mediumObstacleChance: 0.5
-  mediumEnemyChance: 0.4
-  mediumResourceChance: 0.5
-  hardObstacleChance: 0.7
-  hardEnemyChance: 0.6
-  hardResourceChance: 0.4
+  baseObstacleChance: 0.4
+  baseEnemyChance: 0.25
+  baseResourceChance: 0.35
+  obstacleIncreasePerPoint: 0.0005
+  enemyIncreasePerPoint: 0.0005
+  resourceIncreasePerPoint: 0.0005
 --- !u!1001 &625451129017655453
 PrefabInstance:
   m_ObjectHideFlags: 0
