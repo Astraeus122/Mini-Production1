@@ -1,46 +1,50 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class XPBarManager : MonoBehaviour
 {
-    public Image xpFillImage;
-    public Image xpGlowImage;
-    public RectTransform xpBarBackground;
+    public Image xpFillImage; // Image that fills based on XP percentage
+
+    public TextMeshProUGUI xpText; // Displays current XP/max XP
+    public TextMeshProUGUI xpToNextLevelText; // Displays total XP needed for the next level
+    public TextMeshProUGUI scoreText; // Displays the score
 
     private float xpPercentage;
     private float maxWidth;
 
     private void Start()
     {
-        if (xpFillImage == null || xpGlowImage == null || xpBarBackground == null)
+        if (xpFillImage == null || xpText == null || xpToNextLevelText == null || scoreText == null)
         {
-            Debug.LogError("XPBarController is missing references to necessary UI components.");
+            Debug.LogError("XPBarManager is missing references to necessary UI components.");
             return;
         }
 
-        // Assuming the max width of the bar background is the width at 100% XP
-        maxWidth = xpBarBackground.rect.width;
+        // Assuming the max width of the fill image is the width at 100% XP
+        maxWidth = xpFillImage.rectTransform.rect.width;
 
-        // Initialize fill and glow images to zero width
+        // Initialize fill image to zero width
         SetWidth(xpFillImage.rectTransform, 0);
-        SetWidth(xpGlowImage.rectTransform, 0);
     }
 
-    public void UpdateXPBar(float currentXP, float xpToNextLevel)
+    public void UpdateXPBar(float currentXP, float xpToNextLevel, int score)
     {
         xpPercentage = currentXP / xpToNextLevel;
         float newWidth = maxWidth * xpPercentage;
 
-        // Set the width of the fill and glow images based on the XP percentage
+        // Set the width of the fill image based on the XP percentage
         SetWidth(xpFillImage.rectTransform, newWidth);
-        SetWidth(xpGlowImage.rectTransform, newWidth);
 
-        // Adjust the glow color intensity if needed
-        xpGlowImage.color = Color.Lerp(Color.clear, Color.white, xpPercentage);
+        // Update the text elements
+        xpText.text = $"{Mathf.FloorToInt(currentXP)}/{Mathf.FloorToInt(xpToNextLevel)} XP";
+        xpToNextLevelText.text = $"{Mathf.FloorToInt(xpToNextLevel)} XP";
+        scoreText.text = $"{score}CM";
     }
 
     private void SetWidth(RectTransform rectTransform, float width)
     {
         rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, width);
+        rectTransform.anchoredPosition = new Vector2(width / 2, rectTransform.anchoredPosition.y); // Adjust the position to ensure it grows from the left
     }
 }
