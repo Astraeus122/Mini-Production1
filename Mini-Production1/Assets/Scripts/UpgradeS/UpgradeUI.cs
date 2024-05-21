@@ -26,7 +26,6 @@ public class UpgradeUI : MonoBehaviour
     TextMeshProUGUI titleText3, descriptionText3, levelText3;
     [SerializeField]
     Image upgradeImage3;
-
     private Upgrade currentUpgrade;
 
     void OnEnable()
@@ -64,7 +63,7 @@ public class UpgradeUI : MonoBehaviour
     {
         titleText.text = upgrade.name;
         descriptionText.text = upgrade.description;
-        levelText.text = "Level: " + upgrade.level; 
+        levelText.text = "Level: " + upgrade.level;
         upgradeImage.sprite = upgrade.image;
     }
 
@@ -80,9 +79,10 @@ public class UpgradeUI : MonoBehaviour
             Upgrade selectedUpgrade = upgradeManager.currentOptions[index];
             if (selectedUpgrade != null)
             {
+                AudioManager.Instance.PlayButtonClick();
                 selectedUpgrade.ApplyUpgrade(); // Apply the upgrade
                 UpdateUpgradeDisplay(); // Refresh the display of upgrades
-                CloseUpgradeMenu(); // Optionally close the menu right after applying the upgrade
+                CloseUpgradeMenu();
             }
             else
             {
@@ -100,9 +100,9 @@ public class UpgradeUI : MonoBehaviour
         DisplayUpgrades();  // Re-display the upgrades with updated levels
     }
 
-
     public void CloseUpgradeMenu()
     {
+        AudioManager.Instance.PlayButtonClick();
         gameObject.SetActive(false); // Hide the UI
         Time.timeScale = 1; // Resume the game
     }

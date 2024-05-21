@@ -2,9 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-
-
 public class Obstacle_Scr : Hazard
 {
     public Vector3 Movement_Dir;
@@ -12,10 +9,9 @@ public class Obstacle_Scr : Hazard
     public float LifeTime = 300.0f;      // in seconds
     public float LifeDuration = 30.0f;
 
-
     //Initial spawn var
-    public bool FixedSpawn     = false;
-    public bool FixedRotation  = true;
+    public bool FixedSpawn = false;
+    public bool FixedRotation = true;
     public Vector3 SpawnPos; // only use if Fixed Spawn true
     public Vector3 SpawnRot; // only use if Fixed Rot is true
 
@@ -27,9 +23,7 @@ public class Obstacle_Scr : Hazard
     [SerializeField]
     public float Damage = 1;
 
-
     private bool isDead = false;
-
 
     // Update is called once per frame
     void Update()
@@ -37,7 +31,7 @@ public class Obstacle_Scr : Hazard
         // Needs movement - not sure if manager or self should move it
         transform.position += (Movement_Dir * Movement_Speed) * Time.deltaTime;
         LifeDuration += Time.deltaTime;
-        if(TerminationPoint.z - transform.position.z > 30)
+        if (TerminationPoint.z - transform.position.z > 30)
         {
             Die();
         }
@@ -60,7 +54,6 @@ public class Obstacle_Scr : Hazard
 
     public void Die()
     {
-
         if (Spawner != null)
         {
             Spawner.GetComponent<Obst_Spawner_Scr>().ObjectDeath(gameObject);
@@ -74,10 +67,18 @@ public class Obstacle_Scr : Hazard
         if (isDead) return;
 
         if (gameObject.CompareTag("Crate"))
-            GameManager.Instance.AddXP(25);
+        {
+            GameManager.Instance.AddXP(50);
+            if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.PlayResourceCollection();
+                Die();
+            }
+        }
         else if (hazardImpactor.TryGetComponent(out BoatMovement boat))
+        {
             boat.ReceiveDamage(Damage, transform.position);
-
-        Die();
+            Die();
+        }
     }
 }

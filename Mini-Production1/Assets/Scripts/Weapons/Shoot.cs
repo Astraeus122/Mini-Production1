@@ -12,10 +12,10 @@ public class Shoot : MonoBehaviour
 
     [SerializeField]
     private bool turretWeapon = false;
-    
+
     [SerializeField]
     private float force;
-    
+
     [SerializeField]
     private float fireRate = 1.0f;
 
@@ -31,6 +31,8 @@ public class Shoot : MonoBehaviour
 
     public Animator animator;
 
+    private bool isCatapultTriggered = false; // Flag to prevent multiple triggers
+
     public void UpgradeCannon()
     {
         cannonPowerLevel++;
@@ -44,7 +46,14 @@ public class Shoot : MonoBehaviour
     {
         if (Triggered)
         {
-            FireTurret();
+            if (turretWeapon)
+            {
+                FireTurret();
+            }
+            else if (!isCatapultTriggered) // Check the flag before firing the catapult
+            {
+                FireCatapult();
+            }
         }
     }
 
@@ -55,6 +64,11 @@ public class Shoot : MonoBehaviour
         GameObject bullet = Instantiate(projecile, launcher.position, launcher.rotation);
         bullet.GetComponent<Rigidbody>().AddForce(launcher.forward * force, ForceMode.Impulse);
         Destroy(bullet, 1.0f + 0.5f * cannonPowerLevel); // Longer lifetime for higher power levels
+
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlayTurretFire();
+        }
     }
 
     public void FireTurret()
@@ -72,14 +86,22 @@ public class Shoot : MonoBehaviour
         Vector3 direction = Quaternion.Euler(angle, 0, 0) * launcher.forward + launcher.up;
         bullet.GetComponent<Rigidbody>().AddForce(direction * force, ForceMode.Impulse);
         Destroy(bullet, 2.0f + 0.5f * cannonPowerLevel); // Longer lifetime for higher power levels
+
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlayCatapultFire();
+        }
+
+        // Reset the flag after firing
+        isCatapultTriggered = false;
     }
-    
+
     public void FireCatapult()
     {
-        if (Time.time >= nextFireTime)
+        if (Time.time >= nextFireTime && !isCatapultTriggered)
         {
             animator.Play("CatapaultAttack");
-
+            isCatapultTriggered = true; // Set the flag to true when the catapult is triggered
             Invoke("Catapult", 0.5f);
         }
     }
