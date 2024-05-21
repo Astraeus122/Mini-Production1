@@ -552,7 +552,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7901897898330469844, guid: 9d5fad2b63a956242af2578057257410, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.232
+      value: -0.82799995
       objectReference: {fileID: 0}
     - target: {fileID: 7901897898330469844, guid: 9d5fad2b63a956242af2578057257410, type: 3}
       propertyPath: m_LocalPosition.z
@@ -856,8 +856,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sewerPrefabs:
-  - {fileID: 9163466587856353919, guid: e7984a6f9be22e849970d475564420d8, type: 3}
   - {fileID: 6330244436780453116, guid: 36e18cbf085075a49842a927de3b2c67, type: 3}
+  - {fileID: 6330244436780453116, guid: c7f01f0dac7651a4eb9e37054f43c09f, type: 3}
+  - {fileID: 9163466587856353919, guid: e7984a6f9be22e849970d475564420d8, type: 3}
   boatSpeed: 5
   maxNumberOfSewer: 5
   maxSewerLength: 100
@@ -898,7 +899,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 41867275289408978, guid: 75ac378782d622c4ea74324512dd281b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -1.06
       objectReference: {fileID: 0}
     - target: {fileID: 41867275289408978, guid: 75ac378782d622c4ea74324512dd281b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -964,6 +965,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boat
       objectReference: {fileID: 0}
+    - target: {fileID: 810999767295782490, guid: 75ac378782d622c4ea74324512dd281b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 810999767295782490, guid: 75ac378782d622c4ea74324512dd281b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.34
+      objectReference: {fileID: 0}
     - target: {fileID: 1389618653253575865, guid: 75ac378782d622c4ea74324512dd281b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.7
@@ -988,6 +997,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0.297
       objectReference: {fileID: 0}
+    - target: {fileID: 5978575332146014893, guid: 75ac378782d622c4ea74324512dd281b, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 78c834ce43e1fe84f939f89279b6dd0e, type: 2}
     - target: {fileID: 6070297194465526532, guid: 75ac378782d622c4ea74324512dd281b, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -1003,6 +1016,10 @@ PrefabInstance:
     - target: {fileID: 6938990044104976519, guid: 75ac378782d622c4ea74324512dd281b, type: 3}
       propertyPath: m_LocalPosition.z
       value: 3.41
+      objectReference: {fileID: 0}
+    - target: {fileID: 7175474614539685814, guid: 75ac378782d622c4ea74324512dd281b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7477813572674266003, guid: 75ac378782d622c4ea74324512dd281b, type: 3}
       propertyPath: fireRate
@@ -2287,6 +2304,10 @@ PrefabInstance:
     - target: {fileID: 8489321081323879949, guid: 5115169048195bf4faab4c5ff7e46967, type: 3}
       propertyPath: m_Name
       value: SM_Water_Grid
+      objectReference: {fileID: 0}
+    - target: {fileID: 8489321081323879949, guid: 5115169048195bf4faab4c5ff7e46967, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 126
       objectReference: {fileID: 0}
     - target: {fileID: 9123149520836437175, guid: 5115169048195bf4faab4c5ff7e46967, type: 3}
       propertyPath: m_RootOrder
