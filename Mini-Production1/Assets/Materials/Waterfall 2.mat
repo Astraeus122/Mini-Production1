@@ -43,7 +43,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _Alpha_multiplier: 0.37
-    - _Fade_Dis: 0.33
+    - _Fade_Dis: 1
     - _Metallic: 0
     - _NormalStrength: 0.52
     - _QueueControl: 0

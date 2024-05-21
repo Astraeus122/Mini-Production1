@@ -43,13 +43,13 @@ Material:
     m_Ints: []
     m_Floats:
     - _Alpha_multiplier: 105.74
-    - _Fade_Dis: 9.19
+    - _Fade_Dis: 5
     - _Metallic: 0
     - _NormalStrength: 0.2
     - _QueueControl: 0
     - _QueueOffset: -17
     - _Smoothness: 2.08
-    - _TransparencyControl: -12.12
+    - _TransparencyControl: -12.17
     - _VorinoiAgitation: 8
     - _VoronoiPower: 4
     - _VoronoiScale: 12
