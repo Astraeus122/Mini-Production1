@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class HoverEffect : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class HoverEffect : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ISelectHandler, IDeselectHandler
 {
     public Vector3 hoverScale = new Vector3(1.1f, 1.1f, 1.1f);
     public float animationTime = 0.2f;
@@ -12,16 +12,35 @@ public class HoverEffect : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     void Start()
     {
         originalScale = transform.localScale;
+        if (EventSystem.current.currentSelectedGameObject == gameObject)
+        {
+            isHovering = true;
+            StopAllCoroutines();
+            StartCoroutine(ScaleOverTime(hoverScale));
+        }
     }
 
     public void OnPointerEnter(PointerEventData eventData)
+    {
+        EventSystem.current.SetSelectedGameObject(gameObject);
+
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        isHovering = false;
+        StopAllCoroutines();
+        StartCoroutine(ScaleOverTime(originalScale));
+    }
+
+    public void OnSelect(BaseEventData eventData)
     {
         isHovering = true;
         StopAllCoroutines();
         StartCoroutine(ScaleOverTime(hoverScale));
     }
 
-    public void OnPointerExit(PointerEventData eventData)
+    public void OnDeselect(BaseEventData eventData)
     {
         isHovering = false;
         StopAllCoroutines();
