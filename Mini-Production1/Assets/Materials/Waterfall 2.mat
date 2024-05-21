@@ -7,14 +7,14 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Waterfall
+  m_Name: Waterfall 2
   m_Shader: {fileID: -6465566751694194690, guid: e95a35cac0b5af2439f24f793ffa40d4, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2983
+  m_CustomRenderQueue: 2980
   stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
@@ -42,14 +42,14 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Alpha_multiplier: 105.74
-    - _Fade_Dis: 9.19
+    - _Alpha_multiplier: 0.37
+    - _Fade_Dis: 0.33
     - _Metallic: 0
-    - _NormalStrength: 0.2
+    - _NormalStrength: 0.52
     - _QueueControl: 0
-    - _QueueOffset: -17
-    - _Smoothness: 2.08
-    - _TransparencyControl: -12.12
+    - _QueueOffset: -20
+    - _Smoothness: 3.8
+    - _TransparencyControl: -5.43
     - _VorinoiAgitation: 8
     - _VoronoiPower: 4
     - _VoronoiScale: 12
