@@ -859,6 +859,7 @@ MonoBehaviour:
   - {fileID: 6330244436780453116, guid: 36e18cbf085075a49842a927de3b2c67, type: 3}
   - {fileID: 6330244436780453116, guid: c7f01f0dac7651a4eb9e37054f43c09f, type: 3}
   - {fileID: 9163466587856353919, guid: e7984a6f9be22e849970d475564420d8, type: 3}
+  - {fileID: 9163466587856353919, guid: 340ce63288edebf4283752c7791b225e, type: 3}
   boatSpeed: 5
   maxNumberOfSewer: 5
   maxSewerLength: 100

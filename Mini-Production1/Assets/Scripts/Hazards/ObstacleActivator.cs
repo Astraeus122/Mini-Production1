@@ -38,7 +38,7 @@ public class ObstacleActivator : MonoBehaviour
         // Activate or deactivate each type of object based on their chances and limits
         SetActiveRandomlyWithLimit(obstacles, obstacleChance, maxObstacles);
         
-        //SetActiveRandomly(enemies, enemyChance);
+        SetActiveRandomly(enemies, enemyChance);
         
         SetActiveRandomly(resources, resourceChance);
     }
