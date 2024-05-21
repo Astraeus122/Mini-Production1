@@ -469,6 +469,11 @@ public class BoatMovement : MonoBehaviour
             Time.fixedDeltaTime = 0.02f * Time.timeScale;
             isTemporalShiftActive = true;
             temporalShiftTimer = temporalShiftDuration; // Start the duration timer
+
+            if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.PlayTemporalShiftActivate();
+            }
         }
         else
         {
@@ -482,7 +487,13 @@ public class BoatMovement : MonoBehaviour
         Time.fixedDeltaTime = 0.02f;
         isTemporalShiftActive = false;
         temporalShiftTimer = temporalShiftCooldown; // Reset cooldown
+
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlayTemporalShiftDeactivate();
+        }
     }
+
     public void AddJeremiah()
     {
         if (jeremiahPrefab != null && jeremiahStandby != null)
