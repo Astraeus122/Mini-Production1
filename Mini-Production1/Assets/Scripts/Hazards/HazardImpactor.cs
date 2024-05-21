@@ -13,12 +13,13 @@ public class HazardImpactor : MonoBehaviour
         if (hazard.TeamId != teamId)
             hazard.OnImpacting(this);
     }*/
-
     private void OnTriggerStay(Collider other)
     {
         if (!other.TryGetComponent(out Hazard hazard)) return;
 
         if (hazard.TeamId != teamId)
+        {
             hazard.OnImpacting(this);
+        }
     }
 }

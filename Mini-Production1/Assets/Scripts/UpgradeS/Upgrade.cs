@@ -60,6 +60,12 @@ public class Upgrade
             case "Waterproof Seal":
                 boat.leakSusceptibility -= 0.03f;
                 boat.leakSusceptibility = Mathf.Max(0, boat.leakSusceptibility);
+
+                // Play the tape sound
+                if (AudioManager.Instance != null)
+                {
+                    AudioManager.Instance.PlayTapeSound();
+                }
                 break;
             case "Advanced Navigation Tools":
                 boat.ActivateAdvancedNavigation();
