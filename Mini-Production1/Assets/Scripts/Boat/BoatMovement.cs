@@ -240,6 +240,9 @@ public class BoatMovement : MonoBehaviour
         position.z = Mathf.Clamp(position.z, minZ, maxZ);
 
         transform.position = position;
+
+        // rough fix
+        GetComponent<Rigidbody>().velocity = new Vector3(movement.x, 0f, movement.y);
     }
 
     private void TiltBoat(float input)
