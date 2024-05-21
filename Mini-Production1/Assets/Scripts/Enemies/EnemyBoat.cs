@@ -18,6 +18,9 @@ public class EnemyBoat : MonoBehaviour
     [SerializeField]
     private BoatMovement target;
 
+    [SerializeField]
+    private float fireCommandInterval = 1f;
+
     private float xTarget;
 
     bool fireCommandStatus = false;
@@ -43,17 +46,27 @@ public class EnemyBoat : MonoBehaviour
         {
             if (!fireCommandStatus)
             {
-                boat.IssueCrewCommand("Fire");
+                StartCoroutine(RepeatFire());
                 fireCommandStatus = true;
             }
         }
         else if (fireCommandStatus)
         {
-            boat.IssueCrewCommand("Cease Fire");
+            StopAllCoroutines();
             fireCommandStatus = false;
         }
     }
 
+    private IEnumerator RepeatFire()
+    {
+        while(enabled)
+        {
+            boat.IssueCrewCommand("Fire");
+            yield return new WaitForSeconds(fireCommandInterval);
+            boat.IssueCrewCommand("Cease Fire");
+
+        }
+    }
     public void SetTarget(BoatMovement target)
     {
         this.target = target;
