@@ -20,12 +20,12 @@ public class ObstacleActivator : MonoBehaviour
     {
         if (GameManager.Instance != null && GameManager.Instance.IsGameActive)
         {
-            int score = GameManager.Instance.Score;
+            float score = GameManager.Instance.Score;
             ActivateObjects(score);
         }
     }
 
-    private void ActivateObjects(int score)
+    private void ActivateObjects(float score)
     {
         // Calculate current chances based on score
         float obstacleChance = Mathf.Clamp(baseObstacleChance + obstacleIncreasePerPoint * score, 0, 1);
@@ -38,7 +38,7 @@ public class ObstacleActivator : MonoBehaviour
         // Activate or deactivate each type of object based on their chances and limits
         SetActiveRandomlyWithLimit(obstacles, obstacleChance, maxObstacles);
         
-        //SetActiveRandomly(enemies, enemyChance);
+        SetActiveRandomly(enemies, enemyChance);
         
         SetActiveRandomly(resources, resourceChance);
     }

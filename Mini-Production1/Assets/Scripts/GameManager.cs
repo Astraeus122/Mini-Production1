@@ -6,7 +6,7 @@ using UnityEngine.Events;
 public class GameManager : MonoBehaviour
 {
     [SerializeField]
-    private XPBarManager xpBarManager; // Reference to the XPBarController
+    private XPBarManager xpBarManager; // Reference to the XPBarManager
 
     public Transform boat;
     public static GameManager Instance { get; private set; }
@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
 
     public bool IsGameActive { get; private set; } = true;
 
-    public int Score { get; private set; }
+    public float Score { get; private set; } // Use float to track precise distance
 
     [SerializeField]
     private int startingRepairResources = 0;
@@ -69,10 +69,10 @@ public class GameManager : MonoBehaviour
         // score is set to 0 from 0 so doesnt invoke the event initially, we manually do it here
         OnScoreChange?.Invoke(Score.ToString());
 
-        // Check for XPBarController reference
+        // Check for XPBarManager reference
         if (xpBarManager == null)
         {
-            Debug.LogError("XPBarController reference is missing in GameManager.");
+            Debug.LogError("XPBarManager reference is missing in GameManager.");
         }
     }
 
@@ -82,7 +82,7 @@ public class GameManager : MonoBehaviour
         //if (highscore == default) highscore = 0; // int default IS 0
 
         if (Score > highscore)
-            PlayerPrefs.SetInt(HighscorePrefKey, Score);
+            PlayerPrefs.SetInt(HighscorePrefKey, (int)Score); // Cast Score to int for highscore
     }
 
     public void StopGame()
@@ -94,12 +94,16 @@ public class GameManager : MonoBehaviour
     {
         if (!IsGameActive || !IsPlayerAlive()) return;
 
-        int oldScore = Score;
-        Score = Mathf.FloorToInt(Time.timeSinceLevelLoad);
+        float oldScore = Score;
+        Score = Time.timeSinceLevelLoad * 10; // Assuming the rat runs 10 cm per second
 
         AddXP(Time.deltaTime * 5); // Adding XP based on time, modify the multiplier as needed
 
-        if (oldScore != Score) OnScoreChange?.Invoke(Score.ToString());
+        if (Mathf.FloorToInt(oldScore) != Mathf.FloorToInt(Score))
+        {
+            OnScoreChange?.Invoke(Score.ToString());
+            xpBarManager.UpdateXPBar(currentXP, xpToNextLevel, Mathf.FloorToInt(Score)); // Update the XP bar with the score
+        }
     }
 
     public void AddXP(float xp)
@@ -107,7 +111,12 @@ public class GameManager : MonoBehaviour
         if (!IsPlayerAlive()) return;
 
         currentXP += xp;
-        xpBarManager.UpdateXPBar(currentXP, xpToNextLevel); // Update the XP bar
+
+        // Update the XP bar and text elements
+        if (xpBarManager != null)
+        {
+            xpBarManager.UpdateXPBar(currentXP, xpToNextLevel, Mathf.FloorToInt(Score));
+        }
 
         if (currentXP >= xpToNextLevel)
         {
@@ -125,7 +134,7 @@ public class GameManager : MonoBehaviour
 
         if (xpBarManager != null)
         {
-            xpBarManager.UpdateXPBar(currentXP, xpToNextLevel); // Update the XP bar for the new level
+            xpBarManager.UpdateXPBar(currentXP, xpToNextLevel, Mathf.FloorToInt(Score)); // Update the XP bar for the new level
         }
 
         if (upgradeUI != null)
