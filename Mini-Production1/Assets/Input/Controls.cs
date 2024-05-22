@@ -62,6 +62,15 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""TShift"",
+                    ""type"": ""Button"",
+                    ""id"": ""8fe5760b-9057-49ec-960a-2a2a8c6bdba4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -251,6 +260,28 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""action"": ""CmdFire"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a4ebae90-15d3-44d9-9784-288722bf0901"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Rat n' Keys"",
+                    ""action"": ""TShift"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fcba10e5-b80b-4434-be98-c04a84e8ae1f"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""GamePad"",
+                    ""action"": ""TShift"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -352,6 +383,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         m_Character_Interact = m_Character.FindAction("Interact", throwIfNotFound: true);
         m_Character_Dismount = m_Character.FindAction("Dismount", throwIfNotFound: true);
         m_Character_CmdFire = m_Character.FindAction("CmdFire", throwIfNotFound: true);
+        m_Character_TShift = m_Character.FindAction("TShift", throwIfNotFound: true);
         // Boat
         m_Boat = asset.FindActionMap("Boat", throwIfNotFound: true);
         m_Boat_Steering = m_Boat.FindAction("Steering", throwIfNotFound: true);
@@ -418,6 +450,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Character_Interact;
     private readonly InputAction m_Character_Dismount;
     private readonly InputAction m_Character_CmdFire;
+    private readonly InputAction m_Character_TShift;
     public struct CharacterActions
     {
         private @Controls m_Wrapper;
@@ -426,6 +459,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         public InputAction @Interact => m_Wrapper.m_Character_Interact;
         public InputAction @Dismount => m_Wrapper.m_Character_Dismount;
         public InputAction @CmdFire => m_Wrapper.m_Character_CmdFire;
+        public InputAction @TShift => m_Wrapper.m_Character_TShift;
         public InputActionMap Get() { return m_Wrapper.m_Character; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -447,6 +481,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @CmdFire.started -= m_Wrapper.m_CharacterActionsCallbackInterface.OnCmdFire;
                 @CmdFire.performed -= m_Wrapper.m_CharacterActionsCallbackInterface.OnCmdFire;
                 @CmdFire.canceled -= m_Wrapper.m_CharacterActionsCallbackInterface.OnCmdFire;
+                @TShift.started -= m_Wrapper.m_CharacterActionsCallbackInterface.OnTShift;
+                @TShift.performed -= m_Wrapper.m_CharacterActionsCallbackInterface.OnTShift;
+                @TShift.canceled -= m_Wrapper.m_CharacterActionsCallbackInterface.OnTShift;
             }
             m_Wrapper.m_CharacterActionsCallbackInterface = instance;
             if (instance != null)
@@ -463,6 +500,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @CmdFire.started += instance.OnCmdFire;
                 @CmdFire.performed += instance.OnCmdFire;
                 @CmdFire.canceled += instance.OnCmdFire;
+                @TShift.started += instance.OnTShift;
+                @TShift.performed += instance.OnTShift;
+                @TShift.canceled += instance.OnTShift;
             }
         }
     }
@@ -524,6 +564,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         void OnInteract(InputAction.CallbackContext context);
         void OnDismount(InputAction.CallbackContext context);
         void OnCmdFire(InputAction.CallbackContext context);
+        void OnTShift(InputAction.CallbackContext context);
     }
     public interface IBoatActions
     {

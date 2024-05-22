@@ -18,6 +18,15 @@ public class MenuScript : MonoBehaviour
     [SerializeField]
     private Button debugResetButton = null;
 
+    [SerializeField]
+    private Button swapControlbutton;
+
+    [SerializeField]
+    private RectTransform keyControls;
+
+    [SerializeField]
+    private RectTransform gamepadControls;
+
     private void Awake()
     {
         debugResetButton.gameObject.SetActive(Debug.isDebugBuild);
@@ -43,6 +52,22 @@ public class MenuScript : MonoBehaviour
         buttonPressAudioSource.Play();
         MainCanvas.SetActive(false); // Deactivate Main Canvas
         ControlCanvas.SetActive(true); // Activate Control Canvas
+    }
+
+    public void SwapControls()
+    {
+        if (keyControls.gameObject.activeInHierarchy)
+        {
+            keyControls.gameObject.SetActive(false);
+            swapControlbutton.GetComponentInChildren<TMP_Text>().text = "View Key Controls";
+            gamepadControls.gameObject.SetActive(true);
+        }
+        else if (gamepadControls.gameObject.activeInHierarchy)
+        {
+            gamepadControls.gameObject.SetActive(false);
+            swapControlbutton.GetComponentInChildren<TMP_Text>().text = "View Gamepad Controls";
+            keyControls.gameObject.SetActive(true);
+        }
     }
 
     public void HideControls()

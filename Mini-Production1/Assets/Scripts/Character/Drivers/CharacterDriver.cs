@@ -32,6 +32,8 @@ public class CharacterDriver : MonoBehaviour
 
         InputInstance.Controls.Character.CmdFire.performed += CmdFire;
         InputInstance.Controls.Character.CmdFire.canceled += CmdFire;
+
+        InputInstance.Controls.Character.TShift.performed += TShift;
     }
 
     private void OnDisable()
@@ -49,6 +51,8 @@ public class CharacterDriver : MonoBehaviour
 
         InputInstance.Controls.Character.CmdFire.performed -= CmdFire;
         InputInstance.Controls.Character.CmdFire.canceled -= CmdFire;
+
+        InputInstance.Controls.Character.TShift.performed -= TShift;
     }
 
     private void Dismount(InputAction.CallbackContext ctx)
@@ -74,5 +78,10 @@ public class CharacterDriver : MonoBehaviour
     private void CmdFire(InputAction.CallbackContext ctx)
     {
         boatAboard?.IssueCrewCommand(ctx.ReadValueAsButton() ? "Fire" : "Cease Fire");
+    }
+
+    private void TShift(InputAction.CallbackContext ctx)
+    {
+        boatAboard?.ActivateTemporalShift();
     }
 }

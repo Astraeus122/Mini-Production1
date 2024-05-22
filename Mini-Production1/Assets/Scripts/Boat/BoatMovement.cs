@@ -196,13 +196,6 @@ public class BoatMovement : MonoBehaviour
             }
         }
 
-        // Handle Temporal Shift Activation
-        if (Input.GetKeyDown(KeyCode.Q) && temporalShiftTimer <= 0)
-        {
-            if (currentHitPoints > 0)
-                ActivateTemporalShift();
-        }
-
         // Manage active Temporal Shift
         if (isTemporalShiftActive)
         {
@@ -466,6 +459,8 @@ public class BoatMovement : MonoBehaviour
     }
     public void ActivateTemporalShift()
     {
+        if (currentHitPoints <= 0) return;
+
         if (temporalShiftUpgradeLevel > 0 && temporalShiftTimer <= 0)
         {
             Time.timeScale = 0.5f;
