@@ -8,6 +8,9 @@ public class UltimateSpawner : MonoBehaviour
     private BoatMovement player;
 
     [SerializeField]
+    private GameManager gameManager;
+
+    [SerializeField]
     private float shipThreshold = 100;
 
     [SerializeField]
@@ -33,7 +36,7 @@ public class UltimateSpawner : MonoBehaviour
                 enemyShipPrefabs[UnityEngine.Random.Range(0, enemyShipPrefabs.Length)],
                 shipSpawnVolume.GetPoint(),
                 Quaternion.identity)
-                ).SetTarget(player);
+                ).Init(player, gameManager);
 
             shipNeed = 0f;
         }

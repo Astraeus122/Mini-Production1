@@ -27,6 +27,8 @@ public class EnemyBoat : MonoBehaviour
 
     public float FleeTimer { get; set; } = 0;
 
+    private GameManager gm;
+
     private void Update()
     {
         FleeTimer = Mathf.Max(FleeTimer - Time.deltaTime, 0f);
@@ -65,7 +67,11 @@ public class EnemyBoat : MonoBehaviour
 
         SteerToTarget();
     }
-
+    private void OnDestroy()
+    {
+        //  TODO cache from setTarget
+        gm.AddXP(250);
+    }
     private void FireIfClose()
     {
         float deltaX = target.transform.position.x - transform.position.x;
@@ -94,9 +100,10 @@ public class EnemyBoat : MonoBehaviour
 
         }
     }
-    public void SetTarget(BoatMovement target)
+    public void Init(BoatMovement target, GameManager gm)
     {
         this.target = target;
+        this.gm = gm;
     }
 
     private void SteerToTarget()
