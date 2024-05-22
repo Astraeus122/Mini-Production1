@@ -83,6 +83,7 @@ public class BoatMovement : MonoBehaviour
     public GameObject despawnVFX;
     public bool destroyAfterSinking = false;
     public float destroyBelowSinkingY = -3;
+    public float deadSinkRate = 0.3f;
 
     [SerializeField]
     [Tooltip("Clamp position of ship (min value)")]
@@ -336,7 +337,7 @@ public class BoatMovement : MonoBehaviour
     {
         while (true) 
         {
-            transform.position = new Vector3(transform.position.x, transform.position.y - 0.003f, transform.position.z);
+            transform.position = new Vector3(transform.position.x, transform.position.y - deadSinkRate * Time.deltaTime, transform.position.z);
             yield return new WaitForEndOfFrame();
 
             if (destroyAfterSinking && transform.position.y < destroyBelowSinkingY)

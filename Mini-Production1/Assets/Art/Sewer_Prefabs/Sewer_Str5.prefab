@@ -405,6 +405,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 810223331611089591, guid: 05bf9ddcca433cc47b80e7bdfc4feccf, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.47
+      objectReference: {fileID: 0}
+    - target: {fileID: 1626065805658504365, guid: 05bf9ddcca433cc47b80e7bdfc4feccf, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.34
+      objectReference: {fileID: 0}
+    - target: {fileID: 7153783044717064869, guid: 05bf9ddcca433cc47b80e7bdfc4feccf, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -6.54
+      objectReference: {fileID: 0}
     - target: {fileID: 8879100278477538058, guid: 05bf9ddcca433cc47b80e7bdfc4feccf, type: 3}
       propertyPath: m_Name
       value: SewerPipe

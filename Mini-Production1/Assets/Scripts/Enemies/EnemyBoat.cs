@@ -61,19 +61,7 @@ public class EnemyBoat : MonoBehaviour
 
     private void AttackBehaviour()
     {
-        float deltaX = target.transform.position.x - transform.position.x;
-
-        // check target ship is moving
-        if (Mathf.Abs(target.Movement.x) > 1f)
-        {
-            if (target.Movement.x < 0) xTarget = wiggleRange.x;
-            else xTarget = wiggleRange.y;
-        }
-        // if target ship stationary, check it is close
-        else if (Mathf.Abs(deltaX) < 4)
-        {
-            xTarget = target.transform.position.x;
-        }
+        xTarget = target.transform.position.x;
 
         SteerToTarget();
     }

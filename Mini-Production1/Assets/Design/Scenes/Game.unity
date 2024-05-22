@@ -323,7 +323,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1418549267}
-  shipThreshold: 30
+  shipThreshold: 5
   enemyShipPrefabs:
   - {fileID: 4337832363417643681, guid: 0f94f431bd8eb60468d6b1a847133842, type: 3}
   shipSpawnVolume: {fileID: 670689840}
@@ -2584,7 +2584,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5703012905078736329, guid: fdd31716a3feaa641ad1e51c650a2fae, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5790198443230065956, guid: fdd31716a3feaa641ad1e51c650a2fae, type: 3}
       propertyPath: m_text
