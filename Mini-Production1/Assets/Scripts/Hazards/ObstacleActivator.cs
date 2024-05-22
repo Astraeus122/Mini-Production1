@@ -11,14 +11,14 @@ public class ObstacleActivator : MonoBehaviour
     public float baseEnemyChance = 0.25f;
     public float baseResourceChance = 0.35f;
 
-    [Header("Increase Rates Per 50 Points Score")]
+    [Header("Increase Rates Per 100 Points Score")]
     public float obstacleIncreasePerPoint = 0.005f / 150f;
     public float enemyIncreasePerPoint = 0.005f / 150f;
     public float resourceIncreasePerPoint = 0.005f / 150f;
 
     [Header("Maximum Obstacles Configuration")]
-    public int initialMaxObstacles = 2;
-    public float maxObstacleIncreaseRate = 0.01f; // Rate at which the max obstacles increase per point of score
+    public int initialMaxObstacles = 3;
+    public float maxObstacleIncreaseRate = 0.03f; // Rate at which the max obstacles increase per point of score
 
     private void Start()
     {

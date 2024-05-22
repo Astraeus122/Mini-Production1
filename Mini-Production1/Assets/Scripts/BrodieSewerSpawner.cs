@@ -14,7 +14,7 @@ public class BrodieSewerSpawner : MonoBehaviour
     private BrodieSewerSegment[] sewerPrefabsRight;
 
     [SerializeField]
-    private float boatSpeed = 2.5f;
+    private float initialBoatSpeed = 2.5f;
 
     [SerializeField, Range(2, 10)]
     private int maxNumberOfSewer = 5;
@@ -22,9 +22,15 @@ public class BrodieSewerSpawner : MonoBehaviour
     List<BrodieSewerSegment> spawnedSewer = new List<BrodieSewerSegment>();
 
     float currentRotationWalk;
+    private float boatSpeed;
+    private GameManager gameManager;
 
     private void Start()
     {
+        gameManager = FindObjectOfType<GameManager>();
+
+        boatSpeed = initialBoatSpeed;
+
         for (int i = 0; i < 5; i++)
         {
             SpawnSewer();
@@ -35,8 +41,12 @@ public class BrodieSewerSpawner : MonoBehaviour
 
     private void Update()
     {
-        var root = spawnedSewer[0].transform;
+        if (gameManager != null)
+        {
+            AdjustBoatSpeed();
+        }
 
+        var root = spawnedSewer[0].transform;
         root.Translate(Time.deltaTime * -Vector3.forward * boatSpeed, Space.World);
 
         if (spawnedSewer[0].transform.localPosition.z < -spawnedSewer[0].DistToEnd)
@@ -44,6 +54,12 @@ public class BrodieSewerSpawner : MonoBehaviour
             SpawnSewer();
             Rebase();
         }
+    }
+
+    private void AdjustBoatSpeed()
+    {
+        float score = gameManager.Score;
+        boatSpeed = initialBoatSpeed * (1 + (score / 2000)); // Adjust the divisor as needed to balance difficulty
     }
 
     public void OnDeath()
@@ -90,7 +106,7 @@ public class BrodieSewerSpawner : MonoBehaviour
         if (spawnedSewer.Count == 0)
         {
             // first pipe, make it a easy one like a straight
-            return sewerPrefabsStraight[0];
+            return sewerPrefabsStraight[Random.Range(0, sewerPrefabsStraight.Length)];
         }
         else if (currentRotationWalk < -179f)
         {
@@ -104,7 +120,7 @@ public class BrodieSewerSpawner : MonoBehaviour
         else if (currentRotationWalk > 179f)
         {
             //too much right, random from straight or left
-            arrIndex = Random.Range(1, 2);
+            arrIndex = Random.Range(0, 2);
             if (arrIndex == 0)
                 return sewerPrefabsStraight[Random.Range(0, sewerPrefabsStraight.Length)];
             else
@@ -128,5 +144,4 @@ public class BrodieSewerSpawner : MonoBehaviour
         spawnedSewer.RemoveAt(0);
         spawnedSewer[0].Armed = true;
     }
-
 }

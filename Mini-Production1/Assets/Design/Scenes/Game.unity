@@ -1932,11 +1932,15 @@ MonoBehaviour:
   sewerPrefabsStraight:
   - {fileID: 5156995750568129790, guid: 0048b8b37bc238d4ca92e221514c9850, type: 3}
   - {fileID: 8743013788074346873, guid: fe78ad2c1492bd94d90bf115e7b87d1c, type: 3}
+  - {fileID: -301758530115294561, guid: dc9ad814f96b3364898c4a9827d44076, type: 3}
+  - {fileID: 5280995410793858758, guid: 8df53311c9846924dbee92f9cecb20b0, type: 3}
+  - {fileID: 8559668376100730995, guid: 82da5f1f6d2961b45816cdc6430ba8e9, type: 3}
+  - {fileID: 9064259784408977426, guid: 5d0910a746afb9c4680fffa2a51dde3e, type: 3}
   sewerPrefabsLeft:
   - {fileID: 537460920398419549, guid: 1ad0fa891d94dfe4ea405f7e7f40ee46, type: 3}
   sewerPrefabsRight:
   - {fileID: -3125398149219542205, guid: 93982466cc6978149b9d71a619064ee1, type: 3}
-  boatSpeed: 2.5
+  initialBoatSpeed: 2.5
   maxNumberOfSewer: 5
 --- !u!114 &1772109075 stripped
 MonoBehaviour:
