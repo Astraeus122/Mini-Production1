@@ -104,6 +104,9 @@ public class BoatMovement : MonoBehaviour
     [Range(0, 10f)]
     private float maxZ;
 
+    // raised for impact damage, not for all damage (eg per-frame calls to takedamage() for continuous damage)
+    public UnityEvent OnBoatImpact;
+
     public UnityEvent OnBoatDied;
 
     public float SteeringInput { get; set; }
@@ -257,6 +260,8 @@ public class BoatMovement : MonoBehaviour
         float releakStrengthThreshold = 0.5f)
     {
         if (!TakeDamage(damage, triggerShake)) return;
+
+        OnBoatImpact?.Invoke();
 
         // explosion on damage taken
         var explosion = Instantiate(despawnVFX);

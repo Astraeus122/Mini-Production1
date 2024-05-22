@@ -25,15 +25,31 @@ public class EnemyBoat : MonoBehaviour
 
     bool fireCommandStatus = false;
 
+    public float FleeTimer { get; set; } = 0;
+
     private void Update()
+    {
+        FleeTimer = Mathf.Max(FleeTimer - Time.deltaTime, 0f);
+
+        if (FleeTimer > 0f)
+            EvasiveBehaviour();
+        else
+            AttackBehaviour();
+
+        FireIfClose();
+    }
+
+    private void EvasiveBehaviour()
     {
         float deltaX = target.transform.position.x - transform.position.x;
 
+        // check target ship is moving
         if (Mathf.Abs(target.Movement.x) > 1f)
         {
             if (target.Movement.x < 0) xTarget = wiggleRange.y;
             else xTarget = wiggleRange.x;
         }
+        // if target ship stationary, check it is close
         else if (Mathf.Abs(deltaX) < 4)
         {
             if (target.transform.position.x < 0) xTarget = wiggleRange.y;
@@ -41,6 +57,30 @@ public class EnemyBoat : MonoBehaviour
         }
 
         SteerToTarget();
+    }
+
+    private void AttackBehaviour()
+    {
+        float deltaX = target.transform.position.x - transform.position.x;
+
+        // check target ship is moving
+        if (Mathf.Abs(target.Movement.x) > 1f)
+        {
+            if (target.Movement.x < 0) xTarget = wiggleRange.x;
+            else xTarget = wiggleRange.y;
+        }
+        // if target ship stationary, check it is close
+        else if (Mathf.Abs(deltaX) < 4)
+        {
+            xTarget = target.transform.position.x;
+        }
+
+        SteerToTarget();
+    }
+
+    private void FireIfClose()
+    {
+        float deltaX = target.transform.position.x - transform.position.x;
 
         if (Mathf.Abs(deltaX) < 3)
         {
@@ -56,7 +96,6 @@ public class EnemyBoat : MonoBehaviour
             fireCommandStatus = false;
         }
     }
-
     private IEnumerator RepeatFire()
     {
         while(enabled)
