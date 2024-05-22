@@ -3743,6 +3743,7 @@ GameObject:
   - component: {fileID: 7606111803914772228}
   - component: {fileID: 7606111803914772235}
   - component: {fileID: 7606111803914772234}
+  - component: {fileID: 4889463218115806052}
   m_Layer: 5
   m_Name: ExitButton
   m_TagString: Untagged
@@ -3865,6 +3866,20 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &4889463218115806052
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7606111803914772232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e14f3735ca24ba468d3d83a4a52bcf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hoverScale: {x: 1.1, y: 1.1, z: 1.1}
+  animationTime: 0.2
 --- !u!1 &7606111804465737733
 GameObject:
   m_ObjectHideFlags: 0
@@ -3878,6 +3893,7 @@ GameObject:
   - component: {fileID: 7606111804465737728}
   - component: {fileID: 7606111804465737735}
   - component: {fileID: 5703012905078736329}
+  - component: {fileID: 7602269348684002259}
   m_Layer: 5
   m_Name: 'RetryButton '
   m_TagString: Untagged
@@ -4012,6 +4028,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 291069be5c02a2a42a2218f562471193, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7602269348684002259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7606111804465737733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e14f3735ca24ba468d3d83a4a52bcf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hoverScale: {x: 1.1, y: 1.1, z: 1.1}
+  animationTime: 0.2
 --- !u!1 &7606111804675523455
 GameObject:
   m_ObjectHideFlags: 0
@@ -4024,6 +4054,7 @@ GameObject:
   - component: {fileID: 7606111804675523451}
   - component: {fileID: 7606111804675523450}
   - component: {fileID: 7606111804675523449}
+  - component: {fileID: 6883851616476731558}
   m_Layer: 5
   m_Name: MainMenuButton
   m_TagString: Untagged
@@ -4146,6 +4177,20 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 1
+--- !u!114 &6883851616476731558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7606111804675523455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e14f3735ca24ba468d3d83a4a52bcf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hoverScale: {x: 1.1, y: 1.1, z: 1.1}
+  animationTime: 0.2
 --- !u!1 &7606111804854662770
 GameObject:
   m_ObjectHideFlags: 0
