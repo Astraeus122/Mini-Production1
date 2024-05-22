@@ -10,6 +10,7 @@ TagManager:
   - drain
   - Turret
   - SewerEnd
+  - Boat
   layers:
   - Default
   - TransparentFX

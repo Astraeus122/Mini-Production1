@@ -18,11 +18,13 @@ public class ObstacleActivator : MonoBehaviour
 
     private void Start()
     {
-        if (GameManager.Instance != null && GameManager.Instance.IsGameActive)
+        GameManager gameManager = FindObjectOfType<GameManager>();
+        if (gameManager != null && gameManager.IsGameActive)
         {
-            float score = GameManager.Instance.Score;
+            float score = gameManager.Score;
             ActivateObjects(score);
         }
+
     }
 
     private void ActivateObjects(float score)
