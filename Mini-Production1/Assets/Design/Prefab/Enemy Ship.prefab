@@ -5674,7 +5674,7 @@ ParticleSystem:
     startRotation:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 3.4906585
+      scalar: 0.08726646
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -9885,7 +9885,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e823cd5b5d27c0f4b8256e7c12ee3e6d, type: 2}
+  - {fileID: 2100000, guid: b4594189a4e04d24ca0e7af8212fdef6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9906,9 +9906,9 @@ ParticleSystemRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_RenderMode: 0
+  m_RenderMode: 4
   m_MeshDistribution: 0
-  m_SortMode: 0
+  m_SortMode: 4
   m_MinParticleSize: 0
   m_MaxParticleSize: 0.5
   m_CameraVelocityScale: 0
@@ -9927,7 +9927,7 @@ ParticleSystemRenderer:
   m_FreeformStretching: 0
   m_RotateWithStretchDirection: 1
   m_VertexStreams: 00010304
-  m_Mesh: {fileID: 0}
+  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
   m_Mesh1: {fileID: 0}
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
@@ -16192,6 +16192,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3638889475779996703}
     m_Modifications:
+    - target: {fileID: 2225977037064789392, guid: 789c0540860dd4b4c97576877c7f33f2, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a1bb3d486f7a8f54d8f6e7d33602d1dc, type: 2}
     - target: {fileID: 2425715421599197050, guid: 789c0540860dd4b4c97576877c7f33f2, type: 3}
       propertyPath: boatAboard
       value: 
@@ -16432,6 +16436,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3638889475779996703}
     m_Modifications:
+    - target: {fileID: 2225977037064789392, guid: 789c0540860dd4b4c97576877c7f33f2, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a1bb3d486f7a8f54d8f6e7d33602d1dc, type: 2}
     - target: {fileID: 2425715421599197050, guid: 789c0540860dd4b4c97576877c7f33f2, type: 3}
       propertyPath: boatAboard
       value: 
