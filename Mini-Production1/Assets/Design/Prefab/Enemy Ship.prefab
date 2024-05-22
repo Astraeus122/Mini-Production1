@@ -15318,6 +15318,7 @@ MonoBehaviour:
   boat: {fileID: 242941300704943569}
   wiggleRange: {x: -3, y: 3}
   target: {fileID: 0}
+  fireCommandInterval: 1
 --- !u!114 &1204242082668580111
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16176,6 +16177,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3638889475779996703}
     m_Modifications:
+    - target: {fileID: 2225977037064789392, guid: 789c0540860dd4b4c97576877c7f33f2, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a1bb3d486f7a8f54d8f6e7d33602d1dc, type: 2}
     - target: {fileID: 2425715421599197050, guid: 789c0540860dd4b4c97576877c7f33f2, type: 3}
       propertyPath: boatAboard
       value: 
@@ -16416,6 +16421,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3638889475779996703}
     m_Modifications:
+    - target: {fileID: 2225977037064789392, guid: 789c0540860dd4b4c97576877c7f33f2, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a1bb3d486f7a8f54d8f6e7d33602d1dc, type: 2}
     - target: {fileID: 2425715421599197050, guid: 789c0540860dd4b4c97576877c7f33f2, type: 3}
       propertyPath: boatAboard
       value: 
