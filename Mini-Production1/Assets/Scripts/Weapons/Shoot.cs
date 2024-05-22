@@ -63,6 +63,7 @@ public class Shoot : MonoBehaviour
         nextFireTime = Time.time + 1.0f / fireRate;
         GameObject bullet = Instantiate(projecile, launcher.position, launcher.rotation);
         bullet.GetComponent<Rigidbody>().AddForce(launcher.forward * force, ForceMode.Impulse);
+        bullet.GetComponent<Rigidbody>().useGravity = false;
         Destroy(bullet, 1.0f + 0.5f * cannonPowerLevel); // Longer lifetime for higher power levels
 
         if (AudioManager.Instance != null)
@@ -85,6 +86,7 @@ public class Shoot : MonoBehaviour
         GameObject bullet = Instantiate(projecile, launcher.position, launcher.rotation);
         Vector3 direction = Quaternion.Euler(angle, 0, 0) * launcher.forward + launcher.up;
         bullet.GetComponent<Rigidbody>().AddForce(direction * force, ForceMode.Impulse);
+        bullet.GetComponent<Rigidbody>().useGravity = true;
         Destroy(bullet, 2.0f + 0.5f * cannonPowerLevel); // Longer lifetime for higher power levels
 
         if (AudioManager.Instance != null)

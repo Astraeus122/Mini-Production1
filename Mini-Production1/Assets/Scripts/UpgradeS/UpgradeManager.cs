@@ -42,7 +42,7 @@ public class UpgradeManager : MonoBehaviour
     public void GenerateUpgradeOptions()
     {
         currentOptions.Clear();
-        List<Upgrade> availableUpgrades = allUpgrades.Where(u => u.level < u.maxLevel).ToList();
+        List<Upgrade> availableUpgrades = allUpgrades.Where(u => u.level <= u.maxLevel).ToList();
         if (availableUpgrades.Count >= 3)
         {
             for (int i = 0; i < 3; i++)

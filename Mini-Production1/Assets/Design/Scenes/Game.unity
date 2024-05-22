@@ -288,7 +288,7 @@ GameObject:
   - component: {fileID: 168689026}
   - component: {fileID: 168689027}
   m_Layer: 0
-  m_Name: Spawner
+  m_Name: Enemy Ship Spawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -302,7 +302,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 168689025}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.51, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1170,10 +1170,46 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 4efe69b447fa7284aaa9f343f961e5f1, type: 2}
+    - target: {fileID: 1811479210956215446, guid: 75ac378782d622c4ea74324512dd281b, type: 3}
+      propertyPath: m_Size.x
+      value: 0.45298213
+      objectReference: {fileID: 0}
+    - target: {fileID: 1811479210956215446, guid: 75ac378782d622c4ea74324512dd281b, type: 3}
+      propertyPath: m_Size.y
+      value: 1.0671805
+      objectReference: {fileID: 0}
+    - target: {fileID: 1811479210956215446, guid: 75ac378782d622c4ea74324512dd281b, type: 3}
+      propertyPath: m_Size.z
+      value: 0.9980947
+      objectReference: {fileID: 0}
+    - target: {fileID: 1811479210956215446, guid: 75ac378782d622c4ea74324512dd281b, type: 3}
+      propertyPath: m_Center.x
+      value: 0.12705028
+      objectReference: {fileID: 0}
+    - target: {fileID: 1811479210956215446, guid: 75ac378782d622c4ea74324512dd281b, type: 3}
+      propertyPath: m_Center.y
+      value: 0.40144563
+      objectReference: {fileID: 0}
+    - target: {fileID: 1811479210956215446, guid: 75ac378782d622c4ea74324512dd281b, type: 3}
+      propertyPath: m_Center.z
+      value: 0.0009525859
+      objectReference: {fileID: 0}
     - target: {fileID: 1902623957981491400, guid: 75ac378782d622c4ea74324512dd281b, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 4efe69b447fa7284aaa9f343f961e5f1, type: 2}
+    - target: {fileID: 2557670087692905050, guid: 75ac378782d622c4ea74324512dd281b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9990456
+      objectReference: {fileID: 0}
+    - target: {fileID: 2557670087692905050, guid: 75ac378782d622c4ea74324512dd281b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.043681264
+      objectReference: {fileID: 0}
+    - target: {fileID: 2557670087692905050, guid: 75ac378782d622c4ea74324512dd281b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 5.007
+      objectReference: {fileID: 0}
     - target: {fileID: 4447058409733923072, guid: 75ac378782d622c4ea74324512dd281b, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.395
@@ -1262,9 +1298,45 @@ PrefabInstance:
       propertyPath: fireRate
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 7539624278675940664, guid: 75ac378782d622c4ea74324512dd281b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9989542
+      objectReference: {fileID: 0}
+    - target: {fileID: 7539624278675940664, guid: 75ac378782d622c4ea74324512dd281b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.045722954
+      objectReference: {fileID: 0}
+    - target: {fileID: 7539624278675940664, guid: 75ac378782d622c4ea74324512dd281b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7539624278675940664, guid: 75ac378782d622c4ea74324512dd281b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7539624278675940664, guid: 75ac378782d622c4ea74324512dd281b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -5.241
+      objectReference: {fileID: 0}
     - target: {fileID: 8055890068144713918, guid: 75ac378782d622c4ea74324512dd281b, type: 3}
       propertyPath: m_RootOrder
       value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 8152503827669107381, guid: 75ac378782d622c4ea74324512dd281b, type: 3}
+      propertyPath: m_Radius
+      value: 0.9323045
+      objectReference: {fileID: 0}
+    - target: {fileID: 8152503827669107381, guid: 75ac378782d622c4ea74324512dd281b, type: 3}
+      propertyPath: m_Center.x
+      value: -0.06875743
+      objectReference: {fileID: 0}
+    - target: {fileID: 8152503827669107381, guid: 75ac378782d622c4ea74324512dd281b, type: 3}
+      propertyPath: m_Center.y
+      value: 0.45000023
+      objectReference: {fileID: 0}
+    - target: {fileID: 8152503827669107381, guid: 75ac378782d622c4ea74324512dd281b, type: 3}
+      propertyPath: m_Center.z
+      value: -0.41002366
       objectReference: {fileID: 0}
     - target: {fileID: 8990120179489813463, guid: 75ac378782d622c4ea74324512dd281b, type: 3}
       propertyPath: m_Color.b
@@ -1787,7 +1859,7 @@ GameObject:
   - component: {fileID: 1749891077}
   - component: {fileID: 1749891078}
   m_Layer: 0
-  m_Name: Pipe Spawner (Liiiit)
+  m_Name: Pipe Spawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1801,7 +1873,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1749891076}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: 1.21, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1820,14 +1892,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90d14e7dc24f2254192b8acd536c5bf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sewerPrefabs:
-  - {fileID: -301758530115294561, guid: dc9ad814f96b3364898c4a9827d44076, type: 3}
-  - {fileID: 5280995410793858758, guid: 8df53311c9846924dbee92f9cecb20b0, type: 3}
-  - {fileID: 8559668376100730995, guid: 82da5f1f6d2961b45816cdc6430ba8e9, type: 3}
-  - {fileID: 9064259784408977426, guid: 5d0910a746afb9c4680fffa2a51dde3e, type: 3}
-  - {fileID: 8743013788074346873, guid: fe78ad2c1492bd94d90bf115e7b87d1c, type: 3}
+  sewerPrefabsStraight:
   - {fileID: 5156995750568129790, guid: 0048b8b37bc238d4ca92e221514c9850, type: 3}
+  - {fileID: 8743013788074346873, guid: fe78ad2c1492bd94d90bf115e7b87d1c, type: 3}
+  sewerPrefabsLeft:
   - {fileID: 537460920398419549, guid: 1ad0fa891d94dfe4ea405f7e7f40ee46, type: 3}
+  sewerPrefabsRight:
   - {fileID: -3125398149219542205, guid: 93982466cc6978149b9d71a619064ee1, type: 3}
   boatSpeed: 2.5
   maxNumberOfSewer: 5

@@ -19,9 +19,6 @@ public class BrodieSewerSpawner : MonoBehaviour
     [SerializeField, Range(2, 10)]
     private int maxNumberOfSewer = 5;
 
-    [SerializeField]
-    private float cullZThreshold = -20f;
-
     List<BrodieSewerSegment> spawnedSewer = new List<BrodieSewerSegment>();
 
     float currentRotationWalk;
@@ -42,7 +39,7 @@ public class BrodieSewerSpawner : MonoBehaviour
 
         root.Translate(Time.deltaTime * -Vector3.forward * boatSpeed, Space.World);
 
-        if (spawnedSewer[0].transform.position.z < -spawnedSewer[0].DistToEnd)
+        if (spawnedSewer[0].transform.localPosition.z < -spawnedSewer[0].DistToEnd)
         {
             SpawnSewer();
             Rebase();

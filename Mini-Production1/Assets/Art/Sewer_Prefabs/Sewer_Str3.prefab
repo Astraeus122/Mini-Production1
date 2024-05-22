@@ -162,8 +162,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   turnThreshold: 0
   turnDuration: 2
-  <DistToStart>k__BackingField: 40
+  <DistToStart>k__BackingField: 61.53846
   <DistToEnd>k__BackingField: 0
+  <WalkAngle>k__BackingField: 0
 --- !u!1 &7451559382736271459
 GameObject:
   m_ObjectHideFlags: 0

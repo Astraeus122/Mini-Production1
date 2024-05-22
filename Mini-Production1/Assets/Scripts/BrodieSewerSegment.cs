@@ -40,7 +40,7 @@ public class BrodieSewerSegment : MonoBehaviour
             Debug.Log("SewerTurn Triggered:");
             triggered = true;
 
-            //StartCoroutine(TurnSegement());
+            StartCoroutine(TurnSegement());
         }
     }
 

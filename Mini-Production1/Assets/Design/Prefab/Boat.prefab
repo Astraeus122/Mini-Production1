@@ -139,7 +139,7 @@ MonoBehaviour:
   - {fileID: 7109290400716806115}
   - {fileID: 3617322460708761500}
   <Guns>k__BackingField:
-  - {fileID: 0}
+  - {fileID: 6363393184415203439}
   - {fileID: 7477813572674266003}
   <AiRoster>k__BackingField: []
   leakSusceptibility: 0.11
@@ -2361,6 +2361,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1378211234636057498, guid: 60c997616da6fef49a065d1d42bbf985, type: 3}
   m_PrefabInstance: {fileID: 3485443837528940992}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6363393184415203439 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7498942903453573551, guid: 60c997616da6fef49a065d1d42bbf985, type: 3}
+  m_PrefabInstance: {fileID: 3485443837528940992}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e151ec40104fe64992dbb0721662c8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!95 &8402652495299133630 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 4954803297730322814, guid: 60c997616da6fef49a065d1d42bbf985, type: 3}

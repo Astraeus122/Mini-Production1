@@ -47,8 +47,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   turnThreshold: 0
   turnDuration: 2
-  <DistToStart>k__BackingField: 40
+  <DistToStart>k__BackingField: 61.53846
   <DistToEnd>k__BackingField: 0
+  <WalkAngle>k__BackingField: 0
 --- !u!1 &2574075332596084881
 GameObject:
   m_ObjectHideFlags: 0
@@ -366,15 +367,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 656688565799223171, guid: 05bf9ddcca433cc47b80e7bdfc4feccf, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 18.21
+      value: 18.22
       objectReference: {fileID: 0}
     - target: {fileID: 656688565799223171, guid: 05bf9ddcca433cc47b80e7bdfc4feccf, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.36
+      value: 4.41
       objectReference: {fileID: 0}
     - target: {fileID: 656688565799223171, guid: 05bf9ddcca433cc47b80e7bdfc4feccf, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 8.03
+      value: 7.66
       objectReference: {fileID: 0}
     - target: {fileID: 656688565799223171, guid: 05bf9ddcca433cc47b80e7bdfc4feccf, type: 3}
       propertyPath: m_LocalRotation.w
