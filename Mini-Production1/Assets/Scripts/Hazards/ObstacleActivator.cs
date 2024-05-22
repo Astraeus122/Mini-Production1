@@ -11,10 +11,14 @@ public class ObstacleActivator : MonoBehaviour
     public float baseEnemyChance = 0.25f;
     public float baseResourceChance = 0.35f;
 
-    [Header("Increase Rates Per Point Score")]
-    public float obstacleIncreasePerPoint = 0.0005f;
-    public float enemyIncreasePerPoint = 0.0005f;
-    public float resourceIncreasePerPoint = 0.0005f;
+    [Header("Increase Rates Per 50 Points Score")]
+    public float obstacleIncreasePerPoint = 0.005f / 150f;
+    public float enemyIncreasePerPoint = 0.005f / 150f;
+    public float resourceIncreasePerPoint = 0.005f / 150f;
+
+    [Header("Maximum Obstacles Configuration")]
+    public int initialMaxObstacles = 2;
+    public float maxObstacleIncreaseRate = 0.01f; // Rate at which the max obstacles increase per point of score
 
     private void Start()
     {
@@ -24,7 +28,6 @@ public class ObstacleActivator : MonoBehaviour
             float score = gameManager.Score;
             ActivateObjects(score);
         }
-
     }
 
     private void ActivateObjects(float score)
@@ -34,14 +37,12 @@ public class ObstacleActivator : MonoBehaviour
         float enemyChance = Mathf.Clamp(baseEnemyChance + enemyIncreasePerPoint * score, 0, 1);
         float resourceChance = Mathf.Clamp(baseResourceChance + resourceIncreasePerPoint * score, 0, 1);
 
-        // Calculate maximum allowed obstacles
-        int maxObstacles = Mathf.CeilToInt(obstacles.Length * Mathf.Clamp(obstacleChance + 0.2f, 0, 1));
+        // Calculate maximum allowed obstacles based on the score
+        int maxObstacles = Mathf.Clamp(initialMaxObstacles + Mathf.FloorToInt(maxObstacleIncreaseRate * score), initialMaxObstacles, obstacles.Length);
 
         // Activate or deactivate each type of object based on their chances and limits
         SetActiveRandomlyWithLimit(obstacles, obstacleChance, maxObstacles);
-        
         SetActiveRandomly(enemies, enemyChance);
-        
         SetActiveRandomly(resources, resourceChance);
     }
 
