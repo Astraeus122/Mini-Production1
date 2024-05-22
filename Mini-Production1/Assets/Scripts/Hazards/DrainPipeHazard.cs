@@ -11,7 +11,7 @@ public class DrainPipeHazard : Hazard
     {
         if (hazardImpactor.TryGetComponent(out BoatMovement boat))
         {
-            boat.TakeDamage(damagePerSecond * Time.deltaTime);
+            boat.TakeDamage(damagePerSecond * Time.deltaTime, true);
         }
     }
 }

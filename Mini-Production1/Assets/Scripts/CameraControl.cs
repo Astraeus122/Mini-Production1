@@ -20,7 +20,7 @@ public class CameraControl : MonoBehaviour
         offset = transform.position - translationTarget.position;
     }
 
-    void Update()
+    void LateUpdate()
     {
         transform.position = Vector3.Lerp(transform.position, translationTarget.position + offset, Time.deltaTime * followSpeed);
 
