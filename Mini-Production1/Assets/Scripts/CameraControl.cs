@@ -22,6 +22,7 @@ public class CameraControl : MonoBehaviour
 
     void LateUpdate()
     {
+        // smoothly goto the desired place, but always look at target
         transform.position = Vector3.Lerp(transform.position, translationTarget.position + offset, Time.deltaTime * followSpeed);
 
         transform.LookAt(rotationTarget ? rotationTarget : translationTarget);

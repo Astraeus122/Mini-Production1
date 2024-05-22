@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7673439871603961677}
   - component: {fileID: -5441887349518841969}
-  - component: {fileID: 1533557389130122970}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -45,27 +44,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a408188be2706640a0c9834469be913, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  xpBarManager: {fileID: 0}
+  boat: {fileID: 0}
   startingRepairResources: 0
+  upgradeUI: {fileID: 0}
+  currentLevel: 1
+  currentXP: 0
+  xpToNextLevel: 100
+  xpIncreaseFactor: 1.5
   OnScoreChange:
     m_PersistentCalls:
       m_Calls: []
   OnResourceChange:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &1533557389130122970
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7140670724576805554}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f392f6c76d751aa4e9cd9dbee1d6c454, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentLevel: 1
-  currentXP: 0
-  xpToNextLevel: 100
-  xpIncreaseFactor: 1.5
-  upgradeUI: {fileID: 0}
