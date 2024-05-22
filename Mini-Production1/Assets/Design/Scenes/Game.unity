@@ -324,7 +324,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1418549267}
   gameManager: {fileID: 1545753365}
-  shipThreshold: 5
+  shipThreshold: 30
   enemyShipPrefabs:
   - {fileID: 4337832363417643681, guid: 0f94f431bd8eb60468d6b1a847133842, type: 3}
   shipSpawnVolume: {fileID: 670689840}
