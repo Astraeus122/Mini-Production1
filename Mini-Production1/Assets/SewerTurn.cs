@@ -19,8 +19,6 @@ public class SewerTurn : MonoBehaviour
             if (gameManager == null) return;
 
             var boat = gameManager.boat;
-            //boat.GetComponent<BoatMovement>().originalRotation = Quaternion.Euler(boat.localRotation.x, boat.localRotation.y+45f, boat.localRotation.z);
-
             StartCoroutine(RotateAroundTarget(turnAngle, 2f));
         }
     }
@@ -40,16 +38,6 @@ public class SewerTurn : MonoBehaviour
             elapsed += Time.deltaTime;
             yield return null;
         }
-        //transform.parent.parent.RotateAround(transform.position, axis, angle - currentAngle);
-    }
-    
-    public Vector3 RotatePointAroundPivot(Vector3 point, Vector3 pivot, Vector3 angles) {
-        return Quaternion.Euler(angles) * (point - pivot) + pivot;
-    }
-    
-    float EaseInOut(float t)
-    {
-        // Using the cubic ease-in-out curve: t^3 / (t^3 + (1 - t)^3)
-        return t * t * t / (t * t * t + (1 - t) * (1 - t) * (1 - t));
+        transform.parent.parent.RotateAround(transform.position, axis, angle - currentAngle);
     }
 }
