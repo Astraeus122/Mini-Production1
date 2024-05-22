@@ -53,6 +53,9 @@ public class DeathScreenHandler : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         deathScreenCanvas.SetActive(false);
         isDeathScreenActive = false;
+
+        // Initialize GameManager again
+        StartCoroutine(InitializeGameManagerReferences());
     }
 
     public void ExitToMenu()
@@ -69,5 +72,34 @@ public class DeathScreenHandler : MonoBehaviour
         buttonPressAudioSource.Play();
         // Exit the game
         Application.Quit();
+    }
+
+    private IEnumerator InitializeGameManagerReferences()
+    {
+        // Wait for the scene to fully load
+        yield return new WaitForEndOfFrame();
+
+        GameManager gameManager = FindObjectOfType<GameManager>();
+        if (gameManager != null)
+        {
+            GameObject boatObject = GameObject.FindWithTag("Boat");
+            if (boatObject != null)
+            {
+                gameManager.boat = boatObject.transform;
+            }
+            else
+            {
+                Debug.LogError("Boat object with tag 'Player' not found.");
+            }
+
+            gameManager.xpBarManager = FindObjectOfType<XPBarManager>();
+            gameManager.upgradeUI = FindObjectOfType<UpgradeUI>();
+
+            gameManager.InitializeGameManager();
+        }
+        else
+        {
+            Debug.LogError("GameManager not found in the scene.");
+        }
     }
 }

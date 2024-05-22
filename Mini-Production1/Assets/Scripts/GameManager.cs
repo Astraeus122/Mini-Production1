@@ -6,10 +6,9 @@ using UnityEngine.Events;
 public class GameManager : MonoBehaviour
 {
     [SerializeField]
-    private XPBarManager xpBarManager; // Reference to the XPBarManager
+    public XPBarManager xpBarManager; // Reference to the XPBarManager
 
     public Transform boat;
-    public static GameManager Instance { get; private set; }
 
     public static string HighscorePrefKey = "PlayerHighscore";
 
@@ -21,7 +20,7 @@ public class GameManager : MonoBehaviour
     private int startingRepairResources = 0;
 
     [SerializeField]
-    private UpgradeUI upgradeUI;
+    public UpgradeUI upgradeUI;
 
     public int currentLevel = 1;
     public float currentXP = 0;
@@ -42,22 +41,19 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // events purpose for UI updating hence why we convert to string
+    // Events for UI updating
     public UnityEvent<string> OnScoreChange;
     public UnityEvent<string> OnResourceChange;
 
     private BoatMovement boatMovement; // Reference to the BoatMovement
 
-    private void Awake()
+    private void Start()
     {
-        if (Instance == null)
-            Instance = this;
-        else if (Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
+        InitializeGameManager();
+    }
 
+    public void InitializeGameManager()
+    {
         boatMovement = boat.GetComponent<BoatMovement>();
         if (boatMovement == null)
         {
@@ -66,7 +62,7 @@ public class GameManager : MonoBehaviour
 
         RepairResources = startingRepairResources;
 
-        // score is set to 0 from 0 so doesnt invoke the event initially, we manually do it here
+        // Score is set to 0 from 0 so it doesn't invoke the event initially, we manually do it here
         OnScoreChange?.Invoke(Score.ToString());
 
         // Check for XPBarManager reference
@@ -79,7 +75,6 @@ public class GameManager : MonoBehaviour
     private void OnDestroy()
     {
         int highscore = PlayerPrefs.GetInt(HighscorePrefKey);
-        //if (highscore == default) highscore = 0; // int default IS 0
 
         if (Score > highscore)
             PlayerPrefs.SetInt(HighscorePrefKey, (int)Score); // Cast Score to int for highscore

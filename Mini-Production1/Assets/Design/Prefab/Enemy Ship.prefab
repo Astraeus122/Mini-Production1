@@ -15260,6 +15260,21 @@ MonoBehaviour:
   maxX: 6
   minZ: -10
   maxZ: 10
+  OnBoatImpact:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4337832363417643681}
+        m_TargetAssemblyTypeName: EnemyBoat, Assembly-CSharp
+        m_MethodName: set_FleeTimer
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 3
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnBoatDied:
     m_PersistentCalls:
       m_Calls:

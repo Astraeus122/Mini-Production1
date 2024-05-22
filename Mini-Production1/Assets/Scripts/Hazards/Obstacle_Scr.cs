@@ -66,12 +66,17 @@ public class Obstacle_Scr : Hazard
     {
         if (isDead) return;
 
+        GameManager gameManager = FindObjectOfType<GameManager>();
+
+        if (gameManager == null) return;
+
         if (gameObject.CompareTag("Crate"))
         {
-            GameManager.Instance.AddXP(50);
-            if (AudioManager.Instance != null)
+            gameManager.AddXP(50);
+            AudioManager audioManager = FindObjectOfType<AudioManager>();
+            if (audioManager != null)
             {
-                AudioManager.Instance.PlayResourceCollection();
+                audioManager.PlayResourceCollection();
                 Die();
             }
         }

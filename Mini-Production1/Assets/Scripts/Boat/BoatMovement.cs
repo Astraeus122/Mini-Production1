@@ -104,6 +104,9 @@ public class BoatMovement : MonoBehaviour
     [Range(0, 10f)]
     private float maxZ;
 
+    // raised for impact damage, not for all damage (eg per-frame calls to takedamage() for continuous damage)
+    public UnityEvent OnBoatImpact;
+
     public UnityEvent OnBoatDied;
 
     public float SteeringInput { get; set; }
@@ -143,7 +146,7 @@ public class BoatMovement : MonoBehaviour
         {
             // Apply collision damage reduction if shield is not active
             float reducedDamage = damage * (1 - collisionDamageReduction);
-            TakeDamage(reducedDamage, impactPoint);
+            TakeDamage(reducedDamage, impactPoint, true);
         }
     }
 
@@ -253,15 +256,12 @@ public class BoatMovement : MonoBehaviour
         transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * yawSpeed);
     }
 
-    public void TakeDamage(float damage, Vector3 impactPoint, float maxDistFromImpact = Mathf.Infinity,
+    public void TakeDamage(float damage, Vector3 impactPoint, bool triggerShake = false, float maxDistFromImpact = Mathf.Infinity,
         float releakStrengthThreshold = 0.5f)
     {
-        if (!TakeDamage(damage)) return;
-        // Trigger screen shake
-        if (screenShake != null)
-        {
-            screenShake.TriggerShake();
-        }
+        if (!TakeDamage(damage, triggerShake)) return;
+
+        OnBoatImpact?.Invoke();
 
         // explosion on damage taken
         var explosion = Instantiate(despawnVFX);
@@ -291,14 +291,18 @@ public class BoatMovement : MonoBehaviour
         }
     }
 
-    public bool TakeDamage(float damage)
+    public bool TakeDamage(float damage, bool triggerShake = false)
     {
         print(name +"Took damage");
         if (damage == 0) return false;
         if (damage > 0 && currentHitPoints <= 0) return false;
         if (damage < 0 && currentHitPoints >= maxHitPoints) return false;
 
-        
+        if (screenShake && triggerShake)
+        {
+            screenShake.TriggerShake();
+        }
+
         // it is take damage, but supports both direcitons / can be used to heal
         currentHitPoints = Mathf.Clamp(currentHitPoints - damage, 0, maxHitPoints);
 
