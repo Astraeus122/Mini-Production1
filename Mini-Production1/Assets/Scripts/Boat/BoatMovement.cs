@@ -143,7 +143,7 @@ public class BoatMovement : MonoBehaviour
         {
             // Apply collision damage reduction if shield is not active
             float reducedDamage = damage * (1 - collisionDamageReduction);
-            TakeDamage(reducedDamage, impactPoint);
+            TakeDamage(reducedDamage, impactPoint, true);
         }
     }
 
