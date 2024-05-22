@@ -253,15 +253,10 @@ public class BoatMovement : MonoBehaviour
         transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * yawSpeed);
     }
 
-    public void TakeDamage(float damage, Vector3 impactPoint, float maxDistFromImpact = Mathf.Infinity,
+    public void TakeDamage(float damage, Vector3 impactPoint, bool triggerShake = false, float maxDistFromImpact = Mathf.Infinity,
         float releakStrengthThreshold = 0.5f)
     {
-        if (!TakeDamage(damage)) return;
-        // Trigger screen shake
-        if (screenShake != null)
-        {
-            screenShake.TriggerShake();
-        }
+        if (!TakeDamage(damage, triggerShake)) return;
 
         // explosion on damage taken
         var explosion = Instantiate(despawnVFX);
@@ -291,14 +286,18 @@ public class BoatMovement : MonoBehaviour
         }
     }
 
-    public bool TakeDamage(float damage)
+    public bool TakeDamage(float damage, bool triggerShake = false)
     {
         print(name +"Took damage");
         if (damage == 0) return false;
         if (damage > 0 && currentHitPoints <= 0) return false;
         if (damage < 0 && currentHitPoints >= maxHitPoints) return false;
 
-        
+        if (screenShake && triggerShake)
+        {
+            screenShake.TriggerShake();
+        }
+
         // it is take damage, but supports both direcitons / can be used to heal
         currentHitPoints = Mathf.Clamp(currentHitPoints - damage, 0, maxHitPoints);
 
