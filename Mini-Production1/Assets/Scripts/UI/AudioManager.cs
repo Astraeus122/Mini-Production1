@@ -12,20 +12,6 @@ public class AudioManager : MonoBehaviour
     public AudioClip tapeSound;
     public AudioClip catapultFireSound;
     public AudioClip turretFireSound;
-
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
-
     public void PlayButtonClick()
     {
         audioSource.PlayOneShot(buttonClickSound);

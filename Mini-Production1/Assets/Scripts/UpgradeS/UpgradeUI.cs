@@ -47,9 +47,9 @@ public class UpgradeUI : MonoBehaviour
 
     void DisplayUpgrades()
     {
-        if (upgradeManager.currentOptions.Count < 3)
+        if (upgradeManager == null || upgradeManager.currentOptions == null || upgradeManager.currentOptions.Count < 3)
         {
-            Debug.LogError("Not enough upgrades generated.");
+            Debug.LogError("Not enough upgrades generated or UpgradeManager is null.");
             return;
         }
 
@@ -61,6 +61,12 @@ public class UpgradeUI : MonoBehaviour
 
     void UpdateUpgradeCard(TextMeshProUGUI titleText, TextMeshProUGUI descriptionText, TextMeshProUGUI levelText, Image upgradeImage, Upgrade upgrade)
     {
+        if (upgrade == null)
+        {
+            Debug.LogError("Upgrade is null.");
+            return;
+        }
+
         titleText.text = upgrade.name;
         descriptionText.text = upgrade.description;
         levelText.text = "Level: " + upgrade.level;
@@ -74,24 +80,27 @@ public class UpgradeUI : MonoBehaviour
 
     public void SelectAndApplyUpgrade(int index)
     {
-        if (index < upgradeManager.currentOptions.Count)
+        if (upgradeManager == null || upgradeManager.currentOptions == null || index >= upgradeManager.currentOptions.Count)
         {
-            Upgrade selectedUpgrade = upgradeManager.currentOptions[index];
-            if (selectedUpgrade != null)
+            Debug.LogError("Index out of range or UpgradeManager is null.");
+            return;
+        }
+
+        Upgrade selectedUpgrade = upgradeManager.currentOptions[index];
+        if (selectedUpgrade != null)
+        {
+            AudioManager audioManager = FindObjectOfType<AudioManager>();
+            if (audioManager != null)
             {
-                AudioManager.Instance.PlayButtonClick();
-                selectedUpgrade.ApplyUpgrade(); // Apply the upgrade
-                UpdateUpgradeDisplay(); // Refresh the display of upgrades
-                CloseUpgradeMenu();
+                audioManager.PlayButtonClick();
             }
-            else
-            {
-                Debug.LogError("Selected upgrade is null.");
-            }
+            selectedUpgrade.ApplyUpgrade(); // Apply the upgrade
+            UpdateUpgradeDisplay(); // Refresh the display of upgrades
+            CloseUpgradeMenu();
         }
         else
         {
-            Debug.LogError("Index out of range for current options.");
+            Debug.LogError("Selected upgrade is null.");
         }
     }
 
@@ -102,7 +111,11 @@ public class UpgradeUI : MonoBehaviour
 
     public void CloseUpgradeMenu()
     {
-        AudioManager.Instance.PlayButtonClick();
+        AudioManager audioManager = FindObjectOfType<AudioManager>();
+        if (audioManager != null)
+        {
+            audioManager.PlayButtonClick();
+        }
         gameObject.SetActive(false); // Hide the UI
         Time.timeScale = 1; // Resume the game
     }

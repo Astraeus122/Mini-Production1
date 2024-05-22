@@ -14,12 +14,13 @@ public class SewerTurn : MonoBehaviour
                 return;
             Debug.Log("SewerTurn Triggered:");
             triggered = true;
-            //sewer.transform.localRotation = Quaternion.Euler(0,-90+rotationWalk,0f);
-            var boat = GameManager.Instance.boat;
+
+            GameManager gameManager = FindObjectOfType<GameManager>();
+            if (gameManager == null) return;
+
+            var boat = gameManager.boat;
             //boat.GetComponent<BoatMovement>().originalRotation = Quaternion.Euler(boat.localRotation.x, boat.localRotation.y+45f, boat.localRotation.z);
-            
-            //transform.parent.RotateAround(transform.position, new Vector3(0,1,0), -45);
-            //-45
+
             StartCoroutine(RotateAroundTarget(turnAngle, 2f));
         }
     }

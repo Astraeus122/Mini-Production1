@@ -6,6 +6,10 @@ public class GameStatsUI : MonoBehaviour
 {
     private void Update()
     {
-        Debug.Log(GameManager.Instance.Score);
+        GameManager gameManager = FindObjectOfType<GameManager>();
+        if (gameManager != null)
+        {
+            Debug.Log(gameManager.Score);
+        }
     }
 }
